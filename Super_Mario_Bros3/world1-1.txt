@@ -1,0 +1,92 @@
+# id	file_path	transparent_color_r	g	b
+[TEXTURES]
+0	textures\mario.png	255	255	255
+20	textures\misc.png	176	224	248
+10	textures\enemies.png	3	26	110
+[SPRITES]
+# id	left	top	right	bottom	texture_id
+####################################################
+#BIG MARIO
+
+#idle left
+5007	186	154	200	181	0
+
+#walking left
+5006	155	154	171	181	0
+5005	125	155	141	181	0
+
+#idle right
+5009	246	154	260	181	0
+
+walking right
+5010	275	154	291	181	0
+5011	305	155	321	181	0
+#####################################################
+#SMALL MARIO
+#idle left
+1007	187	0	199	15	0
+
+#walking left
+1006	155	0	326	16	0
+1005	125	0	265	16	0
+1004	95	0	206	16	0
+
+#idle right
+1009	247	0	259	15	0
+
+#walking right
+1010	275	0	291	16
+1011	306	0	321	16
+1012	335	0	351	16
+#####################################################
+#FIRE MARIO
+#idle left
+11007	186	394	200	421	0
+#walking left
+11005	125	395	141	421	0
+11006	155	394	171	421	0
+
+#idle right
+11009	246	394	260	421	0
+#walking right
+11010	275	394	291	421	0
+11011	305	395	321	421	0
+#####################################################
+#MARIO WITH A TALE
+#idle left
+17007	182	634	203	662	0
+#walking left
+17005	122	634	143	661	0
+17006	152	634	174	662	0
+
+#idle right
+17009	243	634	264	662	0
+#walking right
+17010	272	634	294	662	0
+17011	303	634	324	661	0
+#####################################################
+#FROG MARIO
+#idle left
+
+#walking left
+
+
+#idle right
+
+#walking right
+#####################################################
+#HAMMER MARIO
+#idle left
+
+#walking left
+
+
+#idle right
+
+#walking right
+#####################################################
+[ANIMATIONS]
+
+[ANIMATION_SETS]
+[OBJECTS]
+# type	x	y	ani_set_id	extra_settings per object type
