@@ -28,11 +28,19 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	y += dy;
 
 	if (vx < 0 && x < 0) {
-		x = 0; vx = -vx;
+		x = 0; vx = 0; vy = GOOMBA_WALKING_SPEED;
 	}
 
 	if (vx > 0 && x > 290) {
-		x = 290; vx = -vx;
+		x = 290; vy = -GOOMBA_WALKING_SPEED; vx = 0;
+	}
+
+	if (vy < 0 && y < -100) {
+		y = -100; vy = 0; vx = -GOOMBA_WALKING_SPEED;
+	}
+
+	if (vy > 0 && y > 150) {
+		y = 150; vy = 0; vx = GOOMBA_WALKING_SPEED;
 	}
 }
 
@@ -59,6 +67,6 @@ void CGoomba::SetState(int state)
 		vy = 0;
 		break;
 	case GOOMBA_STATE_WALKING:
-		vx = -GOOMBA_WALKING_SPEED;
+		vx = GOOMBA_WALKING_SPEED;
 	}
 }
