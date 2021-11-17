@@ -4,20 +4,67 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "Brick.h"
-#include "Mario.h"
+#include "TANK_BODY.h"
 #include "Eye.h"
 #include "Koopas.h"
 #include "Map.h"
 #include "TankParts.h"
 
+#include "Utils.h"
+#include "Game.h"
+#include <iostream>
+#include <fstream>
+
+
+#define GRID_SECTION_SETTINGS	1
+#define GRID_SECTION_OBJECTS	2
+#define MAX_GRID_LINE 1024
+
+class CQuadTree
+{
+	bool isLeaf = false;
+	float x = 0;
+	float y = 0;
+	float cellWidth = 0;
+	float  cellHeight = 0;
+	CQuadTree* BrachTL = NULL;
+	CQuadTree* BrachTR = NULL;
+	CQuadTree* BrachBL = NULL;
+	CQuadTree* BrachBR = NULL;
+	vector<LPGAMEOBJECT> listObjects;
+
+	void _ParseSection_SETTINGS(string line);
+	void _ParseSection_OBJECTS(string line);
+public:
+	CQuadTree(float cellWidth, float cellHeight, float x, float y);
+	CQuadTree(LPCWSTR filePath);
+	void GetObjects(vector<LPGAMEOBJECT>& listObject, int playerX, int playerY);
+	void Load(LPCWSTR filePath);
+	void Unload();
+	void Add(CGameObject* obj)
+	{
+		listObjects.push_back(obj);
+	}
+	int getVollunm(){
+		return listObjects.size();
+	}
+	void Render();
+	void Plit();
+	void ObjectPlit(CQuadTree* brach);
+	bool inRange(float ox, float oy, float x, float y, float width, float height);
+	void Pop(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY);
+
+};
+
 class CPlayScene : public CScene
 {
 protected:
-	CMario* player;					// A play scene has to have player, right? 
+	CTANK_BODY* player;					// A play scene has to have player, right? 
 
 	vector<LPGAMEOBJECT> objects;
 
 	Map* map;
+	CQuadTree* quadtree;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -25,6 +72,7 @@ protected:
 	void _ParseSection_ANIMATION_SETS(string line);
 	void _ParseSection_OBJECTS(string line);
 	void _ParseSection_MAP(string line);
+	void _ParseSection_GRID(string line);
 public:
 	CPlayScene(int id, LPCWSTR filePath);
 
@@ -33,7 +81,9 @@ public:
 	virtual void Render();
 	virtual void Unload();
 
-	CMario* GetPlayer() { return player; }
+	bool IsInUseArea(float Ox, float Oy);
+
+	CTANK_BODY* GetPlayer() { return player; }
 
 	//friend class CPlayScenceKeyHandler;
 };

@@ -62,10 +62,27 @@ public:
 
 	LPANIMATION_SET animation_set;
 
+
+	bool isAlive = false;
+
+	bool Actived = false;
+
+	float origin_x, origin_y;
+
+	int origin_state;
+
+	bool isOriginObj = false;
+
 public:
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void GetPosition(float& x, float& y) { x = this->x; y = this->y; }
+	float GetPositionX() {
+		return x;
+	}
+	float GetPositionY() {
+		return y;
+	}
 	void GetSpeed(float& vx, float& vy) { vx = this->vx; vy = this->vy; }
 
 	int GetState() { return this->state; }
@@ -95,5 +112,39 @@ public:
 
 
 	~CGameObject();
+
+
+	void SetisOriginObj(bool value)
+	{
+		isOriginObj = value;
+	}
+	bool GetisOriginObj()
+	{
+		return isOriginObj;
+	}
+	void reset()
+	{
+		SetState(origin_state);
+		x = origin_x;
+		y = origin_y;
+	}
+
+	void GetOriginLocation(float& x, float& y)
+	{
+		x = origin_x;
+		y = origin_y;
+	}
+
+	void SetActive(bool value)
+	{
+		Actived = value;
+	}
+
+	bool GetActive()
+	{
+		return	Actived;
+	}
+
+	void SetOrigin(float x, float y, int state) { this->origin_x = x, this->origin_y = y; this->origin_state = state; }
 };
 

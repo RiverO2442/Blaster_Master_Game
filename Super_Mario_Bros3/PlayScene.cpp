@@ -27,8 +27,9 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_ANIMATION_SETS	5
 #define SCENE_SECTION_OBJECTS	6
 #define SCENE_SECTION_MAP	7
+#define SCENE_SECTION_GRID	8
 
-#define OBJECT_TYPE_MARIO	0
+#define OBJECT_TYPE_TANK_BODY	0
 #define OBJECT_TYPE_TANK_PART	100
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_GOOMBA	2
@@ -38,6 +39,74 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 
 #define MAX_SCENE_LINE 1024
 
+void CPlayScene::Load()
+{
+	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
+
+	ifstream f;
+	f.open(sceneFilePath);
+
+	// current resource section flag
+	int section = SCENE_SECTION_UNKNOWN;
+
+	char str[MAX_SCENE_LINE];
+	while (f.getline(str, MAX_SCENE_LINE))
+	{
+		string line(str);
+
+		if (line[0] == '#') continue;	// skip comment lines	
+		if (line == "[MAP]") { section = SCENE_SECTION_MAP; continue; }
+		if (line == "[TEXTURES]") { section = SCENE_SECTION_TEXTURES; continue; }
+		if (line == "[SPRITES]") {
+			section = SCENE_SECTION_SPRITES; continue;
+		}
+		if (line == "[ANIMATIONS]") {
+			section = SCENE_SECTION_ANIMATIONS; continue;
+		}
+		if (line == "[MAP]") { section = SCENE_SECTION_MAP; continue; }
+		if (line == "[ANIMATION_SETS]") {
+			section = SCENE_SECTION_ANIMATION_SETS; continue;
+		}
+		if (line == "[OBJECTS]") {
+			section = SCENE_SECTION_OBJECTS; continue;
+		}
+		if (line == "[GRID]") {
+			section = SCENE_SECTION_GRID; continue;
+		}
+		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
+
+		//
+		// data section
+		//
+		switch (section)
+		{
+		case SCENE_SECTION_MAP: _ParseSection_MAP(line); break;
+		case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
+		case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
+		case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
+		case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
+		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+		case SCENE_SECTION_GRID: _ParseSection_GRID(line); break;
+		}
+	}
+
+	f.close();
+
+	CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
+
+	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
+}
+
+void CPlayScene::_ParseSection_GRID(string line)
+{
+	vector<string> tokens = split(line);
+
+	if (tokens.size() < 1) return;
+
+	wstring file_path = ToWSTR(tokens[0]);
+	if (quadtree == NULL)
+		quadtree = new CQuadTree(file_path.c_str());
+}
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
 {
@@ -144,14 +213,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	switch (object_type)
 	{
-	case OBJECT_TYPE_MARIO:
+	case OBJECT_TYPE_TANK_BODY:
 		if (player != NULL)
 		{
-			DebugOut(L"[ERROR] MARIO object was created before!\n");
+			DebugOut(L"[ERROR] TANK_BODY object was created before!\n");
 			return;
 		}
-		obj = new CMario(x, y);
-		player = (CMario*)obj;
+		obj = new CTANK_BODY(x, y);
+		player = (CTANK_BODY*)obj;
 
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
@@ -172,18 +241,25 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CPortal(x, y, r, b, scene_id);
 	}
 	break;
+	
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
 	}
 
 	// General object setup
-	obj->SetPosition(x, y);
+
 
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 
-	obj->SetAnimationSet(ani_set);
-	objects.push_back(obj);
+	if (obj != NULL)
+	{
+		obj->SetPosition(x, y);
+		obj->SetAnimationSet(ani_set);
+		obj->SetOrigin(x, y, obj->GetState());
+		obj->SetisOriginObj(true);
+		objects.push_back(obj);
+	}
 }
 
 void CPlayScene::_ParseSection_MAP(string line)
@@ -205,77 +281,27 @@ void CPlayScene::_ParseSection_MAP(string line)
 	map->ExtractTileFromTileSet();
 }
 
-void CPlayScene::Load()
+bool CPlayScene::IsInUseArea(float Ox, float Oy)
 {
-	DebugOut(L"[INFO] Start loading scene resources from : %s \n", sceneFilePath);
+	float CamX, CamY;
 
-	ifstream f;
-	f.open(sceneFilePath);
+	CamX = (float)CGame::GetInstance()->GetCamX();
 
-	// current resource section flag
-	int section = SCENE_SECTION_UNKNOWN;
+	CamY = (float)CGame::GetInstance()->GetCamY();
 
-	char str[MAX_SCENE_LINE];
-	while (f.getline(str, MAX_SCENE_LINE))
-	{
-		string line(str);
-
-		if (line[0] == '#') continue;	// skip comment lines	
-		if (line == "[MAP]") { section = SCENE_SECTION_MAP; continue; }
-		if (line == "[TEXTURES]") { section = SCENE_SECTION_TEXTURES; continue; }
-		if (line == "[SPRITES]") {
-			section = SCENE_SECTION_SPRITES; continue;
-		}
-		if (line == "[ANIMATIONS]") {
-			section = SCENE_SECTION_ANIMATIONS; continue;
-		}
-		if (line == "[MAP]") { section = SCENE_SECTION_MAP; continue; }
-		if (line == "[ANIMATION_SETS]") {
-			section = SCENE_SECTION_ANIMATION_SETS; continue;
-		}
-		if (line == "[OBJECTS]") {
-			section = SCENE_SECTION_OBJECTS; continue;
-		}
-		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
-
-		//
-		// data section
-		//
-		switch (section)
-		{
-		case SCENE_SECTION_MAP: _ParseSection_MAP(line); break;
-		case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
-		case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
-		case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
-		case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
-		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
-		}
-	}
-
-	f.close();
-
-	CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
-
-	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
+	if (((CamX - CAM_X_BONUS < Ox) && (Ox < CamX + IN_USE_WIDTH)) && ((CamY < Oy) && (Oy < CamY + IN_USE_HEIGHT)))
+		return true;
+	return false;
 }
 
 void CPlayScene::Update(DWORD dt)
 {
-	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
+	// We know that TANK_BODY is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
-	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 1; i < objects.size(); i++)
-	{
-		coObjects.push_back(objects[i]);
-	}
 
-	for (size_t i = 0; i < objects.size(); i++)
-	{
-		objects[i]->Update(dt, &coObjects);
-	}
 
-	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
+	// skip the rest if scene was already unloaded (TANK_BODY::Update might trigger PlayScene::Unload)
 	if (player == NULL) return;
 
 	// Update camera to follow mario
@@ -292,11 +318,38 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 	CGame::GetInstance()->SetCamPos(cx, cy /*cy*/);
+
+	vector<LPGAMEOBJECT> coObjects;
+
+	quadtree->GetObjects(objects, (int)cx, (int)cy);
+
+	for (size_t i = 0; i < objects.size(); i++)
+	{
+		float Ox, Oy;
+		objects[i]->GetPosition(Ox, Oy);
+		if (!IsInUseArea(Ox, Oy) && !objects[i]->GetisOriginObj())
+		{
+			objects[i]->SetActive(false);
+			objects.erase(objects.begin() + i);
+			i--;
+		}
+	}
+
+	for (size_t i = 1; i < objects.size(); i++)
+	{
+		coObjects.push_back(objects[i]);
+	}
+
+	for (size_t i = 0; i < objects.size(); i++)
+	{
+		objects[i]->Update(dt, &coObjects);
+	}
 }
 
 void CPlayScene::Render()
 {
 	CGame* game = CGame::GetInstance();
+
 	if (map)
 	{
 		this->map->Render();
@@ -323,11 +376,11 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
-	CMario* mario = ((CPlayScene*)scence)->GetPlayer();
+	CTANK_BODY* mario = ((CPlayScene*)scence)->GetPlayer();
 	switch (KeyCode)
 	{
 	case DIK_A:
-		mario->SetState(MARIO_STATE_JUMP);
+		mario->SetState(TANK_BODY_STATE_JUMP);
 		break;
 	case DIK_B:
 		mario->Reset();
@@ -338,18 +391,18 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 void CPlayScenceKeyHandler::KeyState(BYTE* states)
 {
 	CGame* game = CGame::GetInstance();
-	CMario* mario = ((CPlayScene*)scence)->GetPlayer();
+	CTANK_BODY* mario = ((CPlayScene*)scence)->GetPlayer();
 
-	// disable control key when Mario die 
-	if (mario->GetState() == MARIO_STATE_DIE) return;
+	// disable control key when TANK_BODY die 
+	if (mario->GetState() == TANK_BODY_STATE_DIE) return;
 	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
+		mario->SetState(TANK_BODY_STATE_WALKING_RIGHT);
 	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
+		mario->SetState(TANK_BODY_STATE_WALKING_LEFT);
 	else if (game->IsKeyDown(DIK_DOWN))
-		mario->SetState(MARIO_STATE_WALKING_DOWN);
+		mario->SetState(TANK_BODY_STATE_WALKING_DOWN);
 	else if (game->IsKeyDown(DIK_UP))
-		mario->SetState(MARIO_STATE_WALKING_UP);
+		mario->SetState(TANK_BODY_STATE_WALKING_UP);
 	else
-		mario->SetState(MARIO_STATE_IDLE);
+		mario->SetState(TANK_BODY_STATE_IDLE);
 }
