@@ -22,7 +22,7 @@
 
 #include "Mario.h"
 #include "Brick.h"
-#include "Goomba.h"
+#include "Eye.h"
 
 #include "PlayScene.h"
 

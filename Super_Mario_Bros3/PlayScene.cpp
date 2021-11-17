@@ -29,6 +29,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_MAP	7
 
 #define OBJECT_TYPE_MARIO	0
+#define OBJECT_TYPE_TANK_PART	100
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_GOOMBA	2
 #define OBJECT_TYPE_KOOPAS	3
@@ -157,6 +158,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
 	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
+	case OBJECT_TYPE_TANK_PART:
+	{
+		float part = atof(tokens[4].c_str());
+		obj = new TankParts(part);
+	}
+	break;
 	case OBJECT_TYPE_PORTAL:
 	{
 		float r = atof(tokens[4].c_str());
@@ -278,6 +285,11 @@ void CPlayScene::Update(DWORD dt)
 	CGame* game = CGame::GetInstance();
 	cx -= game->GetScreenWidth() / 2;
 	cy -= game->GetScreenHeight() / 2;
+
+	if (cx < 0)
+	{
+		cx = 0;
+	}
 
 	CGame::GetInstance()->SetCamPos(cx, cy /*cy*/);
 }

@@ -5,9 +5,10 @@
 #include "GameObject.h"
 #include "Brick.h"
 #include "Mario.h"
-#include "Goomba.h"
+#include "Eye.h"
 #include "Koopas.h"
 #include "Map.h"
+#include "TankParts.h"
 
 class CPlayScene : public CScene
 {
