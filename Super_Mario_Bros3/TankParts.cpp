@@ -37,7 +37,7 @@ void TankParts::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	switch(part)
 	{
 	case TankParts_LEFT_WHEEL:
-			x = TANK_BODY->x - TankParts_WHEEL_DISTANT_X;
+			x = TANK_BODY->x - TankParts_WHEEL_DISTANT_X;	
 			break;
 	case TankParts_RIGHT_WHEEL:
 			x = TANK_BODY->x + TankParts_WHEEL_DISTANT_X;
@@ -108,7 +108,9 @@ void TankParts::CalcPotentialCollisions(
 void TankParts::Render()
 {
 	CTANK_BODY* TANK_BODY = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+
 	int ani = 0;
+
 	if (TANK_BODY->vx > 0)
 	{
 		switch (part)
@@ -125,6 +127,7 @@ void TankParts::Render()
 			break;
 		}
 	}
+
 	else if (TANK_BODY->vx < 0)
 	{
 		switch (part)
@@ -141,6 +144,7 @@ void TankParts::Render()
 			break;
 		}
 	}
+
 	else if(TANK_BODY->vx == 0)
 	{
 		if (part != TankParts_TURRET)

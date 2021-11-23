@@ -1,0 +1,23 @@
+Player
+
+Sprite 20000
+
+ani 2000
+
+aniset 200
+
+enemy
+
+Sprite 30000
+
+ani 3000
+
+aniset 300
+
+Misc
+
+Sprite 40000
+
+ani 4000
+
+aniset 400

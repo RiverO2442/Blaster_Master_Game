@@ -306,8 +306,8 @@
 
 ###########################################
 
-[GRID]
-Grid\Grid1-1.txt
+[QUADTREE]
+Quadtree\Quadtree1-1.txt
 # --- SCENE PORTAL ----
 # type	l	t	ani_set_id	r	b	scene_id
 #50	300	98	0	316	150	1

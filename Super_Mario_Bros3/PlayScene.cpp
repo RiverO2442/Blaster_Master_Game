@@ -299,8 +299,6 @@ void CPlayScene::Update(DWORD dt)
 	// We know that TANK_BODY is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
-
-
 	// skip the rest if scene was already unloaded (TANK_BODY::Update might trigger PlayScene::Unload)
 	if (player == NULL) return;
 
