@@ -7,6 +7,8 @@
 
 #define MAX_SCENE_LINE 1024
 
+#define SCENE_SECTION_NoRenderObj	7
+
 CQuadTree::CQuadTree(LPCWSTR filePath)
 {
 	Load(filePath);
@@ -138,6 +140,8 @@ void CQuadTree::Load(LPCWSTR filePath)
 
 		if (line[0] == '#') continue;	// skip comment lines	
 
+		if (line == "[NoRenderObj]") { section = SCENE_SECTION_NoRenderObj; continue; }
+
 		if (line == "[SETTINGS]") {
 			section = QUADTREE_SECTION_SETTINGS; continue;
 		}
@@ -149,6 +153,7 @@ void CQuadTree::Load(LPCWSTR filePath)
 		//
 		switch (section)
 		{
+		case SCENE_SECTION_NoRenderObj: _ParseSection_NoRenderObj(line); break;
 		case QUADTREE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
 		case QUADTREE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 		}
@@ -157,6 +162,21 @@ void CQuadTree::Load(LPCWSTR filePath)
 	f.close();
 	Plit();
 	DebugOut(L"[INFO] Done loading scene resources %s\n", filePath);
+}
+
+void CQuadTree::_ParseSection_NoRenderObj(string line)
+{
+	vector<string> tokens = split(line);
+
+	if (tokens.size() < 3) return; // skip invalid lines
+
+	int totalRowsMap = atoi(tokens[0].c_str());
+	int totalColumnsMap = atoi(tokens[1].c_str());
+	wstring file_path = ToWSTR(tokens[2]);
+
+	obj = new NoRenderObj(totalRowsMap, totalColumnsMap);
+	obj->LoadNoRenderObj(file_path.c_str());
+	obj->Render(listObjects);
 }
 
 void CQuadTree::Render()

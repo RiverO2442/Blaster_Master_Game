@@ -13,117 +13,147 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\System">
+      <UniqueIdentifier>{e63abbfb-aaad-4b94-8f95-204abe3d490b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player">
+      <UniqueIdentifier>{47697f41-c4c7-40ec-bd71-de1291573041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Enemy">
+      <UniqueIdentifier>{37474437-e523-451e-a601-cdae077ff8b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\OtherObj">
+      <UniqueIdentifier>{b5fc293a-c591-46fb-b5b8-98c781fa5ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System">
+      <UniqueIdentifier>{dce15ad0-38da-4ebf-b4e6-b50e4d3fea83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Enemy">
+      <UniqueIdentifier>{46a69e1e-adfd-4570-a9d8-9d3f4ad6b1db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player">
+      <UniqueIdentifier>{fe6bb8e3-dbf4-463e-91d4-dd70a0bf0df1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OtherObj">
+      <UniqueIdentifier>{77e3cbde-df3d-4e92-9efc-6997792fdcf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprites.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Animations.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyEventHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Koopas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Eye.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TankParts.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TANK_BODY.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QuadTree.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\System</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEventHandler.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TankParts.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TANK_BODY.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Eye.h">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopas.h">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Header Files\OtherObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Header Files\OtherObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NoRenderObj.h">
+      <Filter>Header Files\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprites.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animations.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Koopas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Eye.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TankParts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TANK_BODY.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QuadTree.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\System</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Eye.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Koopas.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files\OtherObj</Filter>
+    </ClCompile>
+    <ClCompile Include="TANK_BODY.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TankParts.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="NoRenderObj.cpp">
+      <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
