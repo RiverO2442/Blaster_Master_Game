@@ -18,6 +18,7 @@ CTANK_BODY::CTANK_BODY(float x, float y) : CGameObject()
 	start_y = y;
 	this->x = x;
 	this->y = y;
+	
 }
 
 void CTANK_BODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -85,6 +86,7 @@ void CTANK_BODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CTANK_BODY::Render()
 {
+	
 	int ani = -1;
 	if (state == TANK_BODY_STATE_DIE)
 		ani = TANK_BODY_ANI_DIE;
@@ -142,14 +144,14 @@ void CTANK_BODY::SetState(int state)
 		break;
 	case TANK_BODY_STATE_JUMP:
 		// TODO: need to check if TANK_BODY is *current* on a platform before allowing to jump again
-		vy = -TANK_BODY_JUMP_SPEED_Y;
+		vy = TANK_BODY_JUMP_SPEED_Y;
 		break;
 	case TANK_BODY_STATE_IDLE:
 		vx = 0;
 		vy = 0;
 		break;
 	case TANK_BODY_STATE_DIE:
-		vy = -TANK_BODY_DIE_DEFLECT_SPEED;
+		vy = TANK_BODY_DIE_DEFLECT_SPEED;
 		break;
 	}
 }
@@ -161,6 +163,8 @@ void CTANK_BODY::GetBoundingBox(float& left, float& top, float& right, float& bo
 
 	right = x + TANK_BODY_BIG_BBOX_WIDTH + 9;
 	bottom = y + TANK_BODY_BIG_BBOX_HEIGHT;
+
+	DebugOut(L"L T R B %f %f %f %f  \n", left, top, right, bottom);
 }
 
 /*

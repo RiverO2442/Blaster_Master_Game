@@ -27,7 +27,8 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_ANIMATION_SETS	5
 #define SCENE_SECTION_OBJECTS	6
 #define SCENE_SECTION_MAP	7
-#define SCENE_SECTION_GRID	8
+#define SCENE_SECTION_QUADTREE	8
+#define SCENE_SECTION_SETTING	9
 
 #define OBJECT_TYPE_TANK_BODY	0
 #define OBJECT_TYPE_TANK_PART	100
@@ -70,8 +71,11 @@ void CPlayScene::Load()
 		if (line == "[OBJECTS]") {
 			section = SCENE_SECTION_OBJECTS; continue;
 		}
-		if (line == "[GRID]") {
-			section = SCENE_SECTION_GRID; continue;
+		if (line == "[QUADTREE]") {
+			section = SCENE_SECTION_QUADTREE; continue;
+		}
+		if (line == "[SETTING]") {
+			section = SCENE_SECTION_SETTING; continue;
 		}
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
@@ -81,12 +85,13 @@ void CPlayScene::Load()
 		switch (section)
 		{
 		case SCENE_SECTION_MAP: _ParseSection_MAP(line); break;
+		case SCENE_SECTION_SETTING: _ParseSection_SETTING(line); break;
 		case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
 		case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
 		case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
 		case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
 		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
-		case SCENE_SECTION_GRID: _ParseSection_GRID(line); break;
+		case SCENE_SECTION_QUADTREE: _ParseSection_QUADTREE(line); break;
 		}
 	}
 
@@ -97,7 +102,7 @@ void CPlayScene::Load()
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
 
-void CPlayScene::_ParseSection_GRID(string line)
+void CPlayScene::_ParseSection_QUADTREE(string line)
 {
 	vector<string> tokens = split(line);
 
@@ -106,6 +111,20 @@ void CPlayScene::_ParseSection_GRID(string line)
 	wstring file_path = ToWSTR(tokens[0]);
 	if (quadtree == NULL)
 		quadtree = new CQuadTree(file_path.c_str());
+}
+
+void CPlayScene::_ParseSection_SETTING(string line)
+{
+	vector<string> tokens = split(line);
+
+	if (tokens.size() < 1) return;
+
+	setMapheight(int(atoi(tokens[0].c_str())));
+
+	CGame::GetInstance()->GetCurrentScene()->setMapheight(int(atoi(tokens[0].c_str())));
+
+	DebugOut(L"Y: la %d  \n", getMapheight());
+
 }
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
@@ -219,10 +238,14 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			DebugOut(L"[ERROR] TANK_BODY object was created before!\n");
 			return;
 		}
-		obj = new CTANK_BODY(x, y);
+		obj = new CTANK_BODY(x, getMapheight() - y);
+		//obj = new CTANK_BODY(x,y);
+		//DebugOut(L"Y Xe la %d  %f  \n", getMapheight(),y);
+
 		player = (CTANK_BODY*)obj;
 
 		DebugOut(L"[INFO] Player object created!\n");
+
 		break;
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
@@ -252,9 +275,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 
-	if (obj != NULL)
+	if (obj != NULL )
 	{
-		obj->SetPosition(x, y);
+		if(object_type != OBJECT_TYPE_TANK_BODY)
+		obj->SetPosition(x, getMapheight() - y);
 		obj->SetAnimationSet(ani_set);
 		obj->SetOrigin(x, y, obj->GetState());
 		obj->SetisOriginObj(true);
@@ -285,9 +309,9 @@ bool CPlayScene::IsInUseArea(float Ox, float Oy)
 {
 	float CamX, CamY;
 
-	CamX = (float)CGame::GetInstance()->GetCamX();
+	CamX = (float)CGame::GetInstance()->GetCam().GetCamX();
 
-	CamY = (float)CGame::GetInstance()->GetCamY();
+	CamY = (float)CGame::GetInstance()->GetCam().GetCamY();
 
 	if (((CamX - CAM_X_BONUS < Ox) && (Ox < CamX + IN_USE_WIDTH)) && ((CamY < Oy) && (Oy < CamY + IN_USE_HEIGHT)))
 		return true;
@@ -304,9 +328,15 @@ void CPlayScene::Update(DWORD dt)
 
 	// Update camera to follow mario
 	float cx, cy;
+
 	player->GetPosition(cx, cy);
 
+	cy = cy;
+
+	/*DebugOut(L"Y: la %d %f  \n", CGame::GetInstance()->GetCurrentScene()->getMapheight(), cy);*/
+	
 	CGame* game = CGame::GetInstance();
+
 	cx -= game->GetScreenWidth() / 2;
 	cy -= game->GetScreenHeight() / 2;
 
@@ -315,7 +345,7 @@ void CPlayScene::Update(DWORD dt)
 		cx = 0;
 	}
 
-	CGame::GetInstance()->SetCamPos(cx, cy /*cy*/);
+	CGame::GetInstance()->SetCamPos(cx, cy);
 
 	vector<LPGAMEOBJECT> coObjects;
 

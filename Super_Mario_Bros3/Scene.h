@@ -9,10 +9,18 @@ protected:
 	CKeyEventHandler* key_handler;
 	int id;
 	LPCWSTR sceneFilePath;
+	int mapHeight;
 
 public:
 	CScene(int id, LPCWSTR filePath);
-
+	int getMapheight()
+	{
+		return mapHeight;
+	}
+	void setMapheight(int height)
+	{
+		mapHeight = height;
+	}
 	CKeyEventHandler* GetKeyEventHandler() { return key_handler; }
 	virtual void Load() = 0;
 	virtual void Unload() = 0;
@@ -28,6 +36,7 @@ protected:
 	CScene* scence;
 
 public:
+
 	virtual void KeyState(BYTE* states) = 0;
 	virtual void OnKeyDown(int KeyCode) = 0;
 	virtual void OnKeyUp(int KeyCode) = 0;

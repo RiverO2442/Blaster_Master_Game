@@ -9,7 +9,9 @@
 700	textures\BM\map3_bank.png	255	255	255
 50	textures\BM\30000.png	37	150	190
 
-
+[SETTING]
+#Map height
+2431
 [MAP]
 #400	57	7	62	56	399	textures\BM\map_4.txt
 #700	67	6	75	109	402	textures\BM\map_3.txt
@@ -298,10 +300,11 @@
 # type	x	y	ani_set_id	extra_settings per object type
 # type: 0 = Mario , 1 = Brick, 2 = Goomba
 # MARIO
-0	50.0	132	1
-100	180	135	304	1
-100	180	135	305	0
-100	180	135	306	2
+0	50	2299	1
+100	180	2296	304	1
+100	180	2296	305	0
+100	180	2296	306	2
+
 
 
 ###########################################

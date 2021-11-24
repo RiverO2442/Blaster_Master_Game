@@ -131,26 +131,26 @@ void CQuadTree::Load(LPCWSTR filePath)
 	// current resource section flag
 	int section = 0;
 
-	char str[MAX_GRID_LINE];
-	while (f.getline(str, MAX_GRID_LINE))
+	char str[MAX_QUADTREE_LINE];
+	while (f.getline(str, MAX_QUADTREE_LINE))
 	{
 		string line(str);
 
 		if (line[0] == '#') continue;	// skip comment lines	
 
 		if (line == "[SETTINGS]") {
-			section = GRID_SECTION_SETTINGS; continue;
+			section = QUADTREE_SECTION_SETTINGS; continue;
 		}
 		if (line == "[OBJECTS]") {
-			section = GRID_SECTION_OBJECTS; continue;
+			section = QUADTREE_SECTION_OBJECTS; continue;
 		}
 		//
 		// data section
 		//
 		switch (section)
 		{
-		case GRID_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
-		case GRID_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+		case QUADTREE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
+		case QUADTREE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 		}
 	}
 

@@ -16,9 +16,9 @@
 #include <fstream>
 
 
-#define GRID_SECTION_SETTINGS	1
-#define GRID_SECTION_OBJECTS	2
-#define MAX_GRID_LINE 1024
+#define QUADTREE_SECTION_SETTINGS	1
+#define QUADTREE_SECTION_OBJECTS	2
+#define MAX_QUADTREE_LINE 1024
 
 class CQuadTree
 {
@@ -60,9 +60,8 @@ class CPlayScene : public CScene
 {
 protected:
 	CTANK_BODY* player;					// A play scene has to have player, right? 
-
 	vector<LPGAMEOBJECT> objects;
-
+	int mapHeight;
 	Map* map;
 	CQuadTree* quadtree;
 
@@ -72,7 +71,8 @@ protected:
 	void _ParseSection_ANIMATION_SETS(string line);
 	void _ParseSection_OBJECTS(string line);
 	void _ParseSection_MAP(string line);
-	void _ParseSection_GRID(string line);
+	void _ParseSection_QUADTREE(string line);
+	void _ParseSection_SETTING(string line);
 public:
 	CPlayScene(int id, LPCWSTR filePath);
 
@@ -84,6 +84,16 @@ public:
 	bool IsInUseArea(float Ox, float Oy);
 
 	CTANK_BODY* GetPlayer() { return player; }
+
+	void setMapheight(int height)
+	{
+		mapHeight = height;
+	}
+
+	int getMapheight()
+	{
+		return mapHeight;
+	}
 
 	//friend class CPlayScenceKeyHandler;
 };
