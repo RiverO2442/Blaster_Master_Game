@@ -1,13 +1,15 @@
 #include "PlayScene.h"
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_GOOMBA	2
-#define OBJECT_TYPE_KOOPAS	3
+#define OBJECT_TYPE_LASERGUARD	3
+#define OBJECT_TYPE_BALLCARRY	4
+#define OBJECT_TYPE_BALLBOT	5
 
 #define OBJECT_TYPE_PORTAL	50
 
 #define MAX_SCENE_LINE 1024
 
-#define SCENE_SECTION_NoRenderObj	7
+#define SCENE_SECTION_MapObj	7
 
 CQuadTree::CQuadTree(LPCWSTR filePath)
 {
@@ -103,12 +105,13 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	{
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
-	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
+	case OBJECT_TYPE_LASERGUARD: obj = new CLaserGuard(); break;
+	case OBJECT_TYPE_BALLCARRY: obj = new CBallCarry(); break;
+	case OBJECT_TYPE_BALLBOT: obj = new CBallbot(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
 	}
-
 	// General object setup
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 	if (obj != NULL)
@@ -120,7 +123,6 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 		/*obj->SetrenderLayer(renderLayer);*/
 		Add(obj);
 	}
-
 }
 
 void CQuadTree::Load(LPCWSTR filePath)
@@ -140,7 +142,7 @@ void CQuadTree::Load(LPCWSTR filePath)
 
 		if (line[0] == '#') continue;	// skip comment lines	
 
-		if (line == "[NoRenderObj]") { section = SCENE_SECTION_NoRenderObj; continue; }
+		if (line == "[MapObj]") { section = SCENE_SECTION_MapObj; continue; }
 
 		if (line == "[SETTINGS]") {
 			section = QUADTREE_SECTION_SETTINGS; continue;
@@ -153,7 +155,7 @@ void CQuadTree::Load(LPCWSTR filePath)
 		//
 		switch (section)
 		{
-		case SCENE_SECTION_NoRenderObj: _ParseSection_NoRenderObj(line); break;
+		case SCENE_SECTION_MapObj: _ParseSection_MapObj(line); break;
 		case QUADTREE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
 		case QUADTREE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 		}
@@ -164,7 +166,7 @@ void CQuadTree::Load(LPCWSTR filePath)
 	DebugOut(L"[INFO] Done loading scene resources %s\n", filePath);
 }
 
-void CQuadTree::_ParseSection_NoRenderObj(string line)
+void CQuadTree::_ParseSection_MapObj(string line)
 {
 	vector<string> tokens = split(line);
 
@@ -174,8 +176,8 @@ void CQuadTree::_ParseSection_NoRenderObj(string line)
 	int totalColumnsMap = atoi(tokens[1].c_str());
 	wstring file_path = ToWSTR(tokens[2]);
 
-	obj = new NoRenderObj(totalRowsMap, totalColumnsMap);
-	obj->LoadNoRenderObj(file_path.c_str());
+	obj = new MapObj(totalRowsMap, totalColumnsMap);
+	obj->LoadMapObj(file_path.c_str());
 	obj->Render(listObjects);
 }
 

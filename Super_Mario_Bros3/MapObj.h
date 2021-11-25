@@ -12,7 +12,7 @@
 #define IN_USE_HEIGHT 300
 #define CAM_X_BONUS 50
 
-class NoRenderObj
+class MapObj
 {
 private:
 	int** TileMap;
@@ -20,8 +20,8 @@ private:
 	int TotalColumnsOfMap, TotalRowsOfMap;
 
 public:
-	NoRenderObj(int _totalRowsMap, int _totalColumnsMap);
-	~NoRenderObj();
+	MapObj(int _totalRowsMap, int _totalColumnsMap);
+	~MapObj();
 	void Render(vector<LPGAMEOBJECT>& listObjects);
-	void LoadNoRenderObj(LPCWSTR file_path);
+	void LoadMapObj(LPCWSTR file_path);
 };

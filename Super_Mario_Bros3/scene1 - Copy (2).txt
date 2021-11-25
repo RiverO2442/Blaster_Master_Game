@@ -1,0 +1,142 @@
+# id	file_path	transparent_color_r	g	b
+[TEXTURES]
+0	textures\mario.png	255	255	255
+20	textures\misc.png	176	224	248
+10	textures\enemies.png	3	26	110
+500	textures\BM\20000.png	0	136	255
+600	textures\BM\20000(1).png	0	136	255
+400	textures\BM\map4_bank.png	255	255	255
+700	textures\BM\map3_bank.png	255	255	255
+50	textures\BM\30000.png	37	150	190
+
+[SETTING]
+#Map height
+2431
+[MAP]
+#400	57	7	62	56	399	textures\BM\map_4.txt
+700	23	7	23	47	161	textures\BM\map_3.txt
+# id	left	top	right	bottom	texture_id
+[SPRITES]
+#TURRET_RIGHT
+69200	0	8	26	17	500
+#TURRET_LEFT
+69201	280	8	306	17	600
+
+#BODY
+69100	129	18	137	24	500
+
+#WHEEL ( LEN PHAI NAM TRAI )
+69000	1	18	9	26	500
+69001	41	17	49	25	500
+69002	57	17	65	25	500
+69003	161	20	169	28	500
+
+#TANK
+60000	0	8	26	26	500
+60001	40	8	66	25	500
+60002	80	8	106	25	500
+60003	120	8	146	26	500
+60004	160	6	186	28	500
+60005	201	8	225	26	500
+60006	240	0	266	34	500
+60007	278	8	308	26	500
+60008	318	8	348	26	500
+60009	360	0	386	34	500
+
+70000	360	8	385	26	600
+70001	320	8	346	25	600
+70002	280	8	306	25	600
+70003	240	8	246	26	600
+
+#BRICK
+20001	408	225	424	241	20
+
+###########################################						
+# ani_id	sprite1_id	time1	sprite2_id	time2	...
+[ANIMATIONS]
+#PHU TUNG CHO TANK
+
+#Banh trc
+#qua phai
+3000	69000	100	69001	100	69002	100	69003	100
+#qua trai
+3001	69000	100	69003	100	69002	100	69001	100
+#idle
+3002	69000	100
+
+
+#Banh sau
+#qua phai
+3100	69001	100	69002	100	69003	100	69000	100
+#qua trai
+3101	69001	100	69000	100	69003	100	69002	100
+#idle
+3102	69001	100
+
+#TURRET (RIGHT to LEFT IDLE)
+3200	69200	100
+3201	69201	100
+
+# ==== MARIO =========
+#idle BIG right
+400	69100	100
+#idle BIG left
+401	69100	100
+#idle small right
+402	69100	100
+#idle small left
+403	69100	100
+#walk right big
+500	69100	100
+#walk left big
+501	69100	100
+#walk right small
+502	69100	100
+#walk left small
+503	69100	100
+#die
+599	10099	100
+
+
+# ==== BRICK =========
+601	20001	100
+###########################################
+
+
+#
+# id	ani1	ani2	ani3
+#
+[ANIMATION_SETS]
+# MARIO
+1	400	401	402	403	500	501	502	503	599
+# BRICK 
+2	601
+# GOOMBA
+3	3000	3001
+#Banh xe truoc
+304	3000	3001	3002
+#Banh xe sau
+305	3100	3101	3102
+#Turret
+306	3200	3201
+###########################################
+
+[OBJECTS]
+# type	x	y	ani_set_id	extra_settings per object type
+# type: 0 = Mario , 1 = Brick, 2 = Goomba
+# MARIO
+0	1336	2310	1
+100	180	2296	304	1
+100	180	2296	305	0
+100	180	2296	306	2
+
+
+
+###########################################
+
+[QUADTREE]
+Quadtree\Quadtree1-1.txt
+# --- SCENE PORTAL ----
+# type	l	t	ani_set_id	r	b	scene_id
+#50	300	98	0	316	150	1
+

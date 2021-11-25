@@ -33,8 +33,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_TANK_BODY	0
 #define OBJECT_TYPE_TANK_PART	100
 #define OBJECT_TYPE_BRICK	1
-#define OBJECT_TYPE_GOOMBA	2
-#define OBJECT_TYPE_KOOPAS	3
+
 
 #define OBJECT_TYPE_PORTAL	50
 
@@ -247,9 +246,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"[INFO] Player object created!\n");
 
 		break;
-	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
-	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
 	case OBJECT_TYPE_TANK_PART:
 	{
 		float part = atof(tokens[4].c_str());
@@ -331,6 +328,8 @@ void CPlayScene::Update(DWORD dt)
 
 	player->GetPosition(cx, cy);
 
+	DebugOut(L"PST x y %f %f", cx, cy);
+
 	cy = cy;
 
 	/*DebugOut(L"Y: la %d %f  \n", CGame::GetInstance()->GetCurrentScene()->getMapheight(), cy);*/
@@ -407,7 +406,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	CTANK_BODY* mario = ((CPlayScene*)scence)->GetPlayer();
 	switch (KeyCode)
 	{
-	case DIK_A:
+	case DIK_SPACE:
 		mario->SetState(TANK_BODY_STATE_JUMP);
 		break;
 	case DIK_B:

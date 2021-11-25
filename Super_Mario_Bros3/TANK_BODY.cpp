@@ -27,7 +27,7 @@ void CTANK_BODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	CGameObject::Update(dt);
 
 	// Simple fall down
-	/*vy += TANK_BODY_GRAVITY * dt;*/
+	vy += TANK_BODY_GRAVITY * dt;
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -144,11 +144,10 @@ void CTANK_BODY::SetState(int state)
 		break;
 	case TANK_BODY_STATE_JUMP:
 		// TODO: need to check if TANK_BODY is *current* on a platform before allowing to jump again
-		vy = TANK_BODY_JUMP_SPEED_Y;
+		vy = -TANK_BODY_JUMP_SPEED_Y;
 		break;
 	case TANK_BODY_STATE_IDLE:
 		vx = 0;
-		vy = 0;
 		break;
 	case TANK_BODY_STATE_DIE:
 		vy = TANK_BODY_DIE_DEFLECT_SPEED;

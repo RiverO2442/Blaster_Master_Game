@@ -149,10 +149,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h" />
+    <ClInclude Include="CBallCarry.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CBallbot.h" />
+    <ClInclude Include="CDrap.h" />
+    <ClInclude Include="CGX680.h" />
+    <ClInclude Include="CGX680S.h" />
+    <ClInclude Include="CLaserGuard.h" />
+    <ClInclude Include="CStuka.h" />
+    <ClInclude Include="Eyelet.h" />
+    <ClInclude Include="Interrupt.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="NoRenderObj.h" />
+    <ClInclude Include="MapObj.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="TankParts.h" />
     <ClInclude Include="Utils.h" />
@@ -169,12 +178,21 @@
     <ClInclude Include="Textures.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBallCarry.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CBallbot.cpp" />
+    <ClCompile Include="CDrap.cpp" />
+    <ClCompile Include="CGX680.cpp" />
+    <ClCompile Include="CGX680S.cpp" />
+    <ClCompile Include="CLaserGuard.cpp" />
+    <ClCompile Include="CStuka.cpp" />
     <ClCompile Include="Eye.cpp" />
+    <ClCompile Include="Eyelet.cpp" />
+    <ClCompile Include="Interrupt.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="NoRenderObj.cpp" />
+    <ClCompile Include="MapObj.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="QuadTree.cpp" />

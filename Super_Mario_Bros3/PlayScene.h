@@ -9,7 +9,10 @@
 #include "Koopas.h"
 #include "Map.h"
 #include "TankParts.h"
-#include "NoRenderObj.h"
+#include "MapObj.h"
+#include "CLaserGuard.h"
+#include "CBallCarry.h"
+#include "CBallbot.h"
 
 #include "Utils.h"
 #include "Game.h"
@@ -32,12 +35,12 @@ class CQuadTree
 	CQuadTree* BrachTR = NULL;
 	CQuadTree* BrachBL = NULL;
 	CQuadTree* BrachBR = NULL;
-	NoRenderObj* obj;
+	MapObj* obj;
 	vector<LPGAMEOBJECT> listObjects;
 
 	void _ParseSection_SETTINGS(string line);
 	void _ParseSection_OBJECTS(string line);
-	void _ParseSection_NoRenderObj(string line);
+	void _ParseSection_MapObj(string line);
 public:
 	CQuadTree(float cellWidth, float cellHeight, float x, float y);
 	CQuadTree(LPCWSTR filePath);
