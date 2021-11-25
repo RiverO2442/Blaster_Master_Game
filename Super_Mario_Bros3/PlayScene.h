@@ -12,7 +12,14 @@
 #include "MapObj.h"
 #include "CLaserGuard.h"
 #include "CBallCarry.h"
+#include "CBallbot.h"
 #include "CDrap.h"
+#include "CGX680.h"
+#include "CGX680S.h"
+#include "CSTUKA.h"
+#include "Eyelet.h"
+#include "Interrupt.h"
+
 
 #include "Utils.h"
 #include "Game.h"

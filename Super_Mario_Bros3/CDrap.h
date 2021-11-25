@@ -16,8 +16,10 @@
 
 #define DRAP_ANI 0
 
+#define DRAP_STATE_IDLE 100
 #define DRAP_STATE_DIE 200
 #define DRAP_STATE_WALKING 300
+
 
 
 class CDrap : public CGameObject

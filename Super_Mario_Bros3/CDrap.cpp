@@ -1,7 +1,7 @@
 #include "CDrap.h"
 CDrap::CDrap()
 {
-	SetState(DRAP_STATE_WALKING);
+	SetState(DRAP_STATE_IDLE);
 }
 
 void CDrap::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -42,6 +42,9 @@ void CDrap::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
+	case DRAP_STATE_WALKING:
+		vx = DRAP_WALKING_SPEED;
+		break;
 
 	}
 }
