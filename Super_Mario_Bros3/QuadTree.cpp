@@ -107,7 +107,7 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
 	case OBJECT_TYPE_LASERGUARD: obj = new CLaserGuard(); break;
 	case OBJECT_TYPE_BALLCARRY: obj = new CBallCarry(); break;
-	case OBJECT_TYPE_BALLBOT: obj = new CBallbot(); break;
+	case OBJECT_TYPE_BALLBOT: obj = new CDrap(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;

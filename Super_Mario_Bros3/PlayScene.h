@@ -12,7 +12,7 @@
 #include "MapObj.h"
 #include "CLaserGuard.h"
 #include "CBallCarry.h"
-#include "CBallbot.h"
+#include "CDrap.h"
 
 #include "Utils.h"
 #include "Game.h"

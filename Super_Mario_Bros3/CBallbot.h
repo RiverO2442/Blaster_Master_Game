@@ -20,7 +20,7 @@
 #define BALLBOT_STATE_WALKING 300
 
 
-class CDrap : public CGameObject
+class CBallBot : public CGameObject
 {
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
@@ -29,6 +29,6 @@ class CDrap : public CGameObject
 	virtual void Render();
 
 public:
-	CDrap();
+	CBallBot();
 	virtual void SetState(int state);
 };
