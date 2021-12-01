@@ -123,6 +123,9 @@
     <ClInclude Include="MapObj.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="CTANKBULLET.h">
+      <Filter>Header Files\OtherObj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="MapObj.cpp">
       <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="CTANKBULLET.cpp">
+      <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

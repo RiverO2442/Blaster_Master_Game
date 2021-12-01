@@ -33,6 +33,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_TANK_BODY	0
 #define OBJECT_TYPE_TANK_PART	100
 #define OBJECT_TYPE_BRICK	1
+#define OBJECT_TYPE_CTANKBULLET	2
 
 
 #define OBJECT_TYPE_PORTAL	50
@@ -239,7 +240,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		}
 		obj = new CTANK_BODY(x, getMapheight() - y);
 		//obj = new CTANK_BODY(x,y);
-		//DebugOut(L"Y Xe la %d  %f  \n", getMapheight(),y);
+		DebugOut(L"RRRRRRRRRrY Xe la %d  %f  \n", getMapheight(),y);
 
 		player = (CTANK_BODY*)obj;
 
@@ -247,6 +248,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 		break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
+	case OBJECT_TYPE_CTANKBULLET: obj = new CTANKBULLET(); break;
+		
 	case OBJECT_TYPE_TANK_PART:
 	{
 		float part = atof(tokens[4].c_str());
@@ -412,7 +415,22 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_B:
 		mario->Reset();
 		break;
+	case DIK_A:
+		mario->SetisFiring(true);
+		break;
 	}
+}
+
+void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
+{
+	CTANK_BODY* mario = ((CPlayScene*)scence)->GetPlayer();
+		switch (KeyCode)
+		{
+		case DIK_A:
+			mario->SetisFiring(false);
+			mario->SetisAlreadyFired(false);
+			break;
+		}
 }
 
 void CPlayScenceKeyHandler::KeyState(BYTE* states)

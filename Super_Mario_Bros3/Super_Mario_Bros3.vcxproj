@@ -158,6 +158,7 @@
     <ClInclude Include="CGX680S.h" />
     <ClInclude Include="CLaserGuard.h" />
     <ClInclude Include="CStuka.h" />
+    <ClInclude Include="CTANKBULLET.h" />
     <ClInclude Include="Eyelet.h" />
     <ClInclude Include="Interrupt.h" />
     <ClInclude Include="Map.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="CGX680S.cpp" />
     <ClCompile Include="CLaserGuard.cpp" />
     <ClCompile Include="CStuka.cpp" />
+    <ClCompile Include="CTANKBULLET.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="Eyelet.cpp" />
     <ClCompile Include="Interrupt.cpp" />

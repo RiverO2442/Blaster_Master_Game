@@ -11,99 +11,37 @@ TankParts::TankParts(int part)
 
 void TankParts::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x;
-	top = y;
-	right = x + TankParts_BBOX_WIDTH;
-	if (state == TankParts_STATE_DIE)
-		y = y + TankParts_BBOX_HEIGHT;
-	else bottom = y + TankParts_BBOX_HEIGHT;
 }
 
 void TankParts::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	
 	CGameObject::Update(dt, coObjects);
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
-
-	coEvents.clear();
-
-	// turn off collision when die 
-	if (state != TankParts_STATE_DIE)
-		CalcPotentialCollisions(coObjects, coEvents);
 
 	CTANK_BODY* TANK_BODY = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 
 	switch(part)
 	{
 	case TankParts_LEFT_WHEEL:
-			x = TANK_BODY->x - TankParts_WHEEL_DISTANT_X;	
+			x = TANK_BODY->x - TankParts_WHEEL_DISTANT_X;
 			break;
 	case TankParts_RIGHT_WHEEL:
 			x = TANK_BODY->x + TankParts_WHEEL_DISTANT_X;
 			break;
 	case TankParts_TURRET:
-		x = TANK_BODY->x - TankParts_TURRET_DISTANT_X;
-		break;
+			x = TANK_BODY->x - TankParts_TURRET_DISTANT_X;
+			break;
 	}
 	if(part == TankParts_TURRET)
 		y = TANK_BODY->y - TankParts_TURRET_DISTANT_Y;
 	else
 		y = TANK_BODY->y + TankParts_WHEEL_DISTANT_Y;
 	
-	// No collision occured, proceed normally
-	if (coEvents.size() == 0)
-	{
 		x += dx;
 		y += dy;
-	}
-	else
-	{
-		float min_tx, min_ty, nx = 0, ny;
-		float rdx = 0;
-		float rdy = 0;
 
-		// TODO: This is a very ugly designed function!!!!
-		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
-
-		// how to push back TANK_BODY if collides with a moving objects, what if TANK_BODY is pushed this way into another object?
-		//if (rdx != 0 && rdx!=dx)
-		//	x += nx*abs(rdx); 
-
-		// block every object first!
-		x += min_tx * dx + nx * 0.4f;
-		y += min_ty * dy + ny * 0.4f;
-
-		if (nx != 0) vx = 0;
-		if (ny != 0) vy = 0;
-
-		//
-		// Collision logic with other objects
-		//
-		for (UINT i = 0; i < coEventsResult.size(); i++)
-		{
-			LPCOLLISIONEVENT e = coEventsResult[i];
-		}
-	}
-
-	// clean up collision events
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
 
-void TankParts::CalcPotentialCollisions(
-	vector<LPGAMEOBJECT>* coObjects,
-	vector<LPCOLLISIONEVENT>& coEvents)
-{
-	for (UINT i = 0; i < coObjects->size(); i++)
-	{
-		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
-		if (e->t > 0 && e->t <= 1.0f)
-			coEvents.push_back(e);
-		else
-			delete e;
-	}
-	std::sort(coEvents.begin(), coEvents.end(), CCollisionEvent::compare);
-}
 
 void TankParts::Render()
 {

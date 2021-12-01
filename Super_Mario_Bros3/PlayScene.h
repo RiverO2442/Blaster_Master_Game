@@ -19,7 +19,7 @@
 #include "CSTUKA.h"
 #include "Eyelet.h"
 #include "Interrupt.h"
-
+#include "CTANKBULLET.h"
 
 #include "Utils.h"
 #include "Game.h"
@@ -116,7 +116,7 @@ class CPlayScenceKeyHandler : public CScenceKeyHandler
 public:
 	virtual void KeyState(BYTE* states);
 	virtual void OnKeyDown(int KeyCode);
-	virtual void OnKeyUp(int KeyCode) {};
+	virtual void OnKeyUp(int KeyCode);
 	CPlayScenceKeyHandler(CScene* s) :CScenceKeyHandler(s) {};
 };
 
