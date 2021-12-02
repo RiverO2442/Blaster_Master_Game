@@ -1,7 +1,7 @@
 #include "Interrupt.h"
 CINTERRUPT::CINTERRUPT()
 {
-	SetState(CINTERRUPT_STATE_IDLE);
+	SetState(STATE_IDLE);
 }
 
 void CINTERRUPT::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -30,11 +30,14 @@ void CINTERRUPT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CINTERRUPT::Render()
 {
-	int ani = CINTERRUPT_ANI;
+	if (state != STATE_DIE)
+	{
+		int ani = CINTERRUPT_ANI;
 
-	animation_set->at(ani)->Render(x, y);
+		animation_set->at(ani)->Render(x, y);
 
-	//RenderBoundingBox();
+		//RenderBoundingBox();
+	}
 }
 
 void CINTERRUPT::SetState(int state)
@@ -42,9 +45,12 @@ void CINTERRUPT::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case CINTERRUPT_STATE_WALKING:
-		vx = CINTERRUPT_WALKING_SPEED;
+	case STATE_IDLE:
+		vx = 0;
+		vy = 0;
 		break;
-
+	case STATE_DIE:
+		vy = DIE_PULL;
+		break;
 	}
 }

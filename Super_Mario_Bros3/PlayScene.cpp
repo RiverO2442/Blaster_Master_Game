@@ -298,6 +298,11 @@ void CPlayScene::_ParseSection_MAP(string line)
 	int totalRowsMap = atoi(tokens[3].c_str());
 	int totalColumnsMap = atoi(tokens[4].c_str());
 	int totalTiles = atoi(tokens[5].c_str());
+
+	setMapheight(int(atoi(tokens[3].c_str())) * 32);
+
+	CGame::GetInstance()->GetCurrentScene()->setMapheight(int(atoi(tokens[3].c_str())) * 32);
+
 	wstring file_path = ToWSTR(tokens[6]);
 
 	map = new Map(idTileSet, totalRowsTileSet, totalColumnsTileSet, totalRowsMap, totalColumnsMap, totalTiles);

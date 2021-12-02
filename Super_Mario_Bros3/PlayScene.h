@@ -13,7 +13,7 @@
 #include "CLaserGuard.h"
 #include "CBallCarry.h"
 #include "CBallbot.h"
-#include "CDrap.h"
+#include "CDRAP.h"
 #include "CGX680.h"
 #include "CGX680S.h"
 #include "CSTUKA.h"

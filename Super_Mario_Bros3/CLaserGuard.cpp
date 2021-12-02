@@ -1,22 +1,22 @@
 #include "CLaserGuard.h"
-CLaserGuard::CLaserGuard()
+CLASERGUARD::CLASERGUARD()
 {
-	SetState(LASERGUARD_STATE_WALKING);
+	SetState(STATE_IDLE);
 }
 
-void CLaserGuard::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+void CLASERGUARD::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
 	top = y;
-	right = x + LASERGUARD_BBOX_WIDTH;
+	right = x + CLASERGUARD_BBOX_WIDTH;
 
-	if (state == LASERGUARD_STATE_DIE)
-		bottom = y + LASERGUARD_BBOX_HEIGHT_DIE;
+	if (state == CLASERGUARD_STATE_DIE)
+		bottom = y + CLASERGUARD_BBOX_HEIGHT_DIE;
 	else
-		bottom = y + LASERGUARD_BBOX_HEIGHT;
+		bottom = y + CLASERGUARD_BBOX_HEIGHT;
 }
 
-void CLaserGuard::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void CLASERGUARD::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	CGameObject::Update(dt, coObjects);
 
@@ -28,20 +28,29 @@ void CLaserGuard::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	y += dy;
 }
 
-void CLaserGuard::Render()
+void CLASERGUARD::Render()
 {
-	int ani = LASERGUARD_ANI;
+	if (state != STATE_DIE)
+	{
+		int ani = CLASERGUARD_ANI;
 
-	animation_set->at(ani)->Render(x, y);
+		animation_set->at(ani)->Render(x, y);
 
-	//RenderBoundingBox();
+		//RenderBoundingBox();
+	}
 }
 
-void CLaserGuard::SetState(int state)
+void CLASERGUARD::SetState(int state)
 {
 	CGameObject::SetState(state);
 	switch (state)
 	{
-
+	case STATE_IDLE:
+		vx = 0;
+		vy = 0;
+		break;
+	case STATE_DIE:
+		vy = DIE_PULL;
+		break;
 	}
 }

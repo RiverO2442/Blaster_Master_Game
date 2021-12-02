@@ -1,7 +1,7 @@
 #include "Eyelet.h"
 CEYELET::CEYELET()
 {
-	SetState(EYELET_STATE_IDLE);
+	SetState(STATE_IDLE);
 }
 
 void CEYELET::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -30,11 +30,14 @@ void CEYELET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CEYELET::Render()
 {
-	int ani = EYELET_ANI;
+	if (state != STATE_DIE)
+	{
+		int ani = EYELET_ANI;
 
-	animation_set->at(ani)->Render(x, y);
+		animation_set->at(ani)->Render(x, y);
 
-	//RenderBoundingBox();
+		//RenderBoundingBox();
+	}
 }
 
 void CEYELET::SetState(int state)
@@ -42,8 +45,12 @@ void CEYELET::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case EYELET_STATE_WALKING:
-		vx = EYELET_WALKING_SPEED;
+	case STATE_IDLE:
+		vx = 0;
+		vy = 0;
+		break;
+	case STATE_DIE:
+		vy = DIE_PULL;
 		break;
 
 	}

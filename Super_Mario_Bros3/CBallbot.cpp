@@ -1,22 +1,22 @@
-#include "CBallBot.h"
-CBallBot::CBallBot()
+#include "CBALLBOT.h"
+CBALLBOT::CBALLBOT()
 {
-	SetState(BALLBOT_STATE_WALKING);
+	SetState(STATE_IDLE);
 }
 
-void CBallBot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+void CBALLBOT::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
 	top = y;
-	right = x + BALLBOT_BBOX_WIDTH;
+	right = x + CBALLBOT_BBOX_WIDTH;
 
-	if (state == BALLBOT_STATE_DIE)
-		bottom = y + BALLBOT_BBOX_HEIGHT_DIE;
+	if (state == CBALLBOT_STATE_DIE)
+		bottom = y + CBALLBOT_BBOX_HEIGHT_DIE;
 	else
-		bottom = y + BALLBOT_BBOX_HEIGHT;
+		bottom = y + CBALLBOT_BBOX_HEIGHT;
 }
 
-void CBallBot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void CBALLBOT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	CGameObject::Update(dt, coObjects);
 
@@ -28,20 +28,29 @@ void CBallBot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	y += dy;
 }
 
-void CBallBot::Render()
+void CBALLBOT::Render()
 {
-	int ani = BALLBOT_ANI;
+	if (state != STATE_DIE)
+	{
+		int ani = CBALLBOT_ANI;
 
-	animation_set->at(ani)->Render(x, y);
+		animation_set->at(ani)->Render(x, y);
 
-	//RenderBoundingBox();
+		//RenderBoundingBox();
+	}
 }
 
-void CBallBot::SetState(int state)
+void CBALLBOT::SetState(int state)
 {
 	CGameObject::SetState(state);
 	switch (state)
 	{
-
+	case STATE_IDLE:
+		vx = 0;
+		vy = 0;
+		break;
+	case STATE_DIE:
+		vy = DIE_PULL;
+		break;
 	}
 }

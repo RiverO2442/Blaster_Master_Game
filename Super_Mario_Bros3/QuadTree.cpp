@@ -112,10 +112,10 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	{
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
-	case OBJECT_TYPE_LASERGUARD: obj = new CLaserGuard(); break;
-	case OBJECT_TYPE_BALLCARRY: obj = new CBallCarry(); break;
-	case OBJECT_TYPE_BALLBOT: obj = new CBallBot(); break;
-	case OBJECT_TYPE_DRAP: obj = new CDrap(); break;
+	case OBJECT_TYPE_LASERGUARD: obj = new CLASERGUARD(); break;
+	case OBJECT_TYPE_BALLCARRY: obj = new CBALLCARRY(); break;
+	case OBJECT_TYPE_BALLBOT: obj = new CBALLBOT(); break;
+	case OBJECT_TYPE_DRAP: obj = new CDRAP(); break;
 	case OBJECT_TYPE_CGX680: obj = new CGX680(); break;
 	case OBJECT_TYPE_CGX680S: obj = new CGX680S(); break;
 	case OBJECT_TYPE_CSTUKA: obj = new CSTUKA(); break;

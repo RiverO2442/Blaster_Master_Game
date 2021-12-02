@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "PlayScene.h"
 #include "TANK_BODY.h"
+#include "Brick.h"
 
 CTANKBULLET::CTANKBULLET()
 {
@@ -77,15 +78,29 @@ void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
-			if (dynamic_cast<CGoomba*>(e->obj)) // if e->obj is Goomba
+			//if (dynamic_cast<CBALLBOT*>(e->obj)) // if e->obj is Goomba
+			//{
+			//	CBALLBOT* obj = dynamic_cast<CBALLBOT*>(e->obj);
+			//	obj->SetState(CBALLBOT_STATE_DIE);
+			//}
+			//if (dynamic_cast<CBALLCARRY*>(e->obj)) // if e->obj is Goomba
+			//{
+			//	CBALLCARRY* obj = dynamic_cast<CBALLCARRY*>(e->obj);
+			//	obj->SetState(CBALLCARRY_STATE_DIE);
+			//}
+			//if (dynamic_cast<CDRAP*>(e->obj)) // if e->obj is Goomba
+			//{
+			//	CDRAP* obj = dynamic_cast<CDRAP*>(e->obj);
+			//	obj->SetState(CDRAP_STATE_DIE);
+			//}
+			if (!dynamic_cast<CBrick*>(e->obj)) // if e->obj is Goomba
 			{
-
+				(e->obj)->SetState(CDRAP_STATE_DIE);
 			}
 			if (nx != 0 )
 			{
 				SetState(CTANKBULLET_STATE_DIE);
 			}
-			
 		}
 		// clean up collision events
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];

@@ -1,7 +1,7 @@
 #include "CGX680S.h"
 CGX680S::CGX680S()
 {
-	SetState(CGX680S_STATE_IDLE);
+	SetState(STATE_IDLE);
 }
 
 void CGX680S::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -30,11 +30,14 @@ void CGX680S::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CGX680S::Render()
 {
-	int ani = CGX680S_ANI;
+	if (state != STATE_DIE)
+	{
+		int ani = CGX680S_ANI;
 
-	animation_set->at(ani)->Render(x, y);
+		animation_set->at(ani)->Render(x, y);
 
-	//RenderBoundingBox();
+		//RenderBoundingBox();
+	}
 }
 
 void CGX680S::SetState(int state)
@@ -42,8 +45,12 @@ void CGX680S::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case CGX680S_STATE_WALKING:
-		vx = CGX680S_WALKING_SPEED;
+	case STATE_IDLE:
+		vx = 0;
+		vy = 0;
+		break;
+	case STATE_DIE:
+		vy = DIE_PULL;
 		break;
 
 	}

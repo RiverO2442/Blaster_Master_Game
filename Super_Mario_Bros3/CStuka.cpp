@@ -1,7 +1,7 @@
 #include "CSTUKA.h"
 CSTUKA::CSTUKA()
 {
-	SetState(CSTUKA_STATE_IDLE);
+	SetState(STATE_IDLE);
 }
 
 void CSTUKA::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -30,11 +30,14 @@ void CSTUKA::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CSTUKA::Render()
 {
-	int ani = CSTUKA_ANI;
+	if (state != STATE_DIE)
+	{
+		int ani = CSTUKA_ANI;
 
-	animation_set->at(ani)->Render(x, y);
+		animation_set->at(ani)->Render(x, y);
 
-	//RenderBoundingBox();
+		//RenderBoundingBox();
+	}
 }
 
 void CSTUKA::SetState(int state)
@@ -42,9 +45,13 @@ void CSTUKA::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case CSTUKA_STATE_WALKING:
-		vx = CSTUKA_WALKING_SPEED;
+	case STATE_IDLE:
+		vx = 0;
+		vy = 0;
 		break;
+	case STATE_DIE:
+			vy = DIE_PULL;
+			break;
 
 	}
 }
