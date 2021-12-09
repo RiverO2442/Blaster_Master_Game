@@ -239,8 +239,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			return;
 		}
 		obj = new CTANK_BODY(x, getMapheight() - y);
-		//obj = new CTANK_BODY(x,y);
-		DebugOut(L"RRRRRRRRRrY Xe la %d  %f  \n", getMapheight(),y);
 
 		player = (CTANK_BODY*)obj;
 
@@ -336,8 +334,6 @@ void CPlayScene::Update(DWORD dt)
 
 	player->GetPosition(cx, cy);
 
-	DebugOut(L"PST x y %f %f", cx, cy);
-
 	cy = cy;
 
 	/*DebugOut(L"Y: la %d %f  \n", CGame::GetInstance()->GetCurrentScene()->getMapheight(), cy);*/
@@ -421,7 +417,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		mario->Reset();
 		break;
 	case DIK_A:
-		mario->SetisFiring(true);
+		mario->SetisFiring(true);	
 		break;
 	}
 }
@@ -433,7 +429,6 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 		{
 		case DIK_A:
 			mario->SetisFiring(false);
-			mario->SetisAlreadyFired(false);
 			break;
 		}
 }

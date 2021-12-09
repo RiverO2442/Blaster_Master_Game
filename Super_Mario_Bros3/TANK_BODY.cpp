@@ -44,6 +44,12 @@ void CTANK_BODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable = 0;
 	}
 
+	if (isAlreadyFired && (DWORD)GetTickCount64() - firing_start > TANK_BODY_FIRING_DELAY_TIME)
+	{
+		SetisAlreadyFired(false);
+		SetisIsFiring(0);
+	}
+
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{

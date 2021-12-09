@@ -38,6 +38,7 @@
 #define TANK_BODY_SMALL_BBOX_HEIGHT 15
 
 #define TANK_BODY_UNTOUCHABLE_TIME 5000
+#define TANK_BODY_FIRING_DELAY_TIME 500
 
 
 
@@ -45,6 +46,7 @@ class CTANK_BODY : public CGameObject
 {
 	int level;
 	int untouchable;
+	DWORD firing_start;
 	DWORD untouchable_start;
 
 	float start_x;			// initial position of TANK_BODY at scene
@@ -62,6 +64,8 @@ public:
 	void SetState(int state);
 	void SetLevel(int l) { level = l; }
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
+	void StartFiring() {if(firing_start == 0) firing_start = GetTickCount(); }
+	void SetisIsFiring(int time) { firing_start = time; }
 
 	void Reset();
 

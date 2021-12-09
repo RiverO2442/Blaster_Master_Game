@@ -56,7 +56,9 @@ void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				y = TANK_BODY->y - 9;
 				SetSpeed(TANK_BODY->nx * 0.15);
 				TANK_BODY->SetisAlreadyFired(true);
+				TANK_BODY->StartFiring();
 				StartReset();
+				DebugOut(L"FIRED \n");
 			}
 		}
 	}
