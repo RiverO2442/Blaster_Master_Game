@@ -160,6 +160,7 @@
     <ClInclude Include="CStuka.h" />
     <ClInclude Include="CTANKBULLET.h" />
     <ClInclude Include="Eyelet.h" />
+    <ClInclude Include="DF.h" />
     <ClInclude Include="Interrupt.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapObj.h" />

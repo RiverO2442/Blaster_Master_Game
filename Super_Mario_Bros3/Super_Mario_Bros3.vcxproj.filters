@@ -126,6 +126,9 @@
     <ClInclude Include="CTANKBULLET.h">
       <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
+    <ClInclude Include="DF.h">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp">
