@@ -34,6 +34,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_TANK_PART	100
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_CTANKBULLET	2
+#define OBJECT_TYPE_CINTERCRUPT_BULLET	12
 
 
 #define OBJECT_TYPE_PORTAL	50
@@ -261,6 +262,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int scene_id = atoi(tokens[6].c_str());
 		obj = new CPortal(x, y, r, b, scene_id);
 	}
+	case OBJECT_TYPE_CINTERCRUPT_BULLET: obj = new CINTERRUPT_BULLET(); break;
 	break;
 	
 	default:

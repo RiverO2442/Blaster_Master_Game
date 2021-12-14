@@ -2,6 +2,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Game.h"
+#include "PlayScene.h"
 #include "algorithm"
 
 #define CINTERRUPT_WALKING_SPEED 0.05f;

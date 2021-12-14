@@ -10,7 +10,7 @@
 #define OBJECT_TYPE_CSTUKA	9
 #define OBJECT_TYPE_EYELET	10
 #define OBJECT_TYPE_CINTERCRUPT	11
-
+#define OBJECT_TYPE_CINTERCRUPT_BULLET	12
 
 #define OBJECT_TYPE_PORTAL	50
 
@@ -121,7 +121,7 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_CSTUKA: obj = new CSTUKA(); break;
 	case OBJECT_TYPE_EYELET: obj = new CEYELET(); break;
 	case OBJECT_TYPE_CINTERCRUPT: obj = new CINTERRUPT(); break;
-		
+	
 		
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);

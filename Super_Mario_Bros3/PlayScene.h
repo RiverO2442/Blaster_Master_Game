@@ -20,6 +20,8 @@
 #include "Eyelet.h"
 #include "Interrupt.h"
 #include "CTANKBULLET.h"
+#include "Interrupt_Firing.h"
+#include "CINTERRUPT_BULLET.h"
 
 #include "Utils.h"
 #include "Game.h"
@@ -77,6 +79,7 @@ protected:
 	int mapHeight;
 	Map* map;
 	CQuadTree* quadtree;
+	vector<CInterrupt_Firing*> CInterrupt_FiringList ;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -106,6 +109,26 @@ public:
 	int getMapheight()
 	{
 		return mapHeight;
+	}
+
+	void AddCInterrupt_FiringList(float x, float y)
+	{
+		CInterrupt_Firing* obj = new CInterrupt_Firing(x, y);
+		this->CInterrupt_FiringList.push_back(obj);
+	}
+	CInterrupt_Firing* GetCInterrupt_FiringList()
+	{
+		return CInterrupt_FiringList.at(0);
+	}
+	bool CheckCInterrupt_FiringList()
+	{
+		if (CInterrupt_FiringList.size() != 0)
+			return true;
+		return false;
+	}
+	void DeleteCInterrupt_FiringList()
+	{
+		this->CInterrupt_FiringList.erase(CInterrupt_FiringList.begin());
 	}
 
 	//friend class CPlayScenceKeyHandler;

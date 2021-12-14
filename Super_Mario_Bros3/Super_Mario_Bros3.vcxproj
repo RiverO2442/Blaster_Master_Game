@@ -156,12 +156,14 @@
     <ClInclude Include="CDrap.h" />
     <ClInclude Include="CGX680.h" />
     <ClInclude Include="CGX680S.h" />
+    <ClInclude Include="CINTERRUPT_BULLET.h" />
     <ClInclude Include="CLaserGuard.h" />
     <ClInclude Include="CStuka.h" />
     <ClInclude Include="CTANKBULLET.h" />
     <ClInclude Include="Eyelet.h" />
     <ClInclude Include="DF.h" />
     <ClInclude Include="Interrupt.h" />
+    <ClInclude Include="Interrupt_Firing.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapObj.h" />
     <ClInclude Include="QuadTree.h" />
@@ -187,6 +189,7 @@
     <ClCompile Include="CDrap.cpp" />
     <ClCompile Include="CGX680.cpp" />
     <ClCompile Include="CGX680S.cpp" />
+    <ClCompile Include="CINTERRUPT_BULLET.cpp" />
     <ClCompile Include="CLaserGuard.cpp" />
     <ClCompile Include="CStuka.cpp" />
     <ClCompile Include="CTANKBULLET.cpp" />

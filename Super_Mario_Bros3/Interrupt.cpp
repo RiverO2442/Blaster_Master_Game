@@ -18,6 +18,7 @@ void CINTERRUPT::GetBoundingBox(float& left, float& top, float& right, float& bo
 
 void CINTERRUPT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
 	CGameObject::Update(dt, coObjects);
 
 	//
@@ -30,11 +31,13 @@ void CINTERRUPT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	float px, py;
 
 	((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer()->GetPosition(px, py);
-
+	if(state != CINTERRUPT_STATE_OPEN)
 	if (this->x < px + TANK_BODY_BIG_BBOX_WIDTH && this->x + CINTERRUPT_BBOX_WIDTH >= px)
+	{
 		SetState(CINTERRUPT_STATE_OPEN);
-	else
-		SetState(CINTERRUPT_ANI_IDLE);
+		playscene->AddCInterrupt_FiringList(this->x, this->y);
+	}
+		
 }
 
 void CINTERRUPT::Render()

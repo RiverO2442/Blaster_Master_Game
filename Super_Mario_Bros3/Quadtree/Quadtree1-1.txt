@@ -2,7 +2,7 @@
 #map_size(width)	map_size(height)
 1524	780
 # type :0 = Mario , 1 = Brick, 3=LaseGuard, 4= BallCarry, 5=BallBot, 6=Drap,
-# 7=GX680, 8=GX680S, 9 = Stuka, 10 = Eyelet, 11=interrup
+# 7=GX680, 8=GX680S, 9 = Stuka, 10 = Eyelet, 11=interrup, 12=interrup_bullet
 #Obj_type	x	y	ani_set
 
 [MapObj]
