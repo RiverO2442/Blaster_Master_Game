@@ -118,10 +118,10 @@ void CREDWORM::CalcPotentialCollisions(
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
-		//if (!dynamic_cast<CBrick*>(e->obj))
-		//{
-		//	continue;
-		//}
+		if (!dynamic_cast<CBrick*>(e->obj))
+		{
+			continue;
+		}
 		if (e->t > 0 && e->t <= 1.0f)
 			coEvents.push_back(e);
 		else

@@ -156,7 +156,7 @@ void CSOPHIA::GetBoundingBox(float& left, float& top, float& right, float& botto
 	right = x + SOPHIA_BIG_BBOX_WIDTH;
 	bottom = y + SOPHIA_BIG_BBOX_HEIGHT;
 
-	DebugOut(L"L T R B %f %f %f %f  \n", left, top, right, bottom);
+	//DebugOut(L"L T R B %f %f %f %f  \n", left, top, right, bottom);
 }
 
 /*

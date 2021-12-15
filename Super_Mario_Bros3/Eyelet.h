@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "algorithm"
 
-#define EYELET_WALKING_SPEED 0.05f;
+#define EYELET_WALKING_SPEED 0.1f
 
 #define EYELET_BBOX_WIDTH 16
 #define EYELET_BBOX_HEIGHT 15
@@ -13,17 +13,25 @@
 #define EYELET_STATE_WALKING_LEFT 1001
 #define EYELET_STATE_WALKING_UP 1002
 #define EYELET_STATE_WALKING_DOWN 1003
+#define EYELET_STATE_ATTACK 1004
 
-#define EYELET_ANI 0
+
+#define EYELET_ANI_LEFT 0
+#define EYELET_ANI_RIGHT 1
 
 #define EYELET_STATE_IDLE 100
 #define EYELET_STATE_DIE 200
 #define EYELET_STATE_WALKING 300
 
+#define MOVING_LIMIT_DEFAULT_VALUE -999999
+#define MOVING_LIMIT_RANGE 30
 
 
 class CEYELET : public CGameObject
 {
+	float kill_point;
+	float moving_limit_top = MOVING_LIMIT_DEFAULT_VALUE;
+	float moving_limit_bottom = MOVING_LIMIT_DEFAULT_VALUE;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT>* coObjects, vector<LPCOLLISIONEVENT>& coEvents);
@@ -31,6 +39,6 @@ class CEYELET : public CGameObject
 	virtual void Render();
 
 public:
-	CEYELET();
+	CEYELET(float kill_point);
 	virtual void SetState(int state);
 };

@@ -22,7 +22,6 @@
 #define CINTERRUPT_STATE_WALKING 300
 
 
-
 class CINTERRUPT : public CGameObject
 {
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
