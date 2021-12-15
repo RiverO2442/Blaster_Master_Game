@@ -75,12 +75,6 @@
     <ClInclude Include="QuadTree.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
-    <ClInclude Include="TankParts.h">
-      <Filter>Header Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="TANK_BODY.h">
-      <Filter>Header Files\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Eye.h">
       <Filter>Header Files\Enemy</Filter>
     </ClInclude>
@@ -129,14 +123,29 @@
     <ClInclude Include="CTANKBULLET.h">
       <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
-    <ClInclude Include="DF.h">
-      <Filter>Header Files\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="CINTERRUPT_BULLET.h">
       <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
     <ClInclude Include="Interrupt_Firing.h">
       <Filter>Header Files\Event_Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CREDWORM.h">
+      <Filter>Header Files\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CTANKWHEELS.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SOPHIA.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TANKBODY.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DF.h">
+      <Filter>Header Files\OtherObj</Filter>
+    </ClInclude>
+    <ClInclude Include="TANKTURRET.h">
+      <Filter>Header Files\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,12 +197,6 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
-    <ClCompile Include="TANK_BODY.cpp">
-      <Filter>Source Files\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="TankParts.cpp">
-      <Filter>Source Files\Player</Filter>
-    </ClCompile>
     <ClCompile Include="CBallbot.cpp">
       <Filter>Source Files\Enemy</Filter>
     </ClCompile>
@@ -229,6 +232,21 @@
     </ClCompile>
     <ClCompile Include="CINTERRUPT_BULLET.cpp">
       <Filter>Source Files\OtherObj</Filter>
+    </ClCompile>
+    <ClCompile Include="CREDWORM.cpp">
+      <Filter>Source Files\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="CTANKWHEELS.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SOPHIA.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TANKBODY.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TANKTURRET.cpp">
+      <Filter>Source Files\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

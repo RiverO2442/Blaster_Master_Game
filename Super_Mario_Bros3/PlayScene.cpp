@@ -30,12 +30,14 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define SCENE_SECTION_QUADTREE	8
 #define SCENE_SECTION_SETTING	9
 
-#define OBJECT_TYPE_TANK_BODY	0
-#define OBJECT_TYPE_TANK_PART	100
+#define OBJECT_TYPE_SOPHIA	0
+#define OBJECT_TYPE_TANK_WHEEL	100
+#define OBJECT_TYPE_TANK_BODY	101
+#define OBJECT_TYPE_TANK_TURRET	102
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_CTANKBULLET	2
 #define OBJECT_TYPE_CINTERCRUPT_BULLET	12
-
+#define OBJECT_TYPE_RED_WORM	13
 
 #define OBJECT_TYPE_PORTAL	50
 
@@ -233,15 +235,15 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	switch (object_type)
 	{
-	case OBJECT_TYPE_TANK_BODY:
+	case OBJECT_TYPE_SOPHIA:
 		if (player != NULL)
 		{
-			DebugOut(L"[ERROR] TANK_BODY object was created before!\n");
+			DebugOut(L"[ERROR] SOPHIA object was created before!\n");
 			return;
 		}
-		obj = new CTANK_BODY(x, getMapheight() - y);
+		obj = new CSOPHIA(x, getMapheight() - y);
 
-		player = (CTANK_BODY*)obj;
+		player = (CSOPHIA*)obj;
 
 		DebugOut(L"[INFO] Player object created!\n");
 
@@ -249,12 +251,24 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
 	case OBJECT_TYPE_CTANKBULLET: obj = new CTANKBULLET(); break;
 		
-	case OBJECT_TYPE_TANK_PART:
+	case OBJECT_TYPE_TANK_WHEEL:
 	{
 		float part = atof(tokens[4].c_str());
-		obj = new TankParts(part);
+		obj = new TANKWHEEL(part);
+		
 	}
 	break;
+	case OBJECT_TYPE_TANK_BODY:
+	{
+		obj = new TANKBODY();
+	}
+	break;
+	case OBJECT_TYPE_TANK_TURRET:
+	{
+		obj = new TANKTURRET();
+	}
+	break;
+	
 	case OBJECT_TYPE_PORTAL:
 	{
 		float r = atof(tokens[4].c_str());
@@ -263,6 +277,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CPortal(x, y, r, b, scene_id);
 	}
 	case OBJECT_TYPE_CINTERCRUPT_BULLET: obj = new CINTERRUPT_BULLET(); break;
+	case OBJECT_TYPE_RED_WORM: obj = new CREDWORM(); break;
+		
 	break;
 	
 	default:
@@ -277,7 +293,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	if (obj != NULL )
 	{
-		if(object_type != OBJECT_TYPE_TANK_BODY)
+		if(object_type != OBJECT_TYPE_SOPHIA)
 		obj->SetPosition(x, getMapheight() - y);
 		obj->SetAnimationSet(ani_set);
 		obj->SetOrigin(x, y, obj->GetState());
@@ -325,10 +341,10 @@ bool CPlayScene::IsInUseArea(float Ox, float Oy)
 
 void CPlayScene::Update(DWORD dt)
 {
-	// We know that TANK_BODY is the first object in the list hence we won't add him into the colliable object list
+	// We know that SOPHIA is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
-	// skip the rest if scene was already unloaded (TANK_BODY::Update might trigger PlayScene::Unload)
+	// skip the rest if scene was already unloaded (SOPHIA::Update might trigger PlayScene::Unload)
 	if (player == NULL) return;
 
 	// Update camera to follow mario
@@ -409,11 +425,11 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
-	CTANK_BODY* mario = ((CPlayScene*)scence)->GetPlayer();
+	CSOPHIA* mario = ((CPlayScene*)scence)->GetPlayer();
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		mario->SetState(TANK_BODY_STATE_JUMP);
+		mario->SetState(SOPHIA_STATE_JUMP);
 		break;
 	case DIK_B:
 		mario->Reset();
@@ -426,7 +442,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 
 void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 {
-	CTANK_BODY* mario = ((CPlayScene*)scence)->GetPlayer();
+	CSOPHIA* mario = ((CPlayScene*)scence)->GetPlayer();
 		switch (KeyCode)
 		{
 		case DIK_A:
@@ -438,18 +454,18 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 void CPlayScenceKeyHandler::KeyState(BYTE* states)
 {
 	CGame* game = CGame::GetInstance();
-	CTANK_BODY* mario = ((CPlayScene*)scence)->GetPlayer();
+	CSOPHIA* mario = ((CPlayScene*)scence)->GetPlayer();
 
-	// disable control key when TANK_BODY die 
-	if (mario->GetState() == TANK_BODY_STATE_DIE) return;
+	// disable control key when SOPHIA die 
+	if (mario->GetState() == SOPHIA_STATE_DIE) return;
 	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(TANK_BODY_STATE_WALKING_RIGHT);
+		mario->SetState(SOPHIA_STATE_WALKING_RIGHT);
 	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(TANK_BODY_STATE_WALKING_LEFT);
+		mario->SetState(SOPHIA_STATE_WALKING_LEFT);
 	else if (game->IsKeyDown(DIK_DOWN))
-		mario->SetState(TANK_BODY_STATE_WALKING_DOWN);
+		mario->SetState(SOPHIA_STATE_WALKING_DOWN);
 	else if (game->IsKeyDown(DIK_UP))
-		mario->SetState(TANK_BODY_STATE_WALKING_UP);
+		mario->SetState(SOPHIA_STATE_WALKING_UP);
 	else
-		mario->SetState(TANK_BODY_STATE_IDLE);
+		mario->SetState(SOPHIA_STATE_IDLE);
 }

@@ -2,16 +2,16 @@
 #include <assert.h>
 #include "Utils.h"
 
-#include "TANK_BODY.h"
+#include "SOPHIA.h"
 #include "Game.h"
 
 #include "Eye.h"
 #include "Portal.h"
 
-CTANK_BODY::CTANK_BODY(float x, float y) : CGameObject()
+CSOPHIA::CSOPHIA(float x, float y) : CGameObject()
 {
 	untouchable = 0;
-	SetState(TANK_BODY_STATE_IDLE);
+	SetState(SOPHIA_STATE_IDLE);
 
 	start_x = x;
 	start_y = y;
@@ -20,13 +20,13 @@ CTANK_BODY::CTANK_BODY(float x, float y) : CGameObject()
 	
 }
 
-void CTANK_BODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void CSOPHIA::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 
 	// Simple fall down
-	vy += TANK_BODY_GRAVITY * dt;
+	vy += SOPHIA_GRAVITY * dt;
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -34,17 +34,17 @@ void CTANK_BODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	coEvents.clear();
 
 	// turn off collision when die 
-	if (state != TANK_BODY_STATE_DIE)
+	if (state != SOPHIA_STATE_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
 
 	// reset untouchable timer if untouchable time has passed
-	if (GetTickCount() - untouchable_start > TANK_BODY_UNTOUCHABLE_TIME)
+	if (GetTickCount() - untouchable_start > SOPHIA_UNTOUCHABLE_TIME)
 	{
 		untouchable_start = 0;
 		untouchable = 0;
 	}
 
-	if (isAlreadyFired && (DWORD)GetTickCount64() - firing_start > TANK_BODY_FIRING_DELAY_TIME)
+	if (isAlreadyFired && (DWORD)GetTickCount64() - firing_start > SOPHIA_FIRING_DELAY_TIME)
 	{
 		SetisAlreadyFired(false);
 		SetisIsFiring(0);
@@ -65,7 +65,7 @@ void CTANK_BODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 
-		// how to push back TANK_BODY if collides with a moving objects, what if TANK_BODY is pushed this way into another object?
+		// how to push back SOPHIA if collides with a moving objects, what if SOPHIA is pushed this way into another object?
 		//if (rdx != 0 && rdx!=dx)
 		//	x += nx*abs(rdx); 
 
@@ -89,98 +89,95 @@ void CTANK_BODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
 
-void CTANK_BODY::Render()
+void CSOPHIA::Render()
 {
-	
-	int ani = -1;
-	if (state == TANK_BODY_STATE_DIE)
-		ani = TANK_BODY_ANI_DIE;
-	else
-	{
-		if (vx == 0)
-		{
-			if (nx > 0) ani = TANK_BODY_ANI_BIG_IDLE_RIGHT;
-			else ani = TANK_BODY_ANI_BIG_IDLE_LEFT;
-		}
-		else if (vx > 0)
-			ani = TANK_BODY_ANI_BIG_WALKING_RIGHT;
-		else ani = TANK_BODY_ANI_BIG_WALKING_LEFT;
+	//
+	//int ani = -1;
+	//if (state == SOPHIA_STATE_DIE)
+	//	ani = SOPHIA_ANI_DIE;
+	//else
+	//{
+	//	if (vx == 0)
+	//	{
+	//		if (nx > 0) ani = SOPHIA_ANI_BIG_IDLE_RIGHT;
+	//		else ani = SOPHIA_ANI_BIG_IDLE_LEFT;
+	//	}
+	//	else if (vx > 0)
+	//		ani = SOPHIA_ANI_BIG_WALKING_RIGHT;
+	//	else ani = SOPHIA_ANI_BIG_WALKING_LEFT;
 
-	}
-	int alpha = 255;
-	if (untouchable) alpha = 128;
+	//}
+	//int alpha = 255;
+	//if (untouchable) alpha = 128;
 
-	animation_set->at(ani)->Render(x, y, alpha);
+	//animation_set->at(ani)->Render(x, y, alpha);
 
-	//RenderBoundingBox();
+	////RenderBoundingBox();
 }
 
-void CTANK_BODY::SetState(int state)
+void CSOPHIA::SetState(int state)
 {
 	CGameObject::SetState(state);
 
 	switch (state)
 	{
-	case TANK_BODY_STATE_WALKING_DOWN:
-		vy = TANK_BODY_WALKING_SPEED;
+	case SOPHIA_STATE_WALKING_DOWN:
+		vy = SOPHIA_WALKING_SPEED;
 		break;
-	case TANK_BODY_STATE_WALKING_UP:
-		vy = -TANK_BODY_WALKING_SPEED;
+	case SOPHIA_STATE_WALKING_UP:
+		vy = -SOPHIA_WALKING_SPEED;
 		break;
-	case TANK_BODY_STATE_WALKING_RIGHT:
-		vx = TANK_BODY_WALKING_SPEED;
+	case SOPHIA_STATE_WALKING_RIGHT:
+		vx = SOPHIA_WALKING_SPEED;
 		nx = 1;
 		break;
-	case TANK_BODY_STATE_WALKING_LEFT:
-		vx = -TANK_BODY_WALKING_SPEED;
+	case SOPHIA_STATE_WALKING_LEFT:
+		vx = -SOPHIA_WALKING_SPEED;
 		nx = -1;
 		break;
-	case TANK_BODY_STATE_JUMP:
-		// TODO: need to check if TANK_BODY is *current* on a platform before allowing to jump again
-		vy = -TANK_BODY_JUMP_SPEED_Y;
+	case SOPHIA_STATE_JUMP:
+		// TODO: need to check if SOPHIA is *current* on a platform before allowing to jump again
+		vy = -SOPHIA_JUMP_SPEED_Y;
 		break;
-	case TANK_BODY_STATE_IDLE:
+	case SOPHIA_STATE_IDLE:
 		vx = 0;
 		break;
-	case TANK_BODY_STATE_DIE:
-		vy = TANK_BODY_DIE_DEFLECT_SPEED;
+	case SOPHIA_STATE_DIE:
+		vy = SOPHIA_DIE_DEFLECT_SPEED;
 		break;
 	}
 }
 
-void CTANK_BODY::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+void CSOPHIA::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x - 10;
-	top = y - 9;
+	left = x;
+	top = y;
 
-	right = x + TANK_BODY_BIG_BBOX_WIDTH + 9;
-	bottom = y + TANK_BODY_BIG_BBOX_HEIGHT;
+	right = x + SOPHIA_BIG_BBOX_WIDTH;
+	bottom = y + SOPHIA_BIG_BBOX_HEIGHT;
 
 	DebugOut(L"L T R B %f %f %f %f  \n", left, top, right, bottom);
 }
 
 /*
-	Reset TANK_BODY status to the beginning state of a scene
+	Reset SOPHIA status to the beginning state of a scene
 */
-void CTANK_BODY::Reset()
+void CSOPHIA::Reset()
 {
-	SetState(TANK_BODY_STATE_IDLE);
-	SetLevel(TANK_BODY_LEVEL_BIG);
-	SetPosition(start_x, start_y);
-	SetSpeed(0, 0);
+	SetState(SOPHIA_STATE_IDLE);
 }
 
-void CTANK_BODY::CalcPotentialCollisions(
+void CSOPHIA::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT>* coObjects,
 	vector<LPCOLLISIONEVENT>& coEvents)
 {
 	vector <LPCOLLISIONEVENT> collisionEvents;
-	CTANK_BODY* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+	CSOPHIA* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
-		if (dynamic_cast<CTANKBULLET*>(e->obj))
+		if (dynamic_cast<CTANKBULLET*>(e->obj) || dynamic_cast<CREDWORM*>(e->obj))
 		{
 			continue;
 		}

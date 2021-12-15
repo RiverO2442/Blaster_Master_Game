@@ -4,11 +4,11 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "Brick.h"
-#include "TANK_BODY.h"
+#include "SOPHIA.h"
 #include "Eye.h"
 #include "Koopas.h"
 #include "Map.h"
-#include "TankParts.h"
+#include "CTANKWHEELS.h"
 #include "MapObj.h"
 #include "CLaserGuard.h"
 #include "CBallCarry.h"
@@ -22,6 +22,9 @@
 #include "CTANKBULLET.h"
 #include "Interrupt_Firing.h"
 #include "CINTERRUPT_BULLET.h"
+#include "CREDWORM.h"
+#include "TANKBODY.h"
+#include "TANKTURRET.h"
 
 #include "Utils.h"
 #include "Game.h"
@@ -74,12 +77,13 @@ public:
 class CPlayScene : public CScene
 {
 protected:
-	CTANK_BODY* player;					// A play scene has to have player, right? 
+	CSOPHIA* player;					// A play scene has to have player, right? 
 	vector<LPGAMEOBJECT> objects;
 	int mapHeight;
 	Map* map;
 	CQuadTree* quadtree;
 	vector<CInterrupt_Firing*> CInterrupt_FiringList ;
+	vector<CInterrupt_Firing*> WormSpamMng;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -99,7 +103,7 @@ public:
 
 	bool IsInUseArea(float Ox, float Oy);
 
-	CTANK_BODY* GetPlayer() { return player; }
+	CSOPHIA* GetPlayer() { return player; }
 
 	void setMapheight(int height)
 	{
@@ -110,7 +114,7 @@ public:
 	{
 		return mapHeight;
 	}
-
+	/////////////////CInterrupt_FiringList
 	void AddCInterrupt_FiringList(float x, float y)
 	{
 		CInterrupt_Firing* obj = new CInterrupt_Firing(x, y);
@@ -130,7 +134,27 @@ public:
 	{
 		this->CInterrupt_FiringList.erase(CInterrupt_FiringList.begin());
 	}
-
+	//////////////////////////WormSpamMng
+	void AddWormSpamMng(float x, float y)
+	{
+		CInterrupt_Firing* obj = new CInterrupt_Firing(x, y);
+		this->WormSpamMng.push_back(obj);
+	}
+	CInterrupt_Firing* GetWormSpamMng()
+	{
+		return WormSpamMng.at(0);
+	}
+	bool CheckWormSpamMng()
+	{
+		if (WormSpamMng.size() != 0)
+			return true;
+		return false;
+	}
+	void DeleteWormSpamMng()
+	{
+		this->WormSpamMng.erase(WormSpamMng.begin());
+	}
+	///////////////////////////////
 	//friend class CPlayScenceKeyHandler;
 };
 

@@ -2,21 +2,21 @@
 #include "GameObject.h"
 #include "DF.h"
 
-class CTANK_BODY : public CGameObject
+class CSOPHIA : public CGameObject
 {
 	int level;
 	int untouchable;
 	DWORD firing_start;
 	DWORD untouchable_start;
 
-	float start_x;			// initial position of TANK_BODY at scene
+	float start_x;			// initial position of SOPHIA at scene
 	float start_y;
 
 	bool isFiring = 0;
 	bool isAlreadyFired = 0;
 
 public:
-	CTANK_BODY(float x = 0.0f, float y = 0.0f);
+	CSOPHIA(float x = 0.0f, float y = 0.0f);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	virtual void Render();
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT>* coObjects, vector<LPCOLLISIONEVENT>& coEvents);

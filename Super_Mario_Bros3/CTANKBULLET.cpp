@@ -1,7 +1,7 @@
 #include "CTANKBULLET.h"
 #include <algorithm>
 #include "PlayScene.h"
-#include "TANK_BODY.h"
+#include "SOPHIA.h"
 #include "Brick.h"
 
 CTANKBULLET::CTANKBULLET()
@@ -46,17 +46,17 @@ void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	if (isUsed == false)
 	{
-		CTANK_BODY* TANK_BODY = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
-		if (TANK_BODY->GetisFiring() == true)
+		CSOPHIA* SOPHIA = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+		if (SOPHIA->GetisFiring() == true)
 		{
-			if (TANK_BODY->GetisAlreadyFired() == false)
+			if (SOPHIA->GetisAlreadyFired() == false)
 			{
 				isUsed = true;
-				x = TANK_BODY->x;
-				y = TANK_BODY->y - 9;
-				SetSpeed(TANK_BODY->nx * 0.15);
-				TANK_BODY->SetisAlreadyFired(true);
-				TANK_BODY->StartFiring();
+				x = SOPHIA->x;
+				y = SOPHIA->y;
+				SetSpeed(SOPHIA->nx * 0.15);
+				SOPHIA->SetisAlreadyFired(true);
+				SOPHIA->StartFiring();
 				StartReset();
 				DebugOut(L"FIRED \n");
 			}
@@ -104,7 +104,7 @@ void CTANKBULLET::CalcPotentialCollisions(
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
-		if (dynamic_cast<CTANK_BODY*>(e->obj))
+		if (dynamic_cast<CSOPHIA*>(e->obj))
 		{
 				continue;
 		}

@@ -71,6 +71,7 @@ void CINTERRUPT_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (dynamic_cast<CBrick*>(e->obj)) // if e->obj is Goomba
 			{
 				SetState(CINTERRUPT_BULLET_STATE_DIE);
+				playscene->AddWormSpamMng(this->x, this->y);
 			}
 		}
 		// clean up collision events
