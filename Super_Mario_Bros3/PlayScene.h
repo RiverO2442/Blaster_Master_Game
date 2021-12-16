@@ -102,6 +102,7 @@ public:
 	virtual void Unload();
 
 	bool IsInUseArea(float Ox, float Oy);
+	bool IsInside(float Ox, float Oy, float xRange, float yRange, float tx, float ty);
 
 	CSOPHIA* GetPlayer() { return player; }
 

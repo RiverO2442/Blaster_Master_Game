@@ -339,6 +339,13 @@ bool CPlayScene::IsInUseArea(float Ox, float Oy)
 	return false;
 }
 
+bool CPlayScene::IsInside(float Ox, float Oy, float xRange, float yRange, float tx, float ty)
+{
+	if (Ox <= tx && tx <= xRange && Oy <= ty && ty <= yRange)
+		return true;
+	return false;
+}
+
 void CPlayScene::Update(DWORD dt)
 {
 	// We know that SOPHIA is the first object in the list hence we won't add him into the colliable object list
