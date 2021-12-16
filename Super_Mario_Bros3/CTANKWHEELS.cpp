@@ -42,14 +42,10 @@ void TANKWHEEL::Render()
 
 	int ani = 0;
 
-	if (SOPHIA->vx > 0)
+	if (SOPHIA->GetState() == SOPHIA_STATE_WALKING_RIGHT)
 	{
 		switch (part)
 		{
-		case TANKWHEEL_TURRET:
-			ani = TURRET_ANI_IDLE_RIGHT;
-			pre_ani = ani;
-			break;
 		case TANKWHEEL_RIGHT_WHEEL:
 			ani = WHEELING_ANI_RIGHT;
 			break;
@@ -59,14 +55,10 @@ void TANKWHEEL::Render()
 		}
 	}
 
-	else if (SOPHIA->vx < 0)
+	else if (SOPHIA->GetState() == SOPHIA_STATE_WALKING_LEFT)
 	{
 		switch (part)
 		{
-		case TANKWHEEL_TURRET:
-			ani = TURRET_ANI_IDLE_LEFT;
-			pre_ani = ani;
-			break;
 		case TANKWHEEL_RIGHT_WHEEL:
 			ani = WHEELING_ANI_LEFT;
 			break;

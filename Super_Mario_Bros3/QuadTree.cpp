@@ -123,7 +123,6 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	{
 		float kill_point = atoi(tokens[4].c_str());
 		obj = new CEYELET(kill_point);
-		obj->SetisOriginObj(true);
 	}
 	break;
 	case OBJECT_TYPE_CINTERCRUPT: obj = new CINTERRUPT(); break;
@@ -251,8 +250,8 @@ void CQuadTree::Pop(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY)
 			{
 				float Ox, Oy;
 				listObjects[i]->GetOriginLocation(Ox, Oy);
-				if (!inRange(Ox, Oy, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()))
-					listObjects[i]->reset();
+				/*if (!inRange(Ox, Oy, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()))
+					listObjects[i]->reset();*/
 				listObject.push_back(listObjects[i]);
 				listObjects[i]->SetActive(true);
 			}

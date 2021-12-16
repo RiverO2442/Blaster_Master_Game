@@ -9,7 +9,7 @@
 #define TILE_HEIGHT 32
 
 #define IN_USE_WIDTH 330
-#define IN_USE_HEIGHT 300
+#define IN_USE_HEIGHT 350
 #define CAM_X_BONUS 50
 
 class MapObj
