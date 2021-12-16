@@ -38,6 +38,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_CTANKBULLET	2
 #define OBJECT_TYPE_CINTERCRUPT_BULLET	12
 #define OBJECT_TYPE_RED_WORM	13
+#define OBJECT_TYPE_EFFECT	14
 
 #define OBJECT_TYPE_PORTAL	50
 
@@ -268,7 +269,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new TANKTURRET();
 	}
 	break;
-	
+	case OBJECT_TYPE_EFFECT:
+	{
+		float time = atof(tokens[4].c_str());
+		obj = new EFFECT(time);
+	}
+	break;
 	case OBJECT_TYPE_PORTAL:
 	{
 		float r = atof(tokens[4].c_str());

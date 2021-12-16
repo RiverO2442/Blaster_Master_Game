@@ -35,7 +35,7 @@ void CINTERRUPT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (this->x < px + SOPHIA_BIG_BBOX_WIDTH && this->x + CINTERRUPT_BBOX_WIDTH >= px && this->y < py)
 	{
 		SetState(CINTERRUPT_STATE_OPEN);
-		playscene->AddCInterrupt_FiringList(this->x, this->y);
+		playscene->AddInterruptBulletMng(this->x, this->y);
 	}
 		
 }

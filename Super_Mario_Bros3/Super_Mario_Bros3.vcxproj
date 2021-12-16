@@ -161,10 +161,11 @@
     <ClInclude Include="CREDWORM.h" />
     <ClInclude Include="CStuka.h" />
     <ClInclude Include="CTANKBULLET.h" />
+    <ClInclude Include="EFFECT.h" />
     <ClInclude Include="Eyelet.h" />
     <ClInclude Include="DF.h" />
     <ClInclude Include="Interrupt.h" />
-    <ClInclude Include="Interrupt_Firing.h" />
+    <ClInclude Include="CEvenType1.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapObj.h" />
     <ClInclude Include="QuadTree.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="CREDWORM.cpp" />
     <ClCompile Include="CStuka.cpp" />
     <ClCompile Include="CTANKBULLET.cpp" />
+    <ClCompile Include="EFFECT.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="Eyelet.cpp" />
     <ClCompile Include="Interrupt.cpp" />

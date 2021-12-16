@@ -83,10 +83,15 @@ void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (!dynamic_cast<CBrick*>(e->obj)) // if e->obj is Goomba
 			{
 				(e->obj)->SetState(STATE_DIE);
-			}
-			if (nx != 0 )
-			{
+				((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(e->obj->x, e->obj->y);
 				SetState(CTANKBULLET_STATE_DIE);
+			}
+			else {
+				if (nx != 0)
+				{
+					((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
+					SetState(CTANKBULLET_STATE_DIE);
+				}
 			}
 		}
 		// clean up collision events

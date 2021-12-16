@@ -26,8 +26,8 @@ void CBALLBOT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
 	coEvents.clear();
-
-	if (switch_state != 0)
+	if (!triggered) {
+	if (switch_state != 0 && state != CBALLBOT_STATE_IDLE)
 	{
 		if ((DWORD)GetTickCount64() - pre_tickcount >= 50)
 		{
@@ -83,9 +83,11 @@ void CBALLBOT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				if (ny < 0 && nx == 0) 
 				{
-					(e->obj)->SetState(CBALLBOT_STATE_IDLE);
+					SetState(CBALLBOT_STATE_IDLE);
 					switch_state = 0;
 					tickcount_diff = 0;
+					pre_tickcount = 0;
+					triggered = true;
 				}
 				if (nx != 0)
 				{
@@ -97,7 +99,7 @@ void CBALLBOT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	}
-
+	}
 }
 
 void CBALLBOT::CalcPotentialCollisions(
@@ -149,9 +151,11 @@ void CBALLBOT::SetState(int state)
 		break;
 	case CBALLBOT_STATE_FALLING:
 		vy = 2*CBALLBOT_FLYING_SPEED;
+		vx = 0;
 		break;
 	case CBALLBOT_STATE_FLY_UP:
 		vy = -CBALLBOT_FLYING_SPEED;
+		vx = 0;
 		break;
 	case CBALLBOT_STATE_DIE:
 		vy = DIE_PULL;

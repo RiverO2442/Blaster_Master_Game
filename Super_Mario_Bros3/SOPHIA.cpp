@@ -5,7 +5,7 @@
 #include "SOPHIA.h"
 #include "Game.h"
 
-#include "Eye.h"
+#include "PlayScene.h"
 #include "Portal.h"
 
 CSOPHIA::CSOPHIA(float x, float y) : CGameObject()
@@ -178,6 +178,10 @@ void CSOPHIA::CalcPotentialCollisions(
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
 		if (dynamic_cast<CTANKBULLET*>(e->obj) || dynamic_cast<CREDWORM*>(e->obj))
+		{
+			continue;
+		}
+		if (dynamic_cast<CEYELET*>(e->obj) && e->obj->GetState() == EYELET_STATE_IDLE)
 		{
 			continue;
 		}

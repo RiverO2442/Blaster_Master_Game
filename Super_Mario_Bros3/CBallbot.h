@@ -25,6 +25,7 @@
 
 class CBALLBOT : public CGameObject
 {
+	bool triggered = false;
 	int pre_ani;
 	DWORD pre_tickcount;
 	DWORD tickcount_diff = 0;

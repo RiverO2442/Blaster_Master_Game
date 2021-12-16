@@ -245,7 +245,7 @@ void CQuadTree::Pop(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY)
 	{
 		for (int i = 0; i < listObjects.size(); i++)
 		{
-			if (inRange(x + cellWidth, y + cellHeight, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()))
+			if (inRange(x + cellWidth, y + cellHeight, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight() + 100))
 			if (!listObjects[i]->GetActive())
 			{
 				float Ox, Oy;
