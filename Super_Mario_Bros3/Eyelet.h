@@ -15,7 +15,6 @@
 #define EYELET_STATE_WALKING_DOWN 1003
 #define EYELET_STATE_ATTACK 1004
 
-
 #define EYELET_ANI_LEFT 0
 #define EYELET_ANI_RIGHT 1
 
@@ -25,7 +24,6 @@
 
 #define MOVING_LIMIT_DEFAULT_VALUE -999999
 #define MOVING_LIMIT_RANGE 30
-
 
 class CEYELET : public CGameObject
 {

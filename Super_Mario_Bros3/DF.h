@@ -1,4 +1,7 @@
 #pragma once
+//GENERAL
+#define STORING_LOCATION_X		-99999
+#define STORING_LOCATION_Y		-99999
 //PLAYER
 
 #define TANKWHEEL_STATE_DIE 0

@@ -150,6 +150,9 @@
     <ClInclude Include="EFFECT.h">
       <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
+    <ClInclude Include="CBOOM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp">
@@ -253,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="EFFECT.cpp">
       <Filter>Source Files\OtherObj</Filter>
+    </ClCompile>
+    <ClCompile Include="CBOOM.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

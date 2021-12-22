@@ -49,7 +49,7 @@ void CREDWORM::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->CheckWormSpamMng())
 		{
 			SetState(CREDWORM_STATE_WALKING);
-			this->SetPosition(playscene->GetWormSpamMng()->getInterrupt_FiringPoisitionX(), playscene->GetWormSpamMng()->getInterrupt_FiringPoisitionY());
+			this->SetPosition(playscene->GetWormSpamMng()->getCEventPoisitionX(), playscene->GetWormSpamMng()->getCEventPoisitionY());
 			playscene->DeleteWormSpamMng();
 			isUsed = true;
 			

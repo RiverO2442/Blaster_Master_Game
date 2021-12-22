@@ -6,7 +6,7 @@
 400	textures\BM\map4_bank.png	255	255	255
 700	textures\BM\map3_bank.png	255	255	255
 800	textures\BM\40500.jpg	0	0	0
-60	textures\BM\40000.png	255	255	255
+60	textures\BM\40000.png	120	120	120
 300	textures\BM\30000.png	0	136	255
 
 #[SETTING]
@@ -208,6 +208,8 @@ tọa độ bên trái
 ###########################################						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
+#BALL_CARRY_BOOM
+40005	40005	100
 #Explosion
 4300	43004	50	43008	15	43005	100	43008	15	43006	100	43008	15
 
@@ -267,7 +269,7 @@ Body
 #robot đi phải
 3007	32806	100	32808	100
 #robot nhả đạn
-3008	32806	50	32807	100
+3008	32806	100	32807	100
 #cục nấm đi màu bạc
 3009	31306	100	31307	100
 #cục nấm đi màu hồng
@@ -291,6 +293,8 @@ Body
 # id	ani1	ani2	ani3
 #
 [ANIMATION_SETS]
+#BALL_CARRY_BOOM
+40005	40005
 # Body
 1	400
 # BRICK 
@@ -304,7 +308,7 @@ Body
 #LASERGUARD
 3012	3012	100
 #BALLCARRY
-3006	3006	3007	3008
+3006	3005	3006	3007	3008
 #BALLL BOT
 3001	3001	3002
 #DRAP
@@ -337,7 +341,13 @@ Body
 # type	x	y	ani_set_id	extra_settings per object type
 # type :0 = Mario , 1 = Brick, 3=LaseGuard, 4= BallCarry, 5=BallBot, 6=Drap,
 # 7=GX680, 8=GX680S, 9 = Stuka, 10 = Eyelet, 11=interrup, 12=interrup_bullet, 13 = RedNeoWorm
+#15=Boom
 
+15	10000	10000	40005
+15	10000	10000	40005
+15	10000	10000	40005
+15	10000	10000	40005
+15	10000	10000	40005
 
 2	10000	10000	406
 2	10000	10000	406
@@ -372,7 +382,7 @@ Body
 14	0	0	4300	295
 
 # TANK
-0	1338	629	1
+0	256	100	1
 100	180	2296	304	1
 100	180	2296	305	0
 101	180	2296	1

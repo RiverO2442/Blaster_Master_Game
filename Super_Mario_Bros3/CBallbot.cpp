@@ -7,7 +7,7 @@ CBALLBOT::CBALLBOT()
 
 void CBALLBOT::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-
+	
 	left = x;
 	top = y;
 	right = x + CBALLBOT_BBOX_WIDTH;
@@ -16,6 +16,10 @@ void CBALLBOT::GetBoundingBox(float& left, float& top, float& right, float& bott
 		bottom = y + CBALLBOT_BBOX_HEIGHT_DIE;
 	else
 		bottom = y + CBALLBOT_BBOX_HEIGHT;
+	if (state == CBALLBOT_STATE_DIE)
+	{
+		left = top = right = bottom = 0;
+	}
 }
 
 void CBALLBOT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -158,7 +162,7 @@ void CBALLBOT::SetState(int state)
 		vx = 0;
 		break;
 	case CBALLBOT_STATE_DIE:
-		vy = DIE_PULL;
+		vy = 10*DIE_PULL;
 		break;
 	}
 }

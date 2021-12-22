@@ -185,7 +185,10 @@ void CSOPHIA::CalcPotentialCollisions(
 		{
 			continue;
 		}
-
+		if (dynamic_cast<CBOOM*>(e->obj))
+		{
+			continue;
+		}
 		if (e->t > 0 && e->t <= 1.0f)
 			collisionEvents.push_back(e);
 		else

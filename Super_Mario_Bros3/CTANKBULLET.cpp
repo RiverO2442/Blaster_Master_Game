@@ -54,7 +54,7 @@ void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				isUsed = true;
 				x = SOPHIA->x;
 				y = SOPHIA->y;
-				SetSpeed(SOPHIA->nx * 0.15);
+				SetSpeed(SOPHIA->nx * CTANKBULLET_SPEED);
 				SOPHIA->SetisAlreadyFired(true);
 				SOPHIA->StartFiring();
 				StartReset();
@@ -130,9 +130,9 @@ void CTANKBULLET::Render()
 	{
 	case CTANKBULLET_STATE_FLYING:
 		if(vx > 0)
-				ani = CTANKBULLET_ANI_FLYING_RIGHT;
+			ani = CTANKBULLET_ANI_FLYING_RIGHT;
 		else
-		ani = CTANKBULLET_ANI_FLYING_LEFT;
+			ani = CTANKBULLET_ANI_FLYING_LEFT;
 		break;
 	}
 

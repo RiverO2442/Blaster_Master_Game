@@ -57,7 +57,7 @@ void CQuadTree::Plit() {
 
 bool CQuadTree::inRange(float ox, float oy, float x, float y, float width, float height)
 {
-	if (x <= ox && ox <= x + width && y <= oy && oy <= y + height)
+	if (x <= ox && ox <= x + width + CAM_X_BONUS && y <= oy && oy <= y + height)
 		return true;
 	return false;
 }
@@ -229,23 +229,13 @@ void CQuadTree::GetObjects(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY)
 
 void CQuadTree::Pop(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY)
 {
-	unsigned int  left, top, right, bottom;
-
-	left = (CamX);
-
-	right = (CamX + CGame::GetInstance()->GetScreenWidth());
-
-	top = (CamY);
-
-	bottom = (CamY + CGame::GetInstance()->GetScreenHeight());
-
 	if (this == NULL)
 		return;
 	if (isLeaf)
 	{
 		for (int i = 0; i < listObjects.size(); i++)
 		{
-			if (inRange(x + cellWidth, y + cellHeight, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight() + 100))
+			if (inRange(x + cellWidth, y + cellHeight, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()))
 			if (!listObjects[i]->GetActive())
 			{
 				float Ox, Oy;
