@@ -33,7 +33,7 @@ void CQuadTree::Plit() {
 	if (listObjects.size() == 0)
 		return;
 	CGame* game = CGame::GetInstance();
-	if (cellHeight > game->GetScreenHeight() / 2 || cellWidth > game->GetScreenWidth() / 2)
+	if (cellHeight > game->GetScreenHeight() / 8 || cellWidth > game->GetScreenWidth() / 8)
 	{
 		BrachTL = new CQuadTree(cellWidth / 2, cellHeight / 2, x, y);
 		BrachTR = new CQuadTree(cellWidth / 2, cellHeight / 2, x + cellWidth / 2, y);
@@ -57,7 +57,7 @@ void CQuadTree::Plit() {
 
 bool CQuadTree::inRange(float ox, float oy, float x, float y, float width, float height)
 {
-	if (x <= ox && ox <= x + width + CAM_X_BONUS && y <= oy && oy <= y + height)
+	if (x <= ox && ox <= x + width && y <= oy && oy <= y + height)
 		return true;
 	return false;
 }

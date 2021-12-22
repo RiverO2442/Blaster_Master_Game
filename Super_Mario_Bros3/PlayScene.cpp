@@ -460,6 +460,9 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 		case DIK_A:
 			mario->SetisFiring(false);
 			break;
+		case DIK_R:
+			CGame::GetInstance()->SwitchScene(2);
+			break;
 		}
 }
 

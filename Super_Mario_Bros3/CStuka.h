@@ -2,6 +2,7 @@
 #pragma once
 #include "GameObject.h"
 #include "algorithm"
+#include "PlayScene.h"
 
 #define CSTUKA_WALKING_SPEED 0.07f
 #define CSTUKA_WALKING_DOWN_SPEED 0.05f

@@ -13,7 +13,7 @@
 #Map height
 #736
 [MAP]
-#400	57	7	62	56	399	textures\BM\map_4.txt
+#400	60	3	62	36	180	textures\BM\map_4.txt
 700	23	7	23	47	161	textures\BM\map_3.txt
 # id	left	top	right	bottom	texture_id
 [SPRITES]
@@ -382,7 +382,7 @@ Body
 14	0	0	4300	295
 
 # TANK
-0	256	100	1
+0	1348	642	1
 100	180	2296	304	1
 100	180	2296	305	0
 101	180	2296	1

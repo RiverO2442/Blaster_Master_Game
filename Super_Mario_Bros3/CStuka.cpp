@@ -1,5 +1,4 @@
 #include "CSTUKA.h"
-#include "PlayScene.h"
 CSTUKA::CSTUKA()
 {
 	SetState(CSTUKA_STATE_WALKING);
