@@ -6,11 +6,9 @@ class JASON : public CGameObject
 {
 	int level;
 	int untouchable;
+
 	DWORD firing_start;
 	DWORD untouchable_start;
-
-	float start_x;			// initial position of SOPHIA at scene
-	float start_y;
 
 	bool isFiring = 0;
 	bool isAlreadyFired = 0;

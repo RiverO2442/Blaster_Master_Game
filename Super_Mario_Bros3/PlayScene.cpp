@@ -37,6 +37,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 #define OBJECT_TYPE_RED_WORM	13
 #define OBJECT_TYPE_EFFECT	14
 #define OBJECT_TYPE_CBOOM	15
+#define OBJECT_TYPE_JASON	16
 
 #define OBJECT_TYPE_PORTAL	50
 
@@ -247,6 +248,20 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"[INFO] Player object created!\n");
 
 		break;
+	case OBJECT_TYPE_JASON:
+		if (player2 != NULL)
+		{
+			DebugOut(L"[ERROR] JASON object was created before!\n");
+			return;
+		}
+		obj = new JASON(x, getMapheight() - y);
+
+		player2 = (JASON*)obj;
+
+		DebugOut(L"[INFO] Player object created!\n");
+
+		break;
+		
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
 	case OBJECT_TYPE_CBOOM: obj = new CBOOM(); break;
 	case OBJECT_TYPE_CTANKBULLET: obj = new CTANKBULLET(); break;
@@ -357,12 +372,15 @@ void CPlayScene::Update(DWORD dt)
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
 	// skip the rest if scene was already unloaded (SOPHIA::Update might trigger PlayScene::Unload)
-	if (player == NULL) return;
+	if (player == NULL && player2 == NULL) return;
 
 	// Update camera to follow mario
 	float cx, cy;
 
-	player->GetPosition(cx, cy);
+	if(player)
+		player->GetPosition(cx, cy);
+	else
+		player2->GetPosition(cx, cy);
 
 	cy = cy;
 
@@ -428,6 +446,8 @@ void CPlayScene::Unload()
 
 	player = NULL;
 
+	player2 = NULL;
+
 	delete map;
 
 	map = nullptr;
@@ -445,28 +465,49 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
-	CSOPHIA* mario = ((CPlayScene*)scence)->GetPlayer();
-	switch (KeyCode)
+	if (((CPlayScene*)scence)->GetPlayer())
 	{
-	case DIK_SPACE:
-		mario->SetState(SOPHIA_STATE_JUMP);
-		break;
-	case DIK_B:
-		mario->Reset();
-		break;
-	case DIK_A:
-		mario->SetisFiring(true);	
-		break;
+		CSOPHIA* player = ((CPlayScene*)scence)->GetPlayer();
+		switch (KeyCode)
+		{
+		case DIK_SPACE:
+			player->SetState(SOPHIA_STATE_JUMP);
+			break;
+		case DIK_B:
+			player->Reset();
+			break;
+		case DIK_A:
+			player->SetisFiring(true);
+			break;
+		}
+	}
+
+	else {
+		JASON* player = ((CPlayScene*)scence)->GetPlayer2();
+		switch (KeyCode)
+		{
+		case DIK_SPACE:
+			player->SetState(SOPHIA_STATE_JUMP);
+			break;
+		case DIK_B:
+			player->Reset();
+			break;
+		case DIK_A:
+			player->SetisFiring(true);
+			break;
+		}
 	}
 }
 
 void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 {
-	CSOPHIA* mario = ((CPlayScene*)scence)->GetPlayer();
+	if (((CPlayScene*)scence)->GetPlayer())
+	{
+		CSOPHIA* player = ((CPlayScene*)scence)->GetPlayer();
 		switch (KeyCode)
 		{
 		case DIK_A:
-			mario->SetisFiring(false);
+			player->SetisFiring(false);
 			break;
 		case DIK_R:
 			CGame::GetInstance()->SwitchScene(2);
@@ -475,23 +516,62 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 			CGame::GetInstance()->SwitchScene(1);
 			break;
 		}
+	}
+		
+	else {
+		JASON* player = ((CPlayScene*)scence)->GetPlayer2();
+		switch (KeyCode)
+		{
+		case DIK_A:
+			player->SetisFiring(false);
+			break;
+		case DIK_R:
+			CGame::GetInstance()->SwitchScene(2);
+			break;
+		case DIK_H:
+			CGame::GetInstance()->SwitchScene(1);
+			break;
+		}
+	}
+		
 }
 
 void CPlayScenceKeyHandler::KeyState(BYTE* states)
 {
 	CGame* game = CGame::GetInstance();
-	CSOPHIA* mario = ((CPlayScene*)scence)->GetPlayer();
 
-	// disable control key when SOPHIA die 
-	if (mario->GetState() == SOPHIA_STATE_DIE) return;
-	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(SOPHIA_STATE_WALKING_RIGHT);
-	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(SOPHIA_STATE_WALKING_LEFT);
-	else if (game->IsKeyDown(DIK_DOWN))
-		mario->SetState(SOPHIA_STATE_WALKING_DOWN);
-	else if (game->IsKeyDown(DIK_UP))
-		mario->SetState(SOPHIA_STATE_WALKING_UP);
-	else
-		mario->SetState(SOPHIA_STATE_IDLE);
+	if (((CPlayScene*)scence)->GetPlayer())
+	{
+		CSOPHIA* player = ((CPlayScene*)scence)->GetPlayer();
+		// disable control key when SOPHIA die 
+		if (player->GetState() == SOPHIA_STATE_DIE) return;
+		if (game->IsKeyDown(DIK_RIGHT))
+			player->SetState(SOPHIA_STATE_WALKING_RIGHT);
+		else if (game->IsKeyDown(DIK_LEFT))
+			player->SetState(SOPHIA_STATE_WALKING_LEFT);
+		else if (game->IsKeyDown(DIK_DOWN))
+			player->SetState(SOPHIA_STATE_WALKING_DOWN);
+		else if (game->IsKeyDown(DIK_UP))
+			player->SetState(SOPHIA_STATE_WALKING_UP);
+		else
+			player->SetState(SOPHIA_STATE_IDLE);
+	}
+
+	else {
+		JASON* player = ((CPlayScene*)scence)->GetPlayer2();
+		// disable control key when SOPHIA die 
+		if (player->GetState() == SOPHIA_STATE_DIE) return;
+		if (game->IsKeyDown(DIK_RIGHT))
+			player->SetState(SOPHIA_STATE_WALKING_RIGHT);
+		else if (game->IsKeyDown(DIK_LEFT))
+			player->SetState(SOPHIA_STATE_WALKING_LEFT);
+		else if (game->IsKeyDown(DIK_DOWN))
+			player->SetState(SOPHIA_STATE_WALKING_DOWN);
+		else if (game->IsKeyDown(DIK_UP))
+			player->SetState(SOPHIA_STATE_WALKING_UP);
+		else
+			player->SetState(SOPHIA_STATE_IDLE);
+	}
+
+
 }

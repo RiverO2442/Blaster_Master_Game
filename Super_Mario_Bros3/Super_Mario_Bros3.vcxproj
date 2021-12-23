@@ -167,6 +167,7 @@
     <ClInclude Include="DF.h" />
     <ClInclude Include="Interrupt.h" />
     <ClInclude Include="CEvenType1.h" />
+    <ClInclude Include="JASON.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapObj.h" />
     <ClInclude Include="QuadTree.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="Eyelet.cpp" />
     <ClCompile Include="Interrupt.cpp" />
+    <ClCompile Include="JASON.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapObj.cpp" />

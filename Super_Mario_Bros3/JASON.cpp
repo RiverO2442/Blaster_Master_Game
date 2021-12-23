@@ -13,8 +13,6 @@ JASON::JASON(float x, float y) : CGameObject()
 	untouchable = 0;
 	SetState(JASON_STATE_IDLE);
 
-	start_x = x;
-	start_y = y;
 	this->x = x;
 	this->y = y;
 
@@ -93,26 +91,29 @@ void JASON::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void JASON::Render()
 {
-	//
-	//int ani = -1;
-	//if (state == JASON_STATE_DIE)
-	//	ani = JASON_ANI_DIE;
-	//else
-	//{
-	//	if (vx == 0)
-	//	{
-	//		if (nx > 0) ani = JASON_ANI_BIG_IDLE_RIGHT;
-	//		else ani = JASON_ANI_BIG_IDLE_LEFT;
-	//	}
-	//	else if (vx > 0)
-	//		ani = JASON_ANI_BIG_WALKING_RIGHT;
-	//	else ani = JASON_ANI_BIG_WALKING_LEFT;
+	
+	int ani = 0;
+	switch (state)
+	{
+	case JASON_STATE_WALKING_DOWN:
+		ani = 0;
+		break;
+	case JASON_STATE_WALKING_UP:
+		ani = 2;
+		break;
+	case JASON_STATE_WALKING_RIGHT:
+		ani = 3;
+		break;
+	case JASON_STATE_WALKING_LEFT:
+		ani = 1;
+		break;
+	}
 
-	//}
-	//int alpha = 255;
-	//if (untouchable) alpha = 128;
+	int alpha = 255;
 
-	//animation_set->at(ani)->Render(x, y, alpha);
+	if (untouchable) alpha = 128;
+
+	animation_set->at(ani)->Render(x, y, alpha);
 
 	////RenderBoundingBox();
 }
@@ -125,7 +126,6 @@ void JASON::SetState(int state)
 	{
 	case JASON_STATE_WALKING_DOWN:
 		vy = JASON_WALKING_SPEED;
-		
 		break;
 	case JASON_STATE_WALKING_UP:
 		vy = -JASON_WALKING_SPEED;

@@ -26,6 +26,7 @@
 #include "TANKBODY.h"
 #include "TANKTURRET.h"
 #include "EFFECT.h"
+#include "JASON.h"
 #include "CBOOM.h"
 
 #include "Utils.h"
@@ -82,7 +83,8 @@ public:
 class CPlayScene : public CScene
 {
 protected:
-	CSOPHIA* player;					// A play scene has to have player, right? 
+	CSOPHIA* player;				// A play scene has to have player, right? 
+	JASON* player2;
 	vector<LPGAMEOBJECT> objects;
 	int mapHeight;
 	Map* map;
@@ -112,6 +114,7 @@ public:
 	bool IsInside(float Ox, float Oy, float xRange, float yRange, float tx, float ty);
 
 	CSOPHIA* GetPlayer() { return player; }
+	JASON* GetPlayer2() { return player2; }
 
 	void setMapheight(int height)
 	{

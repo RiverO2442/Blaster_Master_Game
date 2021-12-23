@@ -153,6 +153,9 @@
     <ClInclude Include="CBOOM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JASON.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp">
@@ -258,6 +261,9 @@
       <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
     <ClCompile Include="CBOOM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JASON.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

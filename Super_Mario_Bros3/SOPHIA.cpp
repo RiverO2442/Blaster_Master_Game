@@ -174,7 +174,7 @@ void CSOPHIA::CalcPotentialCollisions(
 	vector<LPCOLLISIONEVENT>& coEvents)
 {
 	vector <LPCOLLISIONEVENT> collisionEvents;
-	CSOPHIA* mario = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
+
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
