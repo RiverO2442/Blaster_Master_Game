@@ -424,11 +424,19 @@ void CPlayScene::Render()
 */
 void CPlayScene::Unload()
 {
-	for (int i = 0; i < objects.size(); i++)
-		delete objects[i];
-
 	objects.clear();
+
 	player = NULL;
+
+	delete map;
+
+	map = nullptr;
+
+	quadtree->Unload();
+
+	quadtree = nullptr;
+
+	delete quadtree;
 
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
 }
@@ -462,6 +470,9 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 			break;
 		case DIK_R:
 			CGame::GetInstance()->SwitchScene(2);
+			break;
+		case DIK_H:
+			CGame::GetInstance()->SwitchScene(1);
 			break;
 		}
 }

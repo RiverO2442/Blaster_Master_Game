@@ -17,7 +17,27 @@
 #700	23	7	23	47	161	textures\BM\map_3.txt
 # id	left	top	right	bottom	texture_id
 [SPRITES]
+#JASON
+# blast master Lớn
+# trước
+22001	3	41	23	73	500
+23001	3	81	23	113	500
+24001	3	121	23	152	500
 
+#trái
+22002	41	41	65	73	500
+23002	41	81	65	112	500
+24002	41	121	65	152	500
+
+#sau
+22003	83	41	103	73	500
+23003	82	81	103	113	500
+24003	82	121	103	153	500
+
+#phải
+22004	121	41	145	73	500
+23004	122	82	146	113	500
+24004	122	121	146	152	500
 
 #CONTRASTBULLET
 40500	0	8	16	24	800
@@ -208,6 +228,11 @@ tọa độ bên trái
 ###########################################						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
+#JASON LEN TRAI XUONG PHAI
+22001	22001	100	23001	100	24001	100
+22002	22002	100	23001	100	24002	100
+22003	22003	100	23003	100	24003	100
+22004	22004	100	23004	100	24004	100
 #BALL_CARRY_BOOM
 40005	40005	100
 #Explosion
@@ -293,6 +318,8 @@ Body
 # id	ani1	ani2	ani3
 #
 [ANIMATION_SETS]
+#JASON
+22001	22001	22002	22003	22004
 #BALL_CARRY_BOOM
 40005	40005
 # Body
@@ -341,7 +368,7 @@ Body
 # type	x	y	ani_set_id	extra_settings per object type
 # type :0 = Mario , 1 = Brick, 3=LaseGuard, 4= BallCarry, 5=BallBot, 6=Drap,
 # 7=GX680, 8=GX680S, 9 = Stuka, 10 = Eyelet, 11=interrup, 12=interrup_bullet, 13 = RedNeoWorm
-#15=Boom
+#15=Boom	#16JASON
 
 15	10000	10000	40005
 15	10000	10000	40005
@@ -382,6 +409,7 @@ Body
 14	0	0	4300	295
 
 # TANK
+#16	20	1990	22001
 0	20	1990	1
 100	180	2296	304	1
 100	180	2296	305	0
