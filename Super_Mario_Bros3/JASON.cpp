@@ -97,15 +97,22 @@ void JASON::Render()
 	{
 	case JASON_STATE_WALKING_DOWN:
 		ani = 0;
+		pre_ani = ani;
 		break;
 	case JASON_STATE_WALKING_UP:
 		ani = 2;
+		pre_ani = ani;
 		break;
 	case JASON_STATE_WALKING_RIGHT:
 		ani = 3;
+		pre_ani = ani;
 		break;
 	case JASON_STATE_WALKING_LEFT:
 		ani = 1;
+		pre_ani = ani;
+		break;
+	case JASON_STATE_IDLE:
+		ani = pre_ani + 4;
 		break;
 	}
 

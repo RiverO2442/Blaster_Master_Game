@@ -28,6 +28,7 @@
 #include "EFFECT.h"
 #include "JASON.h"
 #include "CBOOM.h"
+#include "NoCollisionObject.h"
 
 #include "Utils.h"
 #include "Game.h"

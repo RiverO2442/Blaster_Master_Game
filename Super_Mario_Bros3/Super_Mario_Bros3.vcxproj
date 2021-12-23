@@ -170,6 +170,7 @@
     <ClInclude Include="JASON.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapObj.h" />
+    <ClInclude Include="NoCollisionObject.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="CTANKWHEELS.h" />
     <ClInclude Include="TANKBODY.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapObj.cpp" />
+    <ClCompile Include="NoCollisionObject.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="QuadTree.cpp" />

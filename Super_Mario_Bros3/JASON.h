@@ -7,6 +7,8 @@ class JASON : public CGameObject
 	int level;
 	int untouchable;
 
+	int pre_ani = 0;
+
 	DWORD firing_start;
 	DWORD untouchable_start;
 
