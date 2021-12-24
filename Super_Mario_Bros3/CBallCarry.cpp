@@ -27,7 +27,7 @@ void CBALLCARRY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	// Simple fall down
 	if (state != CBALLCARRY_STATE_DIE)
-		vy += CBALLCARRY_GRAVITY * dt;
+		vy -= CBALLCARRY_GRAVITY * dt;
 
 	coEvents.clear();
 
@@ -44,7 +44,7 @@ void CBALLCARRY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
-	if (state == STATE_IDLE && playscene->IsInside(x - 400, y - CBALLCARRY_BBOX_HEIGHT, x + 100, y + CBALLCARRY_BBOX_HEIGHT, playscene->GetPlayer()->GetPositionX(), playscene->GetPlayer()->GetPositionY()) && !isUsed)
+	if (state == STATE_IDLE && playscene->IsInside(x - 100, y - CBALLCARRY_BBOX_HEIGHT, x + 100, y + CBALLCARRY_BBOX_HEIGHT, playscene->GetPlayer()->GetPositionX(), playscene->GetPlayer()->GetPositionY()) && !isUsed)
 	{
 		SetState(CBALLCARRY_STATE_WALKING);
 		vx = -(playscene->GetPlayer()->GetPositionX() - x) / abs(playscene->GetPlayer()->GetPositionX() - x) * CBALLCARRY_WALKING_SPEED;
@@ -76,7 +76,7 @@ void CBALLCARRY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		//x += min_tx * dx + nx * 0.4f;
 		//y += min_ty * dy + ny * 0.4f;
 
-		//if (nx != 0) vx = 0;
+		if (nx != 0 && ny == 0) vx = -vx;
 		if (ny != 0) vy = 0;
 
 		//
@@ -153,7 +153,7 @@ void CBALLCARRY::SetState(int state)
 	switch (state)
 	{
 	case STATE_DIE:
-			vy = DIE_PULL;
+			vy = -DIE_PULL;
 			break;
 	}
 }

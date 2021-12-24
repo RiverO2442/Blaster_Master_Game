@@ -132,10 +132,10 @@ void JASON::SetState(int state)
 	switch (state)
 	{
 	case JASON_STATE_WALKING_DOWN:
-		vy = JASON_WALKING_SPEED;
+		vy = -JASON_WALKING_SPEED;
 		break;
 	case JASON_STATE_WALKING_UP:
-		vy = -JASON_WALKING_SPEED;
+		vy = JASON_WALKING_SPEED;
 		break;
 	case JASON_STATE_WALKING_RIGHT:
 		vx = JASON_WALKING_SPEED;

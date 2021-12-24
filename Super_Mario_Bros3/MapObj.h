@@ -10,7 +10,7 @@
 
 #define IN_USE_WIDTH 330
 #define IN_USE_HEIGHT 500
-#define CAM_X_BONUS 300
+#define CAM_X_BONUS 400
 class MapObj
 {
 private:

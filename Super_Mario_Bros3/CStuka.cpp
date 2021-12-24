@@ -84,10 +84,10 @@ void CSTUKA::SetState(int state)
 		vx = CSTUKA_WALKING_SPEED;
 		break;
 	case CSTUKA_STATE_ATTACK:
-		vy = CSTUKA_WALKING_SPEED;
+		vy = -CSTUKA_WALKING_SPEED;
 		break;
 	case STATE_DIE:
-			vy = DIE_PULL;
+			vy = -DIE_PULL;
 			break;
 
 	}

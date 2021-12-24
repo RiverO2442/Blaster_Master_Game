@@ -11,7 +11,7 @@
 #define OBJECT_TYPE_EYELET	10
 #define OBJECT_TYPE_CINTERCRUPT	11
 #define OBJECT_TYPE_CINTERCRUPT_BULLET	12
-
+#define OBJECT_TYPE_NoCollisionObject	17
 #define OBJECT_TYPE_PORTAL	50
 
 #define MAX_SCENE_LINE 1024
@@ -57,7 +57,7 @@ void CQuadTree::Plit() {
 
 bool CQuadTree::inRange(float ox, float oy, float x, float y, float width, float height)
 {
-	if (x <= ox && ox <= x + width && y <= oy && oy <= y + height)
+	if (x <= ox && ox <= x + width + CAM_X_BONUS/2 && y <= oy && oy <= y + height)
 		return true;
 	return false;
 }
@@ -119,6 +119,7 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_CGX680: obj = new CGX680(); break;
 	case OBJECT_TYPE_CGX680S: obj = new CGX680S(); break;
 	case OBJECT_TYPE_CSTUKA: obj = new CSTUKA(); break;
+	case OBJECT_TYPE_NoCollisionObject: obj = new CNoCollisionObject(); break;
 	case OBJECT_TYPE_EYELET: 
 	{
 		float kill_point = atoi(tokens[4].c_str());
@@ -127,7 +128,6 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	break;
 	case OBJECT_TYPE_CINTERCRUPT: obj = new CINTERRUPT(); break;
 	
-		
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;

@@ -134,7 +134,7 @@ public:
 	}
 	void CheckStackBoomCarryMng()
 	{
-		if (BoomCarryMng.at(0)->getCEventStack() < 4)
+		if (BoomCarryMng.at(0)->getCEventStack() < 3)
 		{
 			BoomCarryMng.at(0)->setCEventStack(BoomCarryMng.at(0)->getCEventStack() + 1);
 		}

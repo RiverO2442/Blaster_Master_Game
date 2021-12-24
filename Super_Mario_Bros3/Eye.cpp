@@ -77,9 +77,9 @@ void CGoomba::SetState(int state)
 		vx = -EYE_WALKING_SPEED;
 		break;
 	case EYE_STATE_WALKING_UP:
-		vy = -EYE_WALKING_SPEED;
+		vy = EYE_WALKING_SPEED;
 		break;
 	case EYE_STATE_WALKING_DOWN:
-		vy = EYE_WALKING_SPEED;
+		vy = -EYE_WALKING_SPEED;
 	}
 }

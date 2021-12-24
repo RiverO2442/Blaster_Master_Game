@@ -39,7 +39,7 @@ void CBOOM::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			timing_start = 0;
 		}
 
-	vy += CBOOM_GRAVITY * dt;
+	vy -= CBOOM_GRAVITY * dt;
 
 
 
@@ -51,6 +51,7 @@ void CBOOM::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		playscene->CheckStackBoomCarryMng();
 		isUsed = true;
 		StartTiming();
+		DebugOut(L"KABOM %d \n", GetState());
 	}
 
 	if(isUsed)
@@ -116,20 +117,20 @@ void CBOOM::SetState(int state)
 		vy = 0;
 		break;
 	case CBOOM_STATE_TOP_RIGHT:
-		vx = CBOOM_VX;
-		vy = -CBOOM_VY;
+		vx = 0;
+		vy = 2*CBOOM_VY;
 		break;
 	case CBOOM_STATE_TOP_LEFT:
 		vx = -CBOOM_VX;
-		vy = -CBOOM_VY;
+		vy = 2 * CBOOM_VY;
 		break;
 	case CBOOM_STATE_BOTTOM_RIGHT:
-		vx = -2 * CBOOM_VX;
-		vy = -CBOOM_VY;
+		vx = -2*CBOOM_VX;
+		vy = CBOOM_VY;
 		break;
 	case CBOOM_STATE_BOTTOM_LEFT:
-		vx = 2*CBOOM_VX;
-		vy = -CBOOM_VY;
+		vx =  CBOOM_VX;
+		vy = CBOOM_VY;
 		break;
 	}
 }

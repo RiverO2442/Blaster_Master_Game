@@ -125,7 +125,7 @@ void CINTERRUPT_BULLET::SetState(int state)
 	switch (state)
 	{
 	case CINTERRUPT_BULLET_STATE_IDLE:
-		vy = CINTERRUPT_BULLET_SPEED;
+		vy = -CINTERRUPT_BULLET_SPEED;
 		break;
 
 	}

@@ -43,11 +43,11 @@ void CEYELET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (this->y <= moving_limit_top)
 		{
-			this->vy = EYELET_WALKING_SPEED;
+			this->vy = -EYELET_WALKING_SPEED;
 		}
 		if (this->y >= moving_limit_bottom)
 		{
-			this->vy = -EYELET_WALKING_SPEED;
+			this->vy = EYELET_WALKING_SPEED;
 		}
 	}
 
@@ -94,14 +94,14 @@ void CEYELET::SetState(int state)
 	{
 	case EYELET_STATE_ATTACK:
 		vx = kill_point / abs(kill_point) * EYELET_WALKING_SPEED;
-		vy = EYELET_WALKING_SPEED;
+		vy = -EYELET_WALKING_SPEED;
 		break;
 	case STATE_IDLE:
 		vx = 0;
 		vy = 0;
 		break;
 	case STATE_DIE:
-		vy = DIE_PULL;
+		vy = -DIE_PULL;
 		break;
 
 	}

@@ -154,15 +154,15 @@ void CBALLBOT::SetState(int state)
 		vy = 0;
 		break;
 	case CBALLBOT_STATE_FALLING:
-		vy = 2*CBALLBOT_FLYING_SPEED;
+		vy = -2*CBALLBOT_FLYING_SPEED;
 		vx = 0;
 		break;
 	case CBALLBOT_STATE_FLY_UP:
-		vy = -CBALLBOT_FLYING_SPEED;
+		vy = CBALLBOT_FLYING_SPEED;
 		vx = 0;
 		break;
 	case CBALLBOT_STATE_DIE:
-		vy = 10*DIE_PULL;
+		vy = -10*DIE_PULL;
 		break;
 	}
 }

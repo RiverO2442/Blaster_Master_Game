@@ -151,13 +151,13 @@
       <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
     <ClInclude Include="CBOOM.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
     <ClInclude Include="JASON.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="NoCollisionObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,13 +264,13 @@
       <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
     <ClCompile Include="CBOOM.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
     <ClCompile Include="JASON.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="NoCollisionObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 #include "algorithm"
 #include "PlayScene.h"
 
-#define CBALLCARRY_WALKING_SPEED 0.05f;
+#define CBALLCARRY_WALKING_SPEED 0.1f;
 #define CBALLCARRY_GRAVITY		0.002f
 
 #define CBALLCARRY_BBOX_WIDTH 16
