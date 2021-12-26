@@ -65,8 +65,7 @@ public:
 
 	LPANIMATION_SET animation_set;
 
-
-	bool isAlive = false;
+	bool isAlive = true;
 
 	bool Actived = false;
 
@@ -116,7 +115,14 @@ public:
 
 	~CGameObject();
 
-
+	void SetisAlive(bool value)
+	{
+		isAlive = value;
+	}
+	bool GetisAlive()
+	{
+		return isAlive;
+	}
 	void SetisOriginObj(bool value)
 	{
 		isOriginObj = value;

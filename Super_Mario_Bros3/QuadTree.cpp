@@ -1,22 +1,4 @@
 #include "PlayScene.h"
-#define OBJECT_TYPE_BRICK	1
-#define OBJECT_TYPE_GOOMBA	2
-#define OBJECT_TYPE_LASERGUARD	3
-#define OBJECT_TYPE_BALLCARRY	4
-#define OBJECT_TYPE_BALLBOT	5
-#define OBJECT_TYPE_DRAP	6
-#define OBJECT_TYPE_CGX680	7
-#define OBJECT_TYPE_CGX680S	8
-#define OBJECT_TYPE_CSTUKA	9
-#define OBJECT_TYPE_EYELET	10
-#define OBJECT_TYPE_CINTERCRUPT	11
-#define OBJECT_TYPE_CINTERCRUPT_BULLET	12
-#define OBJECT_TYPE_NoCollisionObject	17
-#define OBJECT_TYPE_PORTAL	50
-
-#define MAX_SCENE_LINE 1024
-
-#define SCENE_SECTION_MapObj	7
 
 CQuadTree::CQuadTree(LPCWSTR filePath)
 {
@@ -227,7 +209,7 @@ void CQuadTree::GetObjects(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY)
 	Pop(listObject, CamX, CamY);
 }
 
-void CQuadTree::Pop(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY)
+void CQuadTree::Pop(vector<LPGAMEOBJECT>& Object, int CamX, int CamY)
 {
 	if (this == NULL)
 		return;
@@ -235,24 +217,24 @@ void CQuadTree::Pop(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY)
 	{
 		for (int i = 0; i < listObjects.size(); i++)
 		{
-			if (inRange(x + cellWidth, y + cellHeight, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()))
+			if (inRange(x + cellWidth, y + cellHeight, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()) && listObjects[i]->GetisAlive())
 			if (!listObjects[i]->GetActive())
 			{
 				float Ox, Oy;
 				listObjects[i]->GetOriginLocation(Ox, Oy);
 				/*if (!inRange(Ox, Oy, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()))
 					listObjects[i]->reset();*/
-				listObject.push_back(listObjects[i]);
+				Object.push_back(listObjects[i]);
 				listObjects[i]->SetActive(true);
 			}
 		}
 		return;
 	}
 
-	BrachTL->Pop(listObject, CamX, CamY);
-	BrachTR->Pop(listObject, CamX, CamY);
-	BrachBL->Pop(listObject, CamX, CamY);
-	BrachBR->Pop(listObject, CamX, CamY);
+	BrachTL->Pop(Object, CamX, CamY);
+	BrachTR->Pop(Object, CamX, CamY);
+	BrachBL->Pop(Object, CamX, CamY);
+	BrachBR->Pop(Object, CamX, CamY);
 		
 }
 

@@ -6,6 +6,8 @@ CGX680::CGX680()
 
 void CGX680::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	if (state == STATE_DIE)
+		return;
 	left = x;
 	top = y;
 	right = x + CGX680_BBOX_WIDTH;
@@ -24,19 +26,21 @@ void CGX680::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
-	if (playscene->IsInside(x - 100, y - 100, x + 100, y + 100, playscene->GetPlayer2()->GetPositionX(), playscene->GetPlayer2()->GetPositionY()))
-	{
-		StartSwitch_state();
-	}
+	if(state != STATE_DIE)
+	{ 
+		if (playscene->IsInside(x - 100, y - 100, x + 100, y + 100, playscene->GetPlayer2()->GetPositionX(), playscene->GetPlayer2()->GetPositionY()))
+		{
+			StartSwitch_state();
+		}
 
-	if ((DWORD)GetTickCount64() - switch_state && switch_state >= CGX680_WALKING_TIME)
-	{
-		switch_state = (DWORD)GetTickCount64();
-		StartSwitch_state();
-		vx = (playscene->GetPlayer2()->GetPositionX() - x) / abs(playscene->GetPlayer2()->GetPositionX() - x) * CGX680_WALKING_SPEED;
-		vy = -(playscene->GetPlayer2()->GetPositionY() - y) / abs(playscene->GetPlayer2()->GetPositionY() - y) * CGX680_WALKING_SPEED;
+		if ((DWORD)GetTickCount64() - switch_state && switch_state >= CGX680_WALKING_TIME)
+		{
+			switch_state = (DWORD)GetTickCount64();
+			StartSwitch_state();
+			vx = (playscene->GetPlayer2()->GetPositionX() - x) / abs(playscene->GetPlayer2()->GetPositionX() - x) * CGX680_WALKING_SPEED;
+			vy = -(playscene->GetPlayer2()->GetPositionY() - y) / abs(playscene->GetPlayer2()->GetPositionY() - y) * CGX680_WALKING_SPEED;
+		}
 	}
-
 	if(state != STATE_IDLE)
 	CalcPotentialCollisions(coObjects, coEvents);
 

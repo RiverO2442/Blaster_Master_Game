@@ -208,6 +208,8 @@ tọa độ bên trái
 ###########################################						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
+#JASON WAVE GUN BULLET
+42007	42007	100
 #BALL_CARRY_BOOM
 40005	40005	100
 #Explosion
@@ -293,6 +295,9 @@ Body
 # id	ani1	ani2	ani3
 #
 [ANIMATION_SETS]
+
+#JASON WAVE GUN BULLET
+42007	42007
 #BALL_CARRY_BOOM
 40005	40005
 # Body
@@ -341,7 +346,7 @@ Body
 # type	x	y	ani_set_id	extra_settings per object type
 # type :0 = Mario , 1 = Brick, 3=LaseGuard, 4= BallCarry, 5=BallBot, 6=Drap,
 # 7=GX680, 8=GX680S, 9 = Stuka, 10 = Eyelet, 11=interrup, 12=interrup_bullet, 13 = RedNeoWorm
-#15=Boom
+#15=Boom 18=JASON WAVE BULLET
 
 15	10000	10000	40005
 15	10000	10000	40005

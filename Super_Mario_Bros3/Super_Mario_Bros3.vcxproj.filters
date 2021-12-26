@@ -159,6 +159,9 @@
     <ClInclude Include="NoCollisionObject.h">
       <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
+    <ClInclude Include="CWAVE_BULLET.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp">
@@ -271,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="NoCollisionObject.cpp">
       <Filter>Source Files\OtherObj</Filter>
+    </ClCompile>
+    <ClCompile Include="CWAVE_BULLET.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

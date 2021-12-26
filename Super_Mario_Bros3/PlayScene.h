@@ -38,6 +38,8 @@
 #include "Textures.h"
 #include "Sprites.h"
 #include "Portal.h"
+#include "DF.h"
+#include "CWAVE_BULLET.h"
 
 #define QUADTREE_SECTION_SETTINGS	1
 #define QUADTREE_SECTION_OBJECTS	2

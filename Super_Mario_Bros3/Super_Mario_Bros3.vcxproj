@@ -162,6 +162,7 @@
     <ClInclude Include="CREDWORM.h" />
     <ClInclude Include="CStuka.h" />
     <ClInclude Include="CTANKBULLET.h" />
+    <ClInclude Include="CWAVE_BULLET.h" />
     <ClInclude Include="EFFECT.h" />
     <ClInclude Include="Eyelet.h" />
     <ClInclude Include="DF.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="CREDWORM.cpp" />
     <ClCompile Include="CStuka.cpp" />
     <ClCompile Include="CTANKBULLET.cpp" />
+    <ClCompile Include="CWAVE_BULLET.cpp" />
     <ClCompile Include="EFFECT.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="Eyelet.cpp" />
