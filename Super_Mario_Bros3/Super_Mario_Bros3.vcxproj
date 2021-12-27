@@ -155,8 +155,10 @@
     <ClInclude Include="CBallbot.h" />
     <ClInclude Include="CBOOM.h" />
     <ClInclude Include="CDrap.h" />
+    <ClInclude Include="CGRENADE.h" />
     <ClInclude Include="CGX680.h" />
     <ClInclude Include="CGX680S.h" />
+    <ClInclude Include="CGX_BULLET.h" />
     <ClInclude Include="CINTERRUPT_BULLET.h" />
     <ClInclude Include="CLaserGuard.h" />
     <ClInclude Include="CREDWORM.h" />
@@ -196,8 +198,10 @@
     <ClCompile Include="CBallbot.cpp" />
     <ClCompile Include="CBOOM.cpp" />
     <ClCompile Include="CDrap.cpp" />
+    <ClCompile Include="CGRENADE.cpp" />
     <ClCompile Include="CGX680.cpp" />
     <ClCompile Include="CGX680S.cpp" />
+    <ClCompile Include="CGX_BULLET.cpp" />
     <ClCompile Include="CINTERRUPT_BULLET.cpp" />
     <ClCompile Include="CLaserGuard.cpp" />
     <ClCompile Include="CREDWORM.cpp" />

@@ -4,7 +4,7 @@
 
 class CEvenType1 : public CGameObject
 {
-	float x, y, stack = 0;
+	float x, y, stack = 0, vx, vy;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {};
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT>* coObjects, vector<LPCOLLISIONEVENT>& coEvents) {};
@@ -12,11 +12,13 @@ class CEvenType1 : public CGameObject
 	virtual void Render() {};
 public:
 
-	CEvenType1(float x, float y, float num = 0)
+	CEvenType1(float x, float y, float num = 0, float vx = 0, float vy = 0)
 	{
 		this->x = x;
 		this->y = y;
 		stack = num;
+		this->vx = vx;
+		this->vy = vy;
 	}
 	float getCEventPoisitionX()
 	{
@@ -25,6 +27,14 @@ public:
 	float getCEventPoisitionY()
 	{
 		return y;
+	}
+	float getCEventSpeedX()
+	{
+		return vx;
+	}
+	float getCEventSpeedY()
+	{
+		return vy;
 	}
 	float getCEventStack()
 	{

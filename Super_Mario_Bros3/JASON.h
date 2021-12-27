@@ -4,7 +4,7 @@
 
 class JASON : public CGameObject
 {
-	int level;
+	int weapon = 1;
 	int untouchable;
 
 	int pre_ani = 0;
@@ -22,7 +22,8 @@ public:
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT>* coObjects, vector<LPCOLLISIONEVENT>& coEvents);
 
 	void SetState(int state);
-	void SetLevel(int l) { level = l; }
+	int getWeapon() { return weapon; }
+	void SwitchWeapon() { weapon = -weapon; }
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	void StartFiring() {if(firing_start == 0) firing_start = GetTickCount(); }
 	void SetisIsFiring(int time) { firing_start = time; }
@@ -31,6 +32,7 @@ public:
 
 	void SetisFiring(bool value) { isFiring = value; }
 	bool GetisFiring() { return isFiring; }
+	int GetPre_ani() { return pre_ani; }
 	void SetisAlreadyFired(bool value) { isAlreadyFired = value; }
 	bool GetisAlreadyFired() { return isAlreadyFired; }
 

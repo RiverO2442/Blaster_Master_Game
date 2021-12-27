@@ -31,14 +31,32 @@ void CGX680S::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (playscene->IsInside(x - 100, y - 100, x + 100, y + 100, playscene->GetPlayer2()->GetPositionX(), playscene->GetPlayer2()->GetPositionY()))
 		{
 			StartSwitch_state();
+			StartAttack();
 		}
 
-		if ((DWORD)GetTickCount64() - switch_state && switch_state >= CGX680S_WALKING_TIME)
+		if ((DWORD)GetTickCount64() - switch_state >= CGX680S_WALKING_TIME && switch_state != 0)
 		{
-			switch_state = (DWORD)GetTickCount64();
+			switch_state = 0;
+
 			StartSwitch_state();
+
 			vx = (playscene->GetPlayer2()->GetPositionX() - x) / abs(playscene->GetPlayer2()->GetPositionX() - x) * CGX680S_WALKING_SPEED;
 			vy = -(playscene->GetPlayer2()->GetPositionY() - y) / abs(playscene->GetPlayer2()->GetPositionY() - y) * CGX680S_WALKING_SPEED;
+		}
+
+		if ((DWORD)GetTickCount64() - attacking >= CGX680S_ATTACKING_TIME && attacking != 0)
+		{
+			attacking = 0;
+
+			StartAttack();
+
+			float distant = (abs(playscene->GetPlayer2()->GetPositionX()) - abs(x)) / sqrt(pow(playscene->GetPlayer2()->GetPositionX(), 2) + pow(x, 2));
+			float distant2 = (abs(playscene->GetPlayer2()->GetPositionY()) - JASON_SMALL_BBOX_HEIGHT / 2 - abs(y)) / sqrt(pow(playscene->GetPlayer2()->GetPositionY(), 2) + pow(y, 2));
+
+			float bx = distant / 6;
+			float by = -distant2 / 6;
+
+			playscene->AddCGXMng(x, y, bx, by);
 		}
 	}
 	if (state != STATE_IDLE)

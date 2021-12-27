@@ -96,19 +96,19 @@ void JASON::Render()
 	switch (state)
 	{
 	case JASON_STATE_WALKING_DOWN:
-		ani = 0;
+		ani = JASON_ANI_WALK_DOWN;
 		pre_ani = ani;
 		break;
 	case JASON_STATE_WALKING_UP:
-		ani = 2;
+		ani = JASON_ANI_WALK_UP;
 		pre_ani = ani;
 		break;
 	case JASON_STATE_WALKING_RIGHT:
-		ani = 3;
+		ani = JASON_ANI_WALK_RIGHT;
 		pre_ani = ani;
 		break;
 	case JASON_STATE_WALKING_LEFT:
-		ani = 1;
+		ani = JASON_ANI_WALK_LEFT;
 		pre_ani = ani;
 		break;
 	case JASON_STATE_IDLE:

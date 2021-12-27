@@ -1,46 +1,29 @@
-#include "CWAVE_BULLET.h"
+#include "CGRENADE.h"
 #include <algorithm>
 #include "PlayScene.h"
 #include "JASON.h"
 #include "Brick.h"
 
-CWAVE_BULLET::CWAVE_BULLET()
+CGRENADE::CGRENADE()
 {
-	SetState(CWAVE_BULLET_STATE_FLYING);
+	SetState(CGRENADE_STATE_FLYING);
 	nx = 0;
 }
 
-void CWAVE_BULLET::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+void CGRENADE::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
 	top = y;
-	right = x + CWAVE_BULLET_BBOX_WIDTH;
+	right = x + CGRENADE_BBOX_WIDTH;
 
-	if (state == CWAVE_BULLET_STATE_DIE)
-		y = y + CWAVE_BULLET_BBOX_HEIGHT;
-	else bottom = y + CWAVE_BULLET_BBOX_HEIGHT;
+	if (state == CGRENADE_STATE_DIE)
+		y = y + CGRENADE_BBOX_HEIGHT;
+	else bottom = y + CGRENADE_BBOX_HEIGHT;
 }
 
-void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void CGRENADE::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if ((DWORD)GetTickCount64() - reset_start > CWAVE_BULLET_RESET_TIME)
-	{
-		state = CWAVE_BULLET_STATE_DIE;
-		reset_start = 0;
-		change_speed_start = 0;
-		dir = 0;
-	}
-	if ((DWORD)GetTickCount64() - change_speed_start > CWAVE_BULLET_CHANGE_SPEED_TIME)
-	{
-		if (dir % 2 == 0)
-		{
-			vx = -vx;
-		}
-		else {
-			vy = -vy;
-		}
-		change_speed_start = (DWORD)GetTickCount64();
-	}
+
 	CGameObject::Update(dt, coObjects);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -48,55 +31,52 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	coEvents.clear();
 
 	// turn off collision when die 
-	if (state != CWAVE_BULLET_STATE_DIE)
+	if (state != CGRENADE_STATE_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
 	else
 	{
 		isUsed = false;
 		x = STORING_LOCATION;
 		y = STORING_LOCATION;
-		SetState(CWAVE_BULLET_STATE_FLYING);
+		SetState(CGRENADE_STATE_FLYING);
 	}
 	if (isUsed == false)
 	{
 		JASON* JASON = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer2();
-		if (JASON->GetisFiring() == true && JASON->getWeapon() == 1)
+		if (JASON->GetisFiring() == true && JASON->getWeapon() == -1)
 		{
 			if (JASON->GetisAlreadyFired() == false)
 			{
 				isUsed = true;
 				x = JASON->x;
 				y = JASON->y;
-				/*SetSpeed(JASON->nx * CWAVE_BULLET_SPEED, CWAVE_BULLET_SPEED);*/
+				/*SetSpeed(JASON->nx * CGRENADE_SPEED, CGRENADE_SPEED);*/
 				switch (JASON->GetPre_ani())
 				{
 				case JASON_ANI_WALK_DOWN:
-					vx = CWAVE_BULLET_SPEED;
-					vy = -CWAVE_BULLET_SPEED;
+					vy = -CGRENADE_SPEED;
+					vx = 0;
 					dir = 0;
 					break;
 				case JASON_ANI_WALK_LEFT:
-					vx = -CWAVE_BULLET_SPEED;
-					vy = CWAVE_BULLET_SPEED;
+					vx = -CGRENADE_SPEED;
+					vy = 0;
 					dir = 1;
 					break;
 				case JASON_ANI_WALK_UP:
-					vx = CWAVE_BULLET_SPEED;
-					vy = CWAVE_BULLET_SPEED;
+					vy = CGRENADE_SPEED;
+					vx = 0;
 					dir = 2;
 					break;
 				case JASON_ANI_WALK_RIGHT:
-					vx = CWAVE_BULLET_SPEED;
-					vy = CWAVE_BULLET_SPEED;
+					vx = CGRENADE_SPEED;
+					vy = 0;
 					dir = 3;
 					break;
-
 				}
 				JASON->SetisAlreadyFired(true);
 				JASON->StartFiring();
 				StartReset();
-				StartSpeed();
-				DebugOut(L"FIRED \n");
 			}
 		}
 	}
@@ -105,6 +85,13 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		x += dx;
 		y += dy;
+		if ((DWORD)GetTickCount64() - reset_start > CGRENADE_RESET_TIME && reset_start != 0)
+		{
+			((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
+			state = CGRENADE_STATE_DIE;
+			reset_start = 0;
+			dir = 0;
+		}
 	}
 	else
 	{
@@ -122,14 +109,14 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				(e->obj)->SetState(STATE_DIE);
 				(e->obj)->SetisAlive(false);
-				SetState(CWAVE_BULLET_STATE_DIE);
+				SetState(CGRENADE_STATE_DIE);
 				((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng((e->obj)->GetPositionX(), (e->obj)->GetPositionY());
 			}
 			else {
 				if (nx != 0)
 				{
 					((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
-					SetState(CWAVE_BULLET_STATE_DIE);
+					SetState(CGRENADE_STATE_DIE);
 				}
 			}
 		}
@@ -141,7 +128,7 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
-void CWAVE_BULLET::CalcPotentialCollisions(
+void CGRENADE::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT>* coObjects,
 	vector<LPCOLLISIONEVENT>& coEvents)
 {
@@ -160,9 +147,9 @@ void CWAVE_BULLET::CalcPotentialCollisions(
 	std::sort(coEvents.begin(), coEvents.end(), CCollisionEvent::compare);
 }
 
-void CWAVE_BULLET::Render()
+void CGRENADE::Render()
 {
-	if (state == CWAVE_BULLET_STATE_DIE)
+	if (state == CGRENADE_STATE_DIE)
 		return;
 	int ani = 0;
 	animation_set->at(ani)->Render(x, y);
@@ -170,14 +157,14 @@ void CWAVE_BULLET::Render()
 	//RenderBoundingBox();
 }
 
-void CWAVE_BULLET::SetState(int state)
+void CGRENADE::SetState(int state)
 {
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case CWAVE_BULLET_STATE_DIE:
-		vx = CWAVE_BULLET_STATE_DIE_SPEED;
-		vy = CWAVE_BULLET_STATE_DIE_SPEED;
+	case CGRENADE_STATE_DIE:
+		vx = CGRENADE_STATE_DIE_SPEED;
+		vy = CGRENADE_STATE_DIE_SPEED;
 		break;
 
 	}

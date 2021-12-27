@@ -40,6 +40,8 @@
 #include "Portal.h"
 #include "DF.h"
 #include "CWAVE_BULLET.h"
+#include "CGRENADE.h"
+#include "CGX_BULLET.h"
 
 #define QUADTREE_SECTION_SETTINGS	1
 #define QUADTREE_SECTION_OBJECTS	2
@@ -96,6 +98,7 @@ protected:
 	vector<CEvenType1*> WormSpamMng;
 	vector<CEvenType1*> KaboomMng;
 	vector<CEvenType1*> BoomCarryMng;
+	vector<CEvenType1*> CGXMng;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -128,6 +131,26 @@ public:
 	{
 		return mapHeight;
 	}
+	/////////////////CGXMng
+	void AddCGXMng(float x, float y, float vx, float vy)
+	{
+		CEvenType1* obj = new CEvenType1(x, y, 0, vx, vy);
+		this->CGXMng.push_back(obj);
+	}
+	CEvenType1* GetCGXMng()
+	{
+		return CGXMng.at(0);
+	}
+	bool CheckCGXMng()
+	{
+		if (CGXMng.size() != 0)
+			return true;
+		return false;
+	}
+	void DeleteCGXMng()
+	{
+		this->CGXMng.erase(CGXMng.begin());
+	}
 	/////////////////BoomCarryMng
 	void AddBoomCarryMng(float x, float y)
 	{
@@ -136,7 +159,7 @@ public:
 	}
 	void CheckStackBoomCarryMng()
 	{
-		if (BoomCarryMng.at(0)->getCEventStack() < 3)
+		if (BoomCarryMng.at(0)->getCEventStack() < 4)
 		{
 			BoomCarryMng.at(0)->setCEventStack(BoomCarryMng.at(0)->getCEventStack() + 1);
 		}

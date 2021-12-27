@@ -20,17 +20,26 @@
 #define CGX680_STATE_IDLE 100
 #define CGX680_STATE_DIE 200
 #define CGX680_STATE_WALKING 300
-#define CGX680_WALKING_TIME 1000
+#define CGX680_WALKING_TIME 100
+#define CGX680_ATTACKING_TIME 3000
 
 
 class CGX680 : public CGameObject
 {
 	DWORD switch_state = 0;
+	DWORD attacking = 0;
 	void StartSwitch_state()
 	{
 		if (switch_state == 0)
 		{
 			switch_state = (DWORD)GetTickCount64();
+		}
+	}
+	void StartAttack()
+	{
+		if (attacking == 0)
+		{
+			attacking = (DWORD)GetTickCount64();
 		}
 	}
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);

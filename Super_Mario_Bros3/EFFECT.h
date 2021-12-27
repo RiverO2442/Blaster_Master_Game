@@ -18,7 +18,6 @@ class EFFECT : public CGameObject
 		}
 	}
 public:
-
 	EFFECT(float time);
 	virtual void Render();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

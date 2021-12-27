@@ -271,7 +271,16 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new EFFECT(time);
 	}
 	break;
-
+	case OBJECT_TYPE_JASON_GRENADE:
+	{
+		obj = new CGRENADE();
+	}
+	break;
+	case OBJECT_TYPE_CGX_BULLET:
+	{
+		obj = new CGX_BULLET();
+	}
+	break;
 	case OBJECT_TYPE_PORTAL:
 	{
 		float r = atof(tokens[4].c_str());
@@ -552,6 +561,8 @@ void CPlayScenceKeyHandler::KeyState(BYTE* states)
 			player->SetState(SOPHIA_STATE_WALKING_DOWN);
 		else if (game->IsKeyDown(DIK_UP))
 			player->SetState(SOPHIA_STATE_WALKING_UP);
+		else if (game->IsKeyDown(DIK_Q))
+			player->SwitchWeapon();
 		else
 			player->SetState(SOPHIA_STATE_IDLE);
 	}
