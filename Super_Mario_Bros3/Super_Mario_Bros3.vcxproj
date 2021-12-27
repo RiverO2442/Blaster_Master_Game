@@ -161,6 +161,7 @@
     <ClInclude Include="CGX_BULLET.h" />
     <ClInclude Include="CINTERRUPT_BULLET.h" />
     <ClInclude Include="CLaserGuard.h" />
+    <ClInclude Include="CLASER_BULLET.h" />
     <ClInclude Include="CREDWORM.h" />
     <ClInclude Include="CStuka.h" />
     <ClInclude Include="CTANKBULLET.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="CGX_BULLET.cpp" />
     <ClCompile Include="CINTERRUPT_BULLET.cpp" />
     <ClCompile Include="CLaserGuard.cpp" />
+    <ClCompile Include="CLASER_BULLET.cpp" />
     <ClCompile Include="CREDWORM.cpp" />
     <ClCompile Include="CStuka.cpp" />
     <ClCompile Include="CTANKBULLET.cpp" />

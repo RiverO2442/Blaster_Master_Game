@@ -191,21 +191,6 @@ void CQuadTree::Render()
 
 void CQuadTree::GetObjects(vector<LPGAMEOBJECT>& listObject, int CamX, int CamY)
 {
-	//listObject.clear();
-
-	unsigned int  left, top, right, bottom;
-
-	left = (CamX);
-
-	right = (CamX + CGame::GetInstance()->GetScreenWidth());
-
-	top = (CamY);
-
-	bottom = (CamY + CGame::GetInstance()->GetScreenHeight());
-
-	if (left > x + cellWidth || right < x || top > y + cellHeight || bottom < y)
-		return;
-
 	Pop(listObject, CamX, CamY);
 }
 

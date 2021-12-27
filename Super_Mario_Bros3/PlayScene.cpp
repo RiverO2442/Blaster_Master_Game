@@ -247,7 +247,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new TANKWHEEL(part);
 	}
 	break;
-
+	case OBJECT_TYPE_CLASER_BULLET:
+	{
+		obj = new CLASER_BULLET();
+	}
+	break;
 	case OBJECT_TYPE_TANK_BODY:
 	{
 		obj = new TANKBODY();

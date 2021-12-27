@@ -160,12 +160,15 @@
       <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
     <ClInclude Include="CWAVE_BULLET.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
     <ClInclude Include="CGRENADE.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
     <ClInclude Include="CGX_BULLET.h">
+      <Filter>Header Files\OtherObj</Filter>
+    </ClInclude>
+    <ClInclude Include="CLASER_BULLET.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -281,13 +284,16 @@
     <ClCompile Include="NoCollisionObject.cpp">
       <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
+    <ClCompile Include="CGX_BULLET.cpp">
+      <Filter>Source Files\OtherObj</Filter>
+    </ClCompile>
     <ClCompile Include="CWAVE_BULLET.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
     <ClCompile Include="CGRENADE.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
-    <ClCompile Include="CGX_BULLET.cpp">
+    <ClCompile Include="CLASER_BULLET.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

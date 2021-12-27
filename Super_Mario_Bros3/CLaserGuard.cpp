@@ -1,4 +1,4 @@
-#include "CLaserGuard.h"
+#include "Interrupt.h"
 CLASERGUARD::CLASERGUARD()
 {
 	SetState(STATE_IDLE);
@@ -18,6 +18,7 @@ void CLASERGUARD::GetBoundingBox(float& left, float& top, float& right, float& b
 
 void CLASERGUARD::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
 	CGameObject::Update(dt, coObjects);
 
 	//
@@ -26,13 +27,22 @@ void CLASERGUARD::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	x += dx;
 	y += dy;
+
+	float px, py;
+
+	((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer2()->GetPosition(px, py);
+	if (state != CLASERGUARD_STATE_OPEN)
+		if (this->x < px + SOPHIA_BIG_BBOX_WIDTH && this->x + CLASERGUARD_BBOX_WIDTH >= px && this->y < py)
+		{
+			playscene->AddInterruptBulletMng(this->x, this->y);
+		}
 }
 
 void CLASERGUARD::Render()
 {
 	if (state != STATE_DIE)
 	{
-		int ani = CLASERGUARD_ANI;
+		int ani = CLASERGUARD_ANI_IDLE;
 
 		animation_set->at(ani)->Render(x, y);
 

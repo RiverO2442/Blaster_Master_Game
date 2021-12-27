@@ -42,6 +42,7 @@
 #include "CWAVE_BULLET.h"
 #include "CGRENADE.h"
 #include "CGX_BULLET.h"
+#include "CLASER_BULLET.h"
 
 #define QUADTREE_SECTION_SETTINGS	1
 #define QUADTREE_SECTION_OBJECTS	2
