@@ -59,7 +59,7 @@ public:
 
 	int IsKeyDown(int KeyCode);
 	void ProcessKeyboard();
-
+	HWND GetCurrenthWnd() { return hWnd; }
 	void Load(LPCWSTR gameFile);
 	LPSCENE GetCurrentScene() { return scenes[current_scene]; }
 	void SwitchScene(int scene_id);

@@ -171,6 +171,9 @@
     <ClInclude Include="CLASER_BULLET.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp">
@@ -294,6 +297,9 @@
       <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
     <ClCompile Include="CLASER_BULLET.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

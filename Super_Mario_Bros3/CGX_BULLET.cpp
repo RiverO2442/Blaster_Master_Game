@@ -76,7 +76,7 @@ void CGX_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
-			if (dynamic_cast<CBrick*>(e->obj)) // if e->obj is Goomba
+			if (dynamic_cast<CBrick*>(e->obj)) 
 			{
 				SetState(CGX_BULLET_STATE_DIE);
 			}
