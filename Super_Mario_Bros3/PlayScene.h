@@ -43,6 +43,7 @@
 #include "CGRENADE.h"
 #include "CGX_BULLET.h"
 #include "CLASER_BULLET.h"
+#include "MapCamera.h"
 
 #define QUADTREE_SECTION_SETTINGS	1
 #define QUADTREE_SECTION_OBJECTS	2
@@ -61,6 +62,7 @@ class CQuadTree
 	CQuadTree* BrachBR = NULL;
 	MapObj* obj;
 	vector<LPGAMEOBJECT> listObjects;
+	
 
 	void _ParseSection_SETTINGS(string line);
 	void _ParseSection_OBJECTS(string line);
@@ -92,6 +94,7 @@ protected:
 	CSOPHIA* player;				// A play scene has to have player, right? 
 	JASON* player2;
 	vector<LPGAMEOBJECT> objects;
+	vector<LPGAMEOBJECT> secondLayer;
 	int mapHeight;
 	Map* map;
 	CQuadTree* quadtree;
@@ -100,6 +103,9 @@ protected:
 	vector<CEvenType1*> KaboomMng;
 	vector<CEvenType1*> BoomCarryMng;
 	vector<CEvenType1*> CGXMng;
+	vector<MapCamera*> MapCam;
+	
+	int camState = 0;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -109,6 +115,7 @@ protected:
 	void _ParseSection_MAP(string line);
 	void _ParseSection_QUADTREE(string line);
 	void _ParseSection_SETTING(string line);
+	void _ParseSection_MAPCAM(string line);
 public:
 	CPlayScene(int id, LPCWSTR filePath);
 
@@ -122,6 +129,16 @@ public:
 
 	CSOPHIA* GetPlayer() { return player; }
 	JASON* GetPlayer2() { return player2; }
+
+	void setCamState(int value)
+	{
+		camState = value;
+	}
+
+	int getCamState()
+	{
+		return camState;
+	}
 
 	void setMapheight(int height)
 	{

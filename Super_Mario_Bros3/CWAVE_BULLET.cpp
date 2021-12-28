@@ -15,10 +15,7 @@ void CWAVE_BULLET::GetBoundingBox(float& left, float& top, float& right, float& 
 	left = x;
 	top = y;
 	right = x + CWAVE_BULLET_BBOX_WIDTH;
-
-	if (state == CWAVE_BULLET_STATE_DIE)
-		y = y + CWAVE_BULLET_BBOX_HEIGHT;
-	else bottom = y + CWAVE_BULLET_BBOX_HEIGHT;
+	bottom = y + CWAVE_BULLET_BBOX_HEIGHT;
 }
 
 void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -65,8 +62,7 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (JASON->GetisAlreadyFired() == false)
 			{
 				isUsed = true;
-				x = JASON->x;
-				y = JASON->y;
+				
 				/*SetSpeed(JASON->nx * CWAVE_BULLET_SPEED, CWAVE_BULLET_SPEED);*/
 				switch (JASON->GetPre_ani())
 				{
@@ -91,6 +87,30 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					dir = 3;
 					break;
 
+				}
+				if (dir % 2 == 0)
+				{
+					x = JASON->GetPositionX() + JASON_BIG_BBOX_WIDTH / 2;
+					if (dir == 0)
+					{
+						y = JASON->GetPositionY() + JASON_BIG_BBOX_HEIGHT;
+					}
+					else
+					{
+						y = JASON->GetPositionY();
+					}
+				}
+				else
+				{
+					y = JASON->GetPositionY() + JASON_BIG_BBOX_HEIGHT / 2;
+					if (dir == 1)
+					{
+						x = JASON->GetPositionX() - CWAVE_BULLET_BBOX_WIDTH;
+					}
+					else
+					{
+						x = JASON->GetPositionX() + JASON_BIG_BBOX_WIDTH;
+					}
 				}
 				JASON->SetisAlreadyFired(true);
 				JASON->StartFiring();
@@ -126,18 +146,12 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng((e->obj)->GetPositionX(), (e->obj)->GetPositionY());
 			}
 			else {
-				if (nx != 0)
-				{
 					((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
 					SetState(CWAVE_BULLET_STATE_DIE);
-				}
 			}
 		}
 		// clean up collision events
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-		if (x <= 0)
-			if (vx < 0)
-				vx = -vx;
 	}
 }
 

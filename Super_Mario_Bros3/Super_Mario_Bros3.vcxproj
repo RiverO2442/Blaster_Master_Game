@@ -173,6 +173,7 @@
     <ClInclude Include="CEvenType1.h" />
     <ClInclude Include="JASON.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapCamera.h" />
     <ClInclude Include="MapObj.h" />
     <ClInclude Include="NoCollisionObject.h" />
     <ClInclude Include="QuadTree.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="JASON.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapCamera.cpp" />
     <ClCompile Include="MapObj.cpp" />
     <ClCompile Include="NoCollisionObject.cpp" />
     <ClCompile Include="PlayScene.cpp" />
