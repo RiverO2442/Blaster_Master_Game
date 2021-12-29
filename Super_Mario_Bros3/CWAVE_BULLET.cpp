@@ -140,7 +140,7 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			LPCOLLISIONEVENT e = coEventsResult[i];
 			if (!dynamic_cast<CBrick*>(e->obj)) 
 			{
-				(e->obj)->SetState(STATE_DIE);
+				(e->obj)->setheath((e->obj)->Getheath() - 100);
 				(e->obj)->SetisAlive(false);
 				SetState(CWAVE_BULLET_STATE_DIE);
 				((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng((e->obj)->GetPositionX(), (e->obj)->GetPositionY());

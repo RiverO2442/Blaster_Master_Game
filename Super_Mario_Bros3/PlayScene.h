@@ -45,6 +45,8 @@
 #include "CLASER_BULLET.h"
 #include "MapCamera.h"
 #include "CSTATBAR.h"
+#include "MINI_JASON.h"
+#include "CTANKDOOR.h"
 
 #define QUADTREE_SECTION_SETTINGS	1
 #define QUADTREE_SECTION_OBJECTS	2
@@ -94,6 +96,7 @@ class CPlayScene : public CScene
 protected:
 	CSOPHIA* player;				// A play scene has to have player, right? 
 	JASON* player2;
+	MINI_JASON* player3;
 	vector<LPGAMEOBJECT> objects;
 	vector<LPGAMEOBJECT> secondLayer;
 	int mapHeight;
@@ -110,6 +113,8 @@ protected:
 	DWORD filming_start = 0;
 
 	int camState = 0;
+
+	bool piloting = true;
 
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
@@ -133,7 +138,17 @@ public:
 
 	CSOPHIA* GetPlayer() { return player; }
 	JASON* GetPlayer2() { return player2; }
+	MINI_JASON* GetPlayer3() { return player3; }
 
+	void setpiloting(int value)
+	{
+		piloting = value;
+	}
+
+	int getpiloting()
+	{
+		return piloting;
+	}
 	void StartFilming()
 	{
 		if (filming_start == 0)

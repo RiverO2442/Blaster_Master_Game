@@ -26,6 +26,9 @@ void CEYELET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// TO-DO: make sure Goomba can interact with the world and to each of them too!
 	// 
 
+	if (state != STATE_DIE)
+	{
+
 	if (state != EYELET_STATE_ATTACK && playscene->IsInside(x, y, x + kill_point, y + 50, playscene->GetPlayer()->GetPositionX(), playscene->GetPlayer()->GetPositionY()) && kill_point >= 0)
 	{
 		moving_limit_bottom = this->y + 10;
@@ -51,6 +54,7 @@ void CEYELET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
+	}
 	x += dx;
 	y += dy;
 }

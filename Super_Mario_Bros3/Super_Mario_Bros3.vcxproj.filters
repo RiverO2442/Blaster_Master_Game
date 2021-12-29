@@ -168,17 +168,23 @@
     <ClInclude Include="CGX_BULLET.h">
       <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
-    <ClInclude Include="CLASER_BULLET.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sound.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\System</Filter>
     </ClInclude>
     <ClInclude Include="MapCamera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="CLASER_BULLET.h">
+      <Filter>Header Files\OtherObj</Filter>
     </ClInclude>
     <ClInclude Include="CSTATBAR.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\OtherObj</Filter>
+    </ClInclude>
+    <ClInclude Include="MINI_JASON.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CTANKDOOR.h">
+      <Filter>Header Files\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -302,17 +308,23 @@
     <ClCompile Include="CGRENADE.cpp">
       <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
-    <ClCompile Include="CLASER_BULLET.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CTANKDOOR.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MINI_JASON.cpp">
+      <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="sound.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\System</Filter>
     </ClCompile>
-    <ClCompile Include="MapCamera.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CLASER_BULLET.cpp">
+      <Filter>Source Files\OtherObj</Filter>
     </ClCompile>
     <ClCompile Include="CSTATBAR.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\OtherObj</Filter>
+    </ClCompile>
+    <ClCompile Include="MapCamera.cpp">
+      <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
