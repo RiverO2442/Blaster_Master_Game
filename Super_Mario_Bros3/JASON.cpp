@@ -91,7 +91,7 @@ void JASON::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void JASON::Render()
 {
-	
+
 	int ani = 0;
 	switch (state)
 	{
@@ -180,6 +180,9 @@ void JASON::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT>* coObjects,
 	vector<LPCOLLISIONEVENT>& coEvents)
 {
+	CGame* game = CGame::GetInstance();
+	CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
+
 	vector <LPCOLLISIONEVENT> collisionEvents;
 
 	for (UINT i = 0; i < coObjects->size(); i++)
@@ -196,6 +199,12 @@ void JASON::CalcPotentialCollisions(
 		}
 		if (dynamic_cast<CBOOM*>(e->obj))
 		{
+			continue;
+		}
+		if (dynamic_cast<CPortal*>(e->obj))
+		{
+			CPortal* portal = dynamic_cast<CPortal*>(e->obj);
+			playscene->setCamState(portal->GetCamState());
 			continue;
 		}
 		if (e->t > 0 && e->t <= 1.0f)

@@ -30,14 +30,16 @@ void CINTERRUPT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	float px, py;
 
-	((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer()->GetPosition(px, py);
-	if(state != CINTERRUPT_STATE_OPEN)
-	if (this->x < px + SOPHIA_BIG_BBOX_WIDTH && this->x + CINTERRUPT_BBOX_WIDTH >= px && this->y < py)
+	if (state != STATE_DIE)
 	{
-		SetState(CINTERRUPT_STATE_OPEN);
-		playscene->AddInterruptBulletMng(this->x, this->y);
-	}
-		
+		((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->GetPlayer()->GetPosition(px, py);
+		if (state != CINTERRUPT_STATE_OPEN)
+			if (this->x < px + SOPHIA_BIG_BBOX_WIDTH && this->x + CINTERRUPT_BBOX_WIDTH >= px && this->y < py)
+			{
+				SetState(CINTERRUPT_STATE_OPEN);
+				playscene->AddInterruptBulletMng(this->x, this->y);
+			}
+	}	
 }
 
 void CINTERRUPT::Render()

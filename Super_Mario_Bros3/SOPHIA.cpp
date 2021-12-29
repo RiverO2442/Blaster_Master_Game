@@ -23,11 +23,12 @@ CSOPHIA::CSOPHIA(float x, float y) : CGameObject()
 void CSOPHIA::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	int id = CGame::GetInstance()->GetCurrentScene()->GetId();
+	CGame* game = CGame::GetInstance();
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 
 	// Simple fall down
-	if(id == 1)
+	//if(!game->GetFilming())
 	vy -= SOPHIA_GRAVITY * dt;
 
 	vector<LPCOLLISIONEVENT> coEvents;
@@ -173,6 +174,9 @@ void CSOPHIA::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT>* coObjects,
 	vector<LPCOLLISIONEVENT>& coEvents)
 {
+	CGame* game = CGame::GetInstance();
+	CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
+
 	vector <LPCOLLISIONEVENT> collisionEvents;
 
 	for (UINT i = 0; i < coObjects->size(); i++)
@@ -191,8 +195,24 @@ void CSOPHIA::CalcPotentialCollisions(
 		{
 			continue;
 		}
+
 		if (e->t > 0 && e->t <= 1.0f)
-			collisionEvents.push_back(e);
+		{
+			if (dynamic_cast<CPortal*>(e->obj))
+			{
+				CPortal* portal = dynamic_cast<CPortal*>(e->obj);
+				if (portal->GetSceneId() != -1)
+					game->SwitchScene(portal->GetSceneId());
+				playscene->StartFilming();
+				game->setFilming(true);
+				playscene->setCamState(portal->GetCamState());
+				continue;
+			}
+			else
+			{
+				collisionEvents.push_back(e);
+			}
+		}
 		else
 			delete e;
 	}

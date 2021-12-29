@@ -304,8 +304,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		float r = atof(tokens[4].c_str());
 		float b = atof(tokens[5].c_str());
 		int scene_id = atoi(tokens[6].c_str());
-		obj = new CPortal(x, y, r, b, scene_id);
+		int camState = atoi(tokens[7].c_str());
+		obj = new CPortal(x, y, r, b, scene_id, camState);
 	}
+	break;
 	case OBJECT_TYPE_CINTERCRUPT_BULLET: obj = new CINTERRUPT_BULLET(); break;
 	case OBJECT_TYPE_RED_WORM: obj = new CREDWORM(); break;
 		
@@ -386,6 +388,12 @@ bool CPlayScene::IsInside(float Ox, float Oy, float xRange, float yRange, float 
 void CPlayScene::Update(DWORD dt)
 {
 	CGame* game = CGame::GetInstance();
+
+	if ((DWORD)GetTickCount64() - filming_start >= filming_duration && filming_start != 0)
+	{
+		filming_start = 0;
+		game->setFilming(false);
+	}
 
 	if (MapCam.size() != 0 && camState < MapCam.size())
 	{
@@ -501,6 +509,8 @@ void CPlayScene::Render()
 void CPlayScene::Unload()
 {
 	objects.clear();
+
+	MapCam.clear();
 
 	secondLayer.clear();
 

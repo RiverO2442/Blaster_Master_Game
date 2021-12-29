@@ -8,7 +8,8 @@
 800	textures\BM\40500.jpg	0	0	0
 60	textures\BM\40000.png	120	120	120
 300	textures\BM\30000.png	0	136	255
-
+900	textures\BM\map3-2nd.png	255	255	255
+1000	textures\BM\StatusBar.png	0	0	255
 #[SETTING]
 #Map height
 #736
@@ -17,7 +18,29 @@
 700	23	7	23	47	161	textures\BM\map_3.txt
 # id	left	top	right	bottom	texture_id
 [SPRITES]
+#StatusBar
+1	26	11	69	1000
+12	26	22	69	1000
+23	26	33	69	1000
+34	26	44	69	1000
+45	26	55	69	1000
+56	26	66	69	1000
+67	26	77	69	1000
+78	26	88	69	1000
+89	26	99	69	1000
 
+101	0	111	70	1000
+112	0	122	70	1000
+123	0	133	70	1000
+134	0	144	70	1000
+145	0	155	70	1000
+156	0	166	70	1000
+167	0	177	70	1000
+178	0	188	70	1000
+189	0	199	70	1000
+
+#MAP4 2nd LAYER
+90000	0	0	1524	780	900
 
 #CONTRASTBULLET
 40500	0	8	16	24	800
@@ -208,6 +231,8 @@ tọa độ bên trái
 ###########################################						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
+#MAP3-2ndLayer
+90000	90000	100
 #JASON WAVE GUN BULLET
 42007	42007	100
 #BALL_CARRY_BOOM
@@ -295,7 +320,8 @@ Body
 # id	ani1	ani2	ani3
 #
 [ANIMATION_SETS]
-
+#MAP3-2ndLayer
+90000	90000
 #JASON WAVE GUN BULLET
 42007	42007
 #BALL_CARRY_BOOM
@@ -398,21 +424,25 @@ Body
 14	0	0	4300	295
 
 # TANK
-0	1350	667	1
+0	1310	667	1
+#0	500	120	1
 100	180	2296	304	1
 100	180	2296	305	0
 101	180	2296	1
 102	180	2296	306
-
-
+#MAP3-2ndLayer
+17	-8	750	90000
+# type	l	t(-30px)	ani_set_id	r	b	scene_id	camState
+50	1252	383	1	30	30	-1	1
+50	1253	127	1	30	30	-1	2
 ###########################################
 [MAPCAM]
 1235	0	1524	396
-0	206	1234	780
-1306	0	1524	780
+#0	206	1266	740
+0	206	1266	740
+1250	0	1498	740
 [QUADTREE]
 Quadtree\Quadtree1-1.txt
 # --- SCENE PORTAL ----
-# type	l	t	ani_set_id	r	b	scene_id
-#50	300	98	0	316	150	1
+
 
