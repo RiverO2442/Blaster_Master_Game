@@ -12,13 +12,12 @@ CTANKBULLET::CTANKBULLET()
 
 void CTANKBULLET::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x;
-	top = y;
-	right = x + CTANKBULLET_BBOX_WIDTH;
-
-	if (state == CTANKBULLET_STATE_DIE)
-		y = y + CTANKBULLET_BBOX_HEIGHT;
-	else bottom = y + CTANKBULLET_BBOX_HEIGHT;
+	if (state != CTANKBULLET_STATE_DIE) {
+		left = x;
+		top = y;
+		right = x + CTANKBULLET_BBOX_WIDTH;
+		bottom = y + CTANKBULLET_BBOX_HEIGHT;
+	}
 }
 
 void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -54,7 +53,19 @@ void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				isUsed = true;
 				x = SOPHIA->x;
 				y = SOPHIA->y;
-				SetSpeed(SOPHIA->nx * CTANKBULLET_SPEED);
+				if (SOPHIA->GetisAimingUp())
+				{
+					x = x + SOPHIA_BIG_BBOX_WIDTH / 3;
+					y = y - SOPHIA_BIG_BBOX_HEIGHT;
+				}
+				if (SOPHIA->GetisAimingUp())
+				{
+					SetSpeed(0, CTANKBULLET_SPEED);
+				}
+				else
+				{
+					SetSpeed(SOPHIA->nx * CTANKBULLET_SPEED);
+				}
 				SOPHIA->SetisAlreadyFired(true);
 				SOPHIA->StartFiring();
 				StartReset();
@@ -86,19 +97,15 @@ void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(e->obj->x, e->obj->y);
 				SetState(CTANKBULLET_STATE_DIE);
 			}
-			else {
-				if (nx != 0)
-				{
-					((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
-					SetState(CTANKBULLET_STATE_DIE);
-				}
+			else 
+			{
+				((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
+				SetState(CTANKBULLET_STATE_DIE);
 			}
+			
 		}
 		// clean up collision events
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-		if (x <= 0)
-			if (vx < 0)
-				vx = -vx;
 	}
 }
 
@@ -123,22 +130,32 @@ void CTANKBULLET::CalcPotentialCollisions(
 
 void CTANKBULLET::Render()
 {
-	if (state == CTANKBULLET_STATE_DIE)
-		return;
-	int ani;
-	switch (state)
+	if (isUsed)
 	{
-	case CTANKBULLET_STATE_FLYING:
-		if(vx > 0)
-			ani = CTANKBULLET_ANI_FLYING_RIGHT;
-		else
-			ani = CTANKBULLET_ANI_FLYING_LEFT;
-		break;
+		if (vx == 0 && vy == 0)
+			return;
+		else {
+			int ani = -1;
+			if (state == CTANKBULLET_STATE_DIE)
+				return;
+			switch (state)
+			{
+			case CTANKBULLET_STATE_FLYING:
+				if (vy != 0)
+					ani = 2;
+				else
+					if (vx > 0)
+						ani = CTANKBULLET_ANI_FLYING_RIGHT;
+					else
+						if (vx < 0)
+							ani = CTANKBULLET_ANI_FLYING_LEFT;
+				break;
+			}
+			if (ani != -1)
+				animation_set->at(ani)->Render(x, y);
+		}
+		//RenderBoundingBox();
 	}
-
-	animation_set->at(ani)->Render(x, y);
-
-	//RenderBoundingBox();
 }
 
 void CTANKBULLET::SetState(int state)

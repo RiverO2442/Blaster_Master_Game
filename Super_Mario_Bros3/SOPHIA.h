@@ -9,6 +9,12 @@ class CSOPHIA : public CGameObject
 	DWORD firing_start;
 	DWORD untouchable_start;
 
+	bool isJumping = false;
+
+	int dir = 0;
+
+	bool isAimingUp;
+
 	float start_x;			// initial position of SOPHIA at scene
 	float start_y;
 
@@ -28,6 +34,17 @@ public:
 	void SetisIsFiring(int time) { firing_start = time; }
 
 	void Reset();
+
+	int GetNx() {
+		return dir;
+	}
+
+
+	bool GetIsJumping() { return isJumping; }
+	void SetIsJumping(bool value) { isJumping = value; }
+	
+	void SetisAimingUp(bool value) { isAimingUp = value; }
+	bool GetisAimingUp() { return isAimingUp; }
 
 	void SetisFiring(bool value) { isFiring = value; }
 	bool GetisFiring() { return isFiring; }

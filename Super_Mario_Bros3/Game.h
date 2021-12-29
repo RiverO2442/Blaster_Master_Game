@@ -49,6 +49,9 @@ class CGame
 
 	int startX = 0, startY = 0, endX = 1000, endY = 1000, MapX = 2020, MapY = 2020;
 
+	int heath = 800;
+	int attack = 100;
+
 	unordered_map<int, LPSCENE> scenes;
 	int current_scene;
 
@@ -57,6 +60,22 @@ class CGame
 
 public:
 
+	int Getattack()
+	{
+		return attack;
+	}
+	void setattack(int value)
+	{
+		attack = value;
+	}
+	int Getheath()
+	{
+		return heath;
+	}
+	void setheath(int value)
+	{
+		heath = value;
+	}
 	bool GetFilming()
 	{
 		return filming;

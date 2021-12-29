@@ -23,6 +23,11 @@ void TANKBODY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	y = SOPHIA->y + BODY_DISTANT_Y;
 
+	if (SOPHIA->GetisAimingUp())
+	{
+		y = y - 4;
+	}
+
 	x += dx;
 	y += dy;
 

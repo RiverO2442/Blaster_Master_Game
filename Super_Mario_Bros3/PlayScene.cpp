@@ -254,7 +254,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_CBOOM: obj = new CBOOM(); break;
 	case OBJECT_TYPE_CTANKBULLET: obj = new CTANKBULLET(); break;
 	case OBJECT_TYPE_NoCollisionObject: obj = new CNoCollisionObject(); break;
-		
+	case OBJECT_TYPE_STATBAR: obj = new CSTATBAR(atoi(tokens[4].c_str())); break;
 	case OBJECT_TYPE_TANK_WHEEL:
 	{
 		float part = atof(tokens[4].c_str());
@@ -325,11 +325,15 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	if (obj != NULL)
 	{
-		if (object_type == OBJECT_TYPE_NoCollisionObject)
+		if (object_type == OBJECT_TYPE_NoCollisionObject || object_type == OBJECT_TYPE_STATBAR)
 		{
-			secondLayer.push_back(obj);
-			obj->SetPosition(x, getMapheight() - y);
+			
+			if(object_type != OBJECT_TYPE_STATBAR)
+				obj->SetPosition(x, getMapheight() - y);
+			else 
+				obj->SetPosition(x, y);
 			obj->SetAnimationSet(ani_set);
+			secondLayer.push_back(obj);
 			return;
 		}
 		if(object_type != OBJECT_TYPE_SOPHIA)
@@ -544,7 +548,11 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 		switch (KeyCode)
 		{
 		case DIK_SPACE:
-			player->SetState(SOPHIA_STATE_JUMP);
+			if (!player->GetIsJumping())
+			{
+				player->SetState(SOPHIA_STATE_JUMP);
+				player->SetIsJumping(true);
+			}
 			break;
 		case DIK_B:
 			player->Reset();
@@ -554,6 +562,9 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 			break;
 		case DIK_C:
 			playscene->setCamState(playscene->getCamState() + 1);
+			break;
+		case DIK_UP:
+			player->SetisAimingUp(true);
 			break;
 		}
 	}
@@ -577,6 +588,7 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 
 void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 {
+	CGame* game = CGame::GetInstance();
 	if (((CPlayScene*)scence)->GetPlayer())
 	{
 		CSOPHIA* player = ((CPlayScene*)scence)->GetPlayer();
@@ -590,6 +602,12 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 			break;
 		case DIK_H:
 			CGame::GetInstance()->SwitchScene(1);
+			break;
+		case DIK_UP:
+			player->SetisAimingUp(false);
+			break;
+		case DIK_V:
+			game->setheath(game->Getheath() - 100);
 			break;
 		}
 	}
@@ -625,10 +643,6 @@ void CPlayScenceKeyHandler::KeyState(BYTE* states)
 			player->SetState(SOPHIA_STATE_WALKING_RIGHT);
 		else if (game->IsKeyDown(DIK_LEFT))
 			player->SetState(SOPHIA_STATE_WALKING_LEFT);
-		else if (game->IsKeyDown(DIK_DOWN))
-			player->SetState(SOPHIA_STATE_WALKING_DOWN);
-		else if (game->IsKeyDown(DIK_UP))
-			player->SetState(SOPHIA_STATE_WALKING_UP);
 		else
 			player->SetState(SOPHIA_STATE_IDLE);
 	}

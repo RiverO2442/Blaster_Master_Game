@@ -23,6 +23,14 @@ void TANKTURRET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	y = SOPHIA->y + TURRET_DISTANT_Y;
 
+	if (SOPHIA->GetisAimingUp())
+		y = y - 16;
+
+	if (SOPHIA->GetNx() < 0 && SOPHIA->GetisAimingUp())
+	{
+		x = x + 4;
+	}
+
 	x += dx;
 	y += dy;
 
@@ -44,8 +52,10 @@ void TANKTURRET::Render()
 		ani = TURRET_ANI_IDLE_LEFT;
 		pre_ani = ani;
 	}
-
 	else ani = pre_ani;
+	
+	if (SOPHIA->GetisAimingUp())
+		ani = ani + 2;
 
 	animation_set->at(ani)->Render(x, y);
 

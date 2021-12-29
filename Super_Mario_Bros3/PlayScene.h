@@ -44,6 +44,7 @@
 #include "CGX_BULLET.h"
 #include "CLASER_BULLET.h"
 #include "MapCamera.h"
+#include "CSTATBAR.h"
 
 #define QUADTREE_SECTION_SETTINGS	1
 #define QUADTREE_SECTION_OBJECTS	2

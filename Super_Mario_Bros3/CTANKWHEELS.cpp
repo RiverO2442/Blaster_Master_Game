@@ -23,12 +23,36 @@ void TANKWHEEL::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 	case TANKWHEEL_LEFT_WHEEL:
 			x = SOPHIA->x + TANKWHEEL_WHEEL_DISTANT_X_1;
+			if (SOPHIA->GetisAimingUp())
+			{
+				if (nx > 0)
+				{
+					x = x + 4;
+				}
+			}
 			break;
 	case TANKWHEEL_RIGHT_WHEEL:
 			x = SOPHIA->x + TANKWHEEL_WHEEL_DISTANT_X_2;
+			if (SOPHIA->GetisAimingUp())
+			{
+				if (nx > 0)
+				{
+					x = x - 2;
+				}
+			}
+			break;
 			break;
 	}
+
 	y = SOPHIA->y + TANKWHEEL_WHEEL_DISTANT_Y;
+
+	float Py, Px;
+	SOPHIA->GetSpeed(Px, Py);
+
+	if (SOPHIA->GetIsJumping() && Py > 0)
+	{
+		y = y + 6;
+	}
 	
 		x += dx;
 		y += dy;
