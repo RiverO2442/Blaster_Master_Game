@@ -201,14 +201,23 @@ void JASON::CalcPotentialCollisions(
 		{
 			continue;
 		}
-		if (dynamic_cast<CPortal*>(e->obj))
-		{
-			CPortal* portal = dynamic_cast<CPortal*>(e->obj);
-			playscene->setCamState(portal->GetCamState());
-			continue;
-		}
 		if (e->t > 0 && e->t <= 1.0f)
-			collisionEvents.push_back(e);
+		{
+			if (dynamic_cast<CPortal*>(e->obj))
+			{
+				CPortal* portal = dynamic_cast<CPortal*>(e->obj);
+				if (portal->GetSceneId() != -1)
+					game->SwitchScene(portal->GetSceneId());
+				playscene->StartFilming();
+				game->setFilming(true);
+				playscene->setCamState(portal->GetCamState());
+				continue;
+			}
+			else
+			{
+				collisionEvents.push_back(e);
+			}
+		}
 		else
 			delete e;
 	}
