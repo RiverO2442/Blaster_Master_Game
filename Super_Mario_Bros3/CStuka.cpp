@@ -40,6 +40,13 @@ void CSTUKA::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		spammed = true;
 	}
 
+	if (((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->CheckCGXMng())
+	{
+		SetState(CSTUKA_STATE_WALKING);
+		this->SetPosition(playscene->GetCGXMng()->getCEventPoisitionX(), playscene->GetCGXMng()->getCEventPoisitionY());
+		playscene->DeleteCGXMng();
+	}
+
 	if (state != STATE_DIE)
 	{
 		if (state != CSTUKA_STATE_ATTACK && playscene->IsInside(x - CSTUKA_BBOX_WIDTH, y, x, y + 200, playscene->GetPlayer()->GetPositionX(), playscene->GetPlayer()->GetPositionY()))

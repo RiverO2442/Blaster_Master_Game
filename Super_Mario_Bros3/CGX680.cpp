@@ -123,6 +123,11 @@ void CGX680::Render()
 	{
 		int ani = CGX680_ANI;
 
+		CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
+
+		if(playscene->GetPlayer2()->getUntouchable())
+			animation_set->at(ani)->Render(x, y, 128);
+		else
 		animation_set->at(ani)->Render(x, y);
 
 		//RenderBoundingBox();

@@ -117,9 +117,7 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 		obj = new CINTERRUPT();
 		obj->setheath(3000);
 	}
-		
-		break;
-	
+	break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;

@@ -149,6 +149,8 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			else
 			if (!dynamic_cast<CBrick*>(e->obj)) 
 			{
+				CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
+				playscene->AddWormSpamMng((e->obj)->x, (e->obj)->y);
 				(e->obj)->setheath((e->obj)->Getheath() - game->Getattack());
 				SetState(CWAVE_BULLET_STATE_DIE);
 				//((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng((e->obj)->GetPositionX(), (e->obj)->GetPositionY());

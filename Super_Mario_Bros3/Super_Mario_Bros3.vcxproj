@@ -180,6 +180,7 @@
     <ClInclude Include="MapCamera.h" />
     <ClInclude Include="MapObj.h" />
     <ClInclude Include="MINI_JASON.h" />
+    <ClInclude Include="NEWENEMY.h" />
     <ClInclude Include="NoCollisionObject.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="CTANKWHEELS.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="MapCamera.cpp" />
     <ClCompile Include="MapObj.cpp" />
     <ClCompile Include="MINI_JASON.cpp" />
+    <ClCompile Include="NEWENEMY.cpp" />
     <ClCompile Include="NoCollisionObject.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Portal.cpp" />

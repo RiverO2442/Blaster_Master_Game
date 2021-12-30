@@ -22,6 +22,14 @@ void CDRAP::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
+	if (((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->CheckWormSpamMng() && !isUsed)
+	{
+		SetState(CREDWORM_STATE_WALKING);
+		this->SetPosition(playscene->GetWormSpamMng()->getCEventPoisitionX(), playscene->GetWormSpamMng()->getCEventPoisitionY());
+		playscene->DeleteWormSpamMng();
+		isUsed = true;
+	}
+
 	if (!spammed && state == STATE_DIE)
 	{
 		((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
