@@ -75,10 +75,20 @@ public:
 
 	bool isOriginObj = false;
 
-	int heath = 1000;
+	int heath = 100;
+
+	bool spammed = false;
 
 public:
 
+	bool Getspammed()
+	{
+		return spammed;
+	}
+	void setspammed(bool value)
+	{
+		spammed = value;
+	}
 	int Getheath()
 	{
 		return heath;

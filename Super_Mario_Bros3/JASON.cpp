@@ -214,6 +214,16 @@ void JASON::CalcPotentialCollisions(
 				continue;
 			}
 			else
+				if (dynamic_cast<Items*>(e->obj))
+				{
+					Items* item = dynamic_cast<Items*>(e->obj);
+					if (item->getType() == 0)
+					{
+						game->setheath(game->Getheath() + 100);
+					}
+					continue;
+				}
+			else
 			{
 				collisionEvents.push_back(e);
 			}

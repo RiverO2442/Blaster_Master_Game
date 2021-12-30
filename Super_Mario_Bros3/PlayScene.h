@@ -47,6 +47,7 @@
 #include "CSTATBAR.h"
 #include "MINI_JASON.h"
 #include "CTANKDOOR.h"
+#include "Items.h"
 
 #define QUADTREE_SECTION_SETTINGS	1
 #define QUADTREE_SECTION_OBJECTS	2
@@ -107,6 +108,7 @@ protected:
 	vector<CEvenType1*> KaboomMng;
 	vector<CEvenType1*> BoomCarryMng;
 	vector<CEvenType1*> CGXMng;
+	vector<CEvenType1*> ItemsMng;
 	vector<MapCamera*> MapCam;
 	
 	int filming_duration = 1000;
@@ -171,6 +173,27 @@ public:
 	int getMapheight()
 	{
 		return mapHeight;
+	}
+	
+	/////////////////ItemsMng
+	void AddItemsMng(float x, float y, int num)
+	{
+		CEvenType1* obj = new CEvenType1(x, y, num);
+		this->ItemsMng.push_back(obj);
+	}
+	CEvenType1* GetItemsMng()
+	{
+		return ItemsMng.at(0);
+	}
+	bool CheckItemsMng()
+	{
+		if (ItemsMng.size() != 0)
+			return true;
+		return false;
+	}
+	void DeleteItemsMng()
+	{
+		this->ItemsMng.erase(ItemsMng.begin());
 	}
 	/////////////////CGXMng
 	void AddCGXMng(float x, float y, float vx, float vy)

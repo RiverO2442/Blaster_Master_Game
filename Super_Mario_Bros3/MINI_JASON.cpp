@@ -223,11 +223,12 @@ void MINI_JASON::CalcPotentialCollisions(
 			if (dynamic_cast<CPortal*>(e->obj))
 			{
 				CPortal* portal = dynamic_cast<CPortal*>(e->obj);
-				if (portal->GetSceneId() != -1)
-					game->SwitchScene(portal->GetSceneId());
 				playscene->StartFilming();
 				game->setFilming(true);
-				playscene->setCamState(portal->GetCamState());
+				if(portal->GetCamState() != -1)
+					playscene->setCamState(portal->GetCamState());
+				if (portal->GetSceneId() != -1)
+					game->SwitchScene(portal->GetSceneId());
 				continue;
 			}
 			else

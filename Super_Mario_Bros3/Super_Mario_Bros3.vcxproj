@@ -154,6 +154,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CBallbot.h" />
     <ClInclude Include="CBOOM.h" />
+    <ClInclude Include="CBREAKABLE_BRICK.h" />
     <ClInclude Include="CDrap.h" />
     <ClInclude Include="CGRENADE.h" />
     <ClInclude Include="CGX680.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="DF.h" />
     <ClInclude Include="Interrupt.h" />
     <ClInclude Include="CEvenType1.h" />
+    <ClInclude Include="Items.h" />
     <ClInclude Include="JASON.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapCamera.h" />
@@ -203,6 +205,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CBallbot.cpp" />
     <ClCompile Include="CBOOM.cpp" />
+    <ClCompile Include="CBREAKABLE_BRICK.cpp" />
     <ClCompile Include="CDrap.cpp" />
     <ClCompile Include="CGRENADE.cpp" />
     <ClCompile Include="CGX680.cpp" />
@@ -221,6 +224,7 @@
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="Eyelet.cpp" />
     <ClCompile Include="Interrupt.cpp" />
+    <ClCompile Include="Items.cpp" />
     <ClCompile Include="JASON.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Map.cpp" />

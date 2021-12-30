@@ -268,6 +268,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_CTANKBULLET: obj = new CTANKBULLET(); break;
 	case OBJECT_TYPE_NoCollisionObject: obj = new CNoCollisionObject(); break;
 	case OBJECT_TYPE_STATBAR: obj = new CSTATBAR(atoi(tokens[4].c_str())); break;
+	case OBJECT_TYPE_ITEMS:
+	{
+		obj = new Items(0);
+	}
+	break;
 	case OBJECT_TYPE_TANK_WHEEL:
 	{
 		float part = atof(tokens[4].c_str());
@@ -562,6 +567,10 @@ void CPlayScene::Unload()
 	quadtree = nullptr;
 
 	delete quadtree;
+
+	CGame* game = CGame::GetInstance();
+
+	game->setFilming(false);
 
 	DebugOut(L"[INFO] Scene %s unloaded! \n", sceneFilePath);
 }

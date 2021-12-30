@@ -59,8 +59,21 @@ void CGX680S::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			playscene->AddCGXMng(x, y, bx, by);
 		}
 	}
+	else
+	{
+		if (!spammed)
+		{
+			int chance = rand() % 100;
+			srand(time(NULL));
+			if(chance >= 50)
+			playscene->AddItemsMng(x, y, 0);
+			spammed = true;
+		}
+	}
+
 	if (state != STATE_IDLE)
 		CalcPotentialCollisions(coObjects, coEvents);
+
 
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
@@ -92,6 +105,7 @@ void CGX680S::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			LPCOLLISIONEVENT e = coEventsResult[i];
 		}
 	}
+
 
 	// clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];

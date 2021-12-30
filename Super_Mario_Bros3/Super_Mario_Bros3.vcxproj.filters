@@ -186,6 +186,12 @@
     <ClInclude Include="CTANKDOOR.h">
       <Filter>Header Files\Player</Filter>
     </ClInclude>
+    <ClInclude Include="CBREAKABLE_BRICK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp">
@@ -325,6 +331,12 @@
     </ClCompile>
     <ClCompile Include="MapCamera.cpp">
       <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="CBREAKABLE_BRICK.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
