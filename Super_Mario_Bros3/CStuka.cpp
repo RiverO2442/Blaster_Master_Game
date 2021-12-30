@@ -30,6 +30,15 @@ void CSTUKA::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	//{
 	//	tickcount_diff += (DWORD)GetTickCount64() - pre_tickcount;
 	//}
+	if (!spammed && state == STATE_DIE)
+	{
+		((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
+		int chance = rand() % 100;
+		srand(time(NULL));
+		if (chance >= 70)
+			playscene->AddItemsMng(x, y, 0);
+		spammed = true;
+	}
 
 	x += dx;
 	y += dy;

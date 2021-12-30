@@ -218,6 +218,21 @@ void CSOPHIA::CalcPotentialCollisions(
 				continue;
 			}
 			else
+				if (dynamic_cast<Items*>(e->obj))
+				{
+					Items* item = dynamic_cast<Items*>(e->obj);
+					if (item->getType() == 0)
+					{
+						game->setheath(game->Getheath() + 100);
+					}
+					else
+					{
+						game->setattack(game->Getattack() + 100);
+					}
+					item->SetState(STATE_DIE);
+					continue;
+				}
+			else
 			{
 				collisionEvents.push_back(e);
 			}

@@ -118,8 +118,9 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 	if (obj != NULL)
 	{
+		CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
 		int add = 0;
-		obj->SetPosition((float)x, (float)y);
+		obj->SetPosition((float)x, playscene->getMapheight() - (float)y);
 		obj->SetAnimationSet(ani_set);
 		obj->SetOrigin((float)x, (float)y, obj->GetState());
 		/*obj->SetrenderLayer(renderLayer);*/

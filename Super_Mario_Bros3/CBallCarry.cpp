@@ -29,6 +29,16 @@ void CBALLCARRY::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (state != CBALLCARRY_STATE_DIE)
 		vy -= CBALLCARRY_GRAVITY * dt;
 
+	if (!spammed && state == STATE_DIE)
+	{
+		((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
+		int chance = rand() % 100;
+		srand(time(NULL));
+		if (chance >= 70)
+			playscene->AddItemsMng(x, y, 0);
+		spammed = true;
+	}
+
 	coEvents.clear();
 
 	// turn off collision when die 

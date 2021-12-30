@@ -221,6 +221,11 @@ void JASON::CalcPotentialCollisions(
 					{
 						game->setheath(game->Getheath() + 100);
 					}
+					else
+					{
+						game->setattack(game->Getattack() + 100);
+					}
+					item->SetState(STATE_DIE);
 					continue;
 				}
 			else

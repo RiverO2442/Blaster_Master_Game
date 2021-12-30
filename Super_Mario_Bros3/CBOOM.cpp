@@ -17,7 +17,6 @@ void CBOOM::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 	left = x;
 	top = y;
 	right = x + CREDWORM_BBOX_WIDTH;
-
 	if (state == CREDWORM_STATE_DIE)
 		y = y + CREDWORM_BBOX_HEIGHT;
 	else bottom = y + CREDWORM_BBOX_HEIGHT;

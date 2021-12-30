@@ -93,8 +93,8 @@ void CTANKBULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			LPCOLLISIONEVENT e = coEventsResult[i];
 			if (!dynamic_cast<CBrick*>(e->obj)) 
 			{
-				(e->obj)->setheath((e->obj)->Getheath() - 1000);
-				((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(e->obj->x, e->obj->y);
+				(e->obj)->setheath((e->obj)->Getheath() - TANK_BULLET_DMG);
+				//((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(e->obj->x, e->obj->y);
 				SetState(CTANKBULLET_STATE_DIE);
 			}
 			else 
@@ -118,7 +118,15 @@ void CTANKBULLET::CalcPotentialCollisions(
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 		if (dynamic_cast<CSOPHIA*>(e->obj))
 		{
-				continue;
+			continue;
+		}
+		if (dynamic_cast<CBOOM*>(e->obj))
+		{
+			continue;
+		}
+		if (dynamic_cast<Items*>(e->obj))
+		{
+			continue;
 		}
 		if (e->t > 0 && e->t <= 1.0f)
 			coEvents.push_back(e);

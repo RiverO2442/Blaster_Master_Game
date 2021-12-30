@@ -20,6 +20,7 @@ void CWAVE_BULLET::GetBoundingBox(float& left, float& top, float& right, float& 
 
 void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	CGame* game = CGame::GetInstance();
 	if ((DWORD)GetTickCount64() - reset_start > CWAVE_BULLET_RESET_TIME)
 	{
 		state = CWAVE_BULLET_STATE_DIE;
@@ -140,9 +141,9 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			LPCOLLISIONEVENT e = coEventsResult[i];
 			if (!dynamic_cast<CBrick*>(e->obj)) 
 			{
-				(e->obj)->setheath((e->obj)->Getheath() - 100);
+				(e->obj)->setheath((e->obj)->Getheath() - game->Getattack());
 				SetState(CWAVE_BULLET_STATE_DIE);
-				((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng((e->obj)->GetPositionX(), (e->obj)->GetPositionY());
+				//((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng((e->obj)->GetPositionX(), (e->obj)->GetPositionY());
 			}
 			else {
 					((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
@@ -162,6 +163,10 @@ void CWAVE_BULLET::CalcPotentialCollisions(
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 		if (dynamic_cast<JASON*>(e->obj))
+		{
+			continue;
+		}
+		if (dynamic_cast<Items*>(e->obj))
 		{
 			continue;
 		}

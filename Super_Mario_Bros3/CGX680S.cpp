@@ -28,7 +28,7 @@ void CGX680S::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (state != STATE_DIE)
 	{
-		if (playscene->IsInside(x - 100, y - 100, x + 100, y + 100, playscene->GetPlayer2()->GetPositionX(), playscene->GetPlayer2()->GetPositionY()))
+		if (playscene->IsInside(x - 200, y - 200, x + 200, y + 200, playscene->GetPlayer2()->GetPositionX(), playscene->GetPlayer2()->GetPositionY()))
 		{
 			StartSwitch_state();
 			StartAttack();
@@ -134,6 +134,7 @@ void CGX680S::SetState(int state)
 		vy = 0;
 		break;
 	case STATE_DIE:
+		((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
 		vy = DIE_PULL;
 		break;
 	}

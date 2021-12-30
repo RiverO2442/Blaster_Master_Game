@@ -28,6 +28,15 @@ void CREDWORM::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
+	if (!spammed && state == STATE_DIE)
+	{
+		((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
+		int chance = rand() % 100;
+		srand(time(NULL));
+		if (chance >= 90)
+			playscene->AddItemsMng(x, y, 0);
+		spammed = true;
+	}
 	// Simple fall down
 	if (state != CREDWORM_STATE_DIE)
 		vy -= SOPHIA_GRAVITY * dt;

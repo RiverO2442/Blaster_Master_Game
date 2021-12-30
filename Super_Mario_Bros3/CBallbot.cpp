@@ -7,7 +7,6 @@ CBALLBOT::CBALLBOT()
 
 void CBALLBOT::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	
 	left = x;
 	top = y;
 	right = x + CBALLBOT_BBOX_WIDTH;
@@ -30,6 +29,17 @@ void CBALLBOT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
 	coEvents.clear();
+
+	if (!spammed && state == STATE_DIE)
+	{
+		((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
+		int chance = rand() % 100;
+		srand(time(NULL));
+		if (chance >= 70)
+			playscene->AddItemsMng(x, y, 0);
+		spammed = true;
+	}
+
 	if (!triggered) {
 	if (switch_state != 0 && state != CBALLBOT_STATE_IDLE)
 	{

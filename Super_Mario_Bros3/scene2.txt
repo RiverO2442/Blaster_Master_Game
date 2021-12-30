@@ -9,7 +9,9 @@
 60	textures\BM\40000.png	120	120	120
 300	textures\BM\30000.png	0	136	255
 900	textures\BM\map4-2nd.png	255	255	255
-1000	textures\BM\StatusBar.png	0	0	255	
+1000	textures\BM\StatusBar.png	0	0	255
+1400	textures\BM\area3tiles.png	255	255	255
+
 #[SETTING]
 #Map height
 #736
@@ -18,6 +20,9 @@
 #700	23	7	23	47	161	textures\BM\map_3.txt
 # id	left	top	right	bottom	texture_id
 [SPRITES]
+#GACH BE
+14000	1	1	17	17	1400
+14001	20	1	38	17	1400
 #StatusBar
 1	26	11	69	1000
 12	26	22	69	1000
@@ -271,6 +276,9 @@ tọa độ bên trái
 ###########################################						
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
+#GACH BE
+14000	14000	100
+14001	14001	100
 #LASER_BULLET
 43003	43003	100
 #CGX_BULLET
@@ -399,6 +407,8 @@ Body
 # id	ani1	ani2	ani3
 #
 [ANIMATION_SETS]
+#GACH BE
+14000	14000	14001
 #LASER_BULLET
 43003	43003
 #CGX_BULLET
@@ -463,7 +473,7 @@ Body
 # type	x	y	ani_set_id	extra_settings per object type
 # type :0 = Mario , 1 = Brick, 3=LaseGuard, 4= BallCarry, 5=BallBot, 6=Drap,
 # 7=GX680, 8=GX680S, 9 = Stuka, 10 = Eyelet, 11=interrup, 12=interrup_bullet, 13 = RedNeoWorm 14=CBOOM
-#15=Boom	#16JASON #17Nocolision	#19 JASON GRENADE	#20 = CGX_BULLET
+#15=Boom	#16JASON #17Nocolision	#19 JASON GRENADE	#20 = CGX_BULLET	#26 = GACHBE
 
 25	10000	10000	42005
 25	10000	10000	42005
@@ -562,8 +572,8 @@ Body
 14	0	0	4300	295
 14	0	0	4300	295
 #PLAYER
-#16	200	1920	22001
-16	37	381	22001
+16	200	1920	22001
+#16	37	381	22001
 #MAP4-2ndLayer
 17	0	2004	90000
 # type	l	t(-30px)	ani_set_id	r	b	scene_id	camState
