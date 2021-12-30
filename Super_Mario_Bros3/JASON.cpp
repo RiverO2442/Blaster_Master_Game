@@ -234,7 +234,7 @@ void JASON::CalcPotentialCollisions(
 				}
 			else
 			{
-				if (dynamic_cast<CBrick*>(e->obj))
+				if (dynamic_cast<CBrick*>(e->obj) || dynamic_cast<CBREAKABLE_BRICK*>(e->obj))
 					collisionEvents.push_back(e);
 				/*else
 				{

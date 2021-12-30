@@ -186,6 +186,7 @@
     <ClInclude Include="sound.h" />
     <ClInclude Include="TANKBODY.h" />
     <ClInclude Include="TANKTURRET.h" />
+    <ClInclude Include="THORN.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="TANKBODY.cpp" />
     <ClCompile Include="TANKTURRET.cpp" />
+    <ClCompile Include="THORN.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />

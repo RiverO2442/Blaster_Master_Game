@@ -29,6 +29,7 @@
 #include "JASON.h"
 #include "CBOOM.h"
 #include "NoCollisionObject.h"
+#include "CBREAKABLE_BRICK.h"
 
 #include "Utils.h"
 #include "Game.h"
@@ -48,6 +49,7 @@
 #include "MINI_JASON.h"
 #include "CTANKDOOR.h"
 #include "Items.h"
+#include "THORN.h"
 
 #define QUADTREE_SECTION_SETTINGS	1
 #define QUADTREE_SECTION_OBJECTS	2

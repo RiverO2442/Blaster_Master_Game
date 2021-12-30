@@ -139,6 +139,14 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
+			if (dynamic_cast<CBREAKABLE_BRICK*>(e->obj))
+			{
+				//(e->obj)->setheath((e->obj)->Getheath() - game->Getattack());
+				(e->obj)->SetState(STATE_DIE);
+				SetState(CWAVE_BULLET_STATE_DIE);
+				//((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng((e->obj)->GetPositionX(), (e->obj)->GetPositionY());
+			}
+			else
 			if (!dynamic_cast<CBrick*>(e->obj)) 
 			{
 				(e->obj)->setheath((e->obj)->Getheath() - game->Getattack());
@@ -149,6 +157,8 @@ void CWAVE_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					((CPlayScene*)CGame::GetInstance()->GetCurrentScene())->AddKaboomMng(x, y);
 					SetState(CWAVE_BULLET_STATE_DIE);
 			}
+
+			
 		}
 		// clean up collision events
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];

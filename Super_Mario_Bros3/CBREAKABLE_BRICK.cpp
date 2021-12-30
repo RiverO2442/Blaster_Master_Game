@@ -2,10 +2,13 @@
 
 void CBREAKABLE_BRICK::Render()
 {
-	//if (state != STATE_DIE)
+	if (state != STATE_DIE)
 	{
-		animation_set->at(0)->Render(x, y);
+		animation_set->at(1)->Render(x, y);
 		//RenderBoundingBox();
+	}
+	else {
+		animation_set->at(0)->Render(x, y);
 	}
 }
 

@@ -316,6 +316,16 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CGRENADE();
 	}
 	break;
+	case OBJECT_TYPE_THORN:
+	{
+		obj = new THORN();
+	}
+	break;
+	case OBJECT_TYPE_BREAKABLE_BRICK:
+	{
+		obj = new CBREAKABLE_BRICK();
+	}
+	break;
 	case OBJECT_TYPE_CGX_BULLET:
 	{
 		obj = new CGX_BULLET();
@@ -349,7 +359,6 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	{
 		if (object_type == OBJECT_TYPE_NoCollisionObject || object_type == OBJECT_TYPE_STATBAR)
 		{
-			
 			if(object_type != OBJECT_TYPE_STATBAR)
 				obj->SetPosition(x, getMapheight() - y);
 			else 
@@ -533,6 +542,9 @@ void CPlayScene::Render()
 
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
+
+	if(player2)
+	player2->Render();
 
 	for (int i = 0; i < secondLayer.size(); i++)
 		secondLayer[i]->Render();

@@ -473,7 +473,9 @@ Body
 # type	x	y	ani_set_id	extra_settings per object type
 # type :0 = Mario , 1 = Brick, 3=LaseGuard, 4= BallCarry, 5=BallBot, 6=Drap,
 # 7=GX680, 8=GX680S, 9 = Stuka, 10 = Eyelet, 11=interrup, 12=interrup_bullet, 13 = RedNeoWorm 14=CBOOM
-#15=Boom	#16JASON #17Nocolision	#19 JASON GRENADE	#20 = CGX_BULLET	#26 = GACHBE
+#15=Boom	#16JASON #17Nocolision	#19 JASON GRENADE	#20 = CGX_BULLET	#26 = GACHBE	#27 = GAI
+
+
 
 25	10000	10000	42005
 25	10000	10000	42005
@@ -571,9 +573,11 @@ Body
 14	0	0	4300	295
 14	0	0	4300	295
 14	0	0	4300	295
+
+27	40	381	14000
 #PLAYER
-16	200	1920	22001
-#16	37	381	22001
+#16	200	1920	22001
+16	15	381	22001
 #MAP4-2ndLayer
 17	0	2004	90000
 # type	l	t(-30px)	ani_set_id	r	b	scene_id	camState

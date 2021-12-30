@@ -102,13 +102,23 @@ void CQuadTree::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_CGX680S: obj = new CGX680S(); break;
 	case OBJECT_TYPE_CSTUKA: obj = new CSTUKA(); break;
 	case OBJECT_TYPE_NoCollisionObject: obj = new CNoCollisionObject(); break;
+	case OBJECT_TYPE_BREAKABLE_BRICK:
+	{
+		obj = new CBREAKABLE_BRICK();
+	}
+	break;
 	case OBJECT_TYPE_EYELET: 
 	{
 		float kill_point = atoi(tokens[4].c_str());
 		obj = new CEYELET(kill_point);
 	}
 	break;
-	case OBJECT_TYPE_CINTERCRUPT: obj = new CINTERRUPT(); break;
+	case OBJECT_TYPE_CINTERCRUPT: {
+		obj = new CINTERRUPT();
+		obj->setheath(3000);
+	}
+		
+		break;
 	
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
@@ -203,7 +213,7 @@ void CQuadTree::Pop(vector<LPGAMEOBJECT>& Object, int CamX, int CamY)
 	{
 		for (int i = 0; i < listObjects.size(); i++)
 		{
-			if (inRange(x + cellWidth, y + cellHeight, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()) && listObjects[i]->GetisAlive())
+			if (inRange(x - cellWidth, y - cellHeight, CamX, CamY, CGame::GetInstance()->GetScreenWidth(), CGame::GetInstance()->GetScreenHeight()) && listObjects[i]->GetisAlive())
 			if (!listObjects[i]->GetActive())
 			{
 				float Ox, Oy;
@@ -216,7 +226,6 @@ void CQuadTree::Pop(vector<LPGAMEOBJECT>& Object, int CamX, int CamY)
 		}
 		return;
 	}
-
 	BrachTL->Pop(Object, CamX, CamY);
 	BrachTR->Pop(Object, CamX, CamY);
 	BrachBL->Pop(Object, CamX, CamY);
