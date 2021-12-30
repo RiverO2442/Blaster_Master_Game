@@ -88,6 +88,12 @@ void CDRAP::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				if (ny == 0 && nx != 0)
 					vx = 0;
 			}
+			CGame* game = CGame::GetInstance();
+			if (dynamic_cast<JASON*>(e->obj) && !playscene->GetPlayer2()->getUntouchable())
+			{
+				playscene->GetPlayer2()->StartUntouchable();
+				game->setheath(game->Getheath() - 100);
+			}
 		}
 	}
 

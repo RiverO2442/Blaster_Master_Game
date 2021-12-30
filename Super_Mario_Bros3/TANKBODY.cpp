@@ -42,7 +42,10 @@ void TANKBODY::Render()
 
 	ani = TANKBODY_ANI_IDLE;
 
-	animation_set->at(ani)->Render(x, y);
+	int alpha = 255;
+	if (SOPHIA->getUntouchable()) alpha = 128;
+
+	animation_set->at(ani)->Render(x, y, alpha);
 
 	//RenderBoundingBox();
 }

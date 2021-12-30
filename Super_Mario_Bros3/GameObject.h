@@ -9,6 +9,7 @@
 
 #define DIE_PULL 0.2f
 #define STATE_DIE 200
+#define STATE_OVER 2000
 #define STATE_IDLE 100
 
 using namespace std;

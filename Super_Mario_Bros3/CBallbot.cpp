@@ -108,9 +108,20 @@ void CBALLBOT::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					vx = 0;
 				}
 			}
+			CGame* game = CGame::GetInstance();
+			if (dynamic_cast<CSOPHIA*>(e->obj) && !playscene->GetPlayer()->getUntouchable())
+			{
+				playscene->GetPlayer()->StartUntouchable();
+				game->setheath(game->Getheath() - 100);
+			}
 
 		}
-
+		CGame* game = CGame::GetInstance();
+		if (playscene->IsInside(x - SOPHIA_BIG_BBOX_WIDTH, y - SOPHIA_BIG_BBOX_HEIGHT, x + CBALLBOT_BBOX_WIDTH, y + CBALLBOT_BBOX_HEIGHT, playscene->GetPlayer()->GetPositionX(), playscene->GetPlayer()->GetPositionY()) && !playscene->GetPlayer()->getUntouchable())
+		{
+			playscene->GetPlayer()->StartUntouchable();
+			game->setheath(game->Getheath() - 100);
+		}
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	}
 	}
@@ -128,7 +139,10 @@ void CBALLBOT::CalcPotentialCollisions(
 			continue;
 		}
 		if (e->t > 0 && e->t <= 1.0f)
-			coEvents.push_back(e);
+		{
+			//if (dynamic_cast<CSOPHIA*>(e->obj))
+				coEvents.push_back(e);
+		}
 		else
 			delete e;
 	}

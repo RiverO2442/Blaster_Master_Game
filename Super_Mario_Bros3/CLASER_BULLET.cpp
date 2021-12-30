@@ -31,7 +31,7 @@ void CLASER_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	coEvents.clear();
 
 	// turn off collision when die 
-	if (state != CLASER_BULLET_STATE_DIE)
+	if (state != STATE_DIE)
 		CalcPotentialCollisions(coObjects, coEvents);
 	else
 	{
@@ -65,16 +65,26 @@ void CLASER_BULLET::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 
+
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
-			if (dynamic_cast<CBrick*>(e->obj)) 
+
+			CGame* game = CGame::GetInstance();
+			if (dynamic_cast<CBrick*>(e->obj))
 			{
-				SetState(CLASER_BULLET_STATE_DIE);
+				SetState(STATE_DIE);
 			}
+			if (dynamic_cast<JASON*>(e->obj) && !playscene->GetPlayer2()->getUntouchable())
+			{
+				playscene->GetPlayer2()->StartUntouchable();
+				game->setheath(game->Getheath() - 100);
+				SetState(STATE_DIE);
+			}
+			else
+				SetState(STATE_DIE);
+
 		}
-		// clean up collision events
-		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	}
 }
 
@@ -85,7 +95,7 @@ void CLASER_BULLET::CalcPotentialCollisions(
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
-		if (!dynamic_cast<CBrick*>(e->obj))
+		if (!dynamic_cast<CBrick*>(e->obj) && !dynamic_cast<JASON*>(e->obj))
 		{
 			continue;
 		}

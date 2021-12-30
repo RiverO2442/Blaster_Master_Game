@@ -4,7 +4,8 @@
 #include "algorithm"
 #include "PlayScene.h"
 
-
+#define CBOOM_BBOX_WIDTH	18
+#define CBOOM_BBOX_HEIGHT 10
 
 #define CBOOM_STATE_IDLE	50
 #define CBOOM_STATE_MOVE	100

@@ -159,8 +159,11 @@ void CSOPHIA::SetState(int state)
 
 void CSOPHIA::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
-	//if (playscene->getpiloting()) {
+	CGame* game = CGame::GetInstance();
+	if (!game->Getheath() == 0)
+	{
+		CPlayScene* playscene = ((CPlayScene*)CGame::GetInstance()->GetCurrentScene());
+		//if (playscene->getpiloting()) {
 		left = x;
 		top = y;
 		right = x + SOPHIA_BIG_BBOX_WIDTH;
@@ -168,7 +171,7 @@ void CSOPHIA::GetBoundingBox(float& left, float& top, float& right, float& botto
 
 		//DebugOut(L"L T R B %f %f %f %f  \n", left, top, right, bottom);
 	//}
-	
+	}
 }
 
 /*
@@ -193,10 +196,6 @@ void CSOPHIA::CalcPotentialCollisions(
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
 		if (dynamic_cast<CTANKBULLET*>(e->obj) || dynamic_cast<CREDWORM*>(e->obj))
-		{
-			continue;
-		}
-		if (dynamic_cast<CEYELET*>(e->obj) && e->obj->GetState() == EYELET_STATE_IDLE)
 		{
 			continue;
 		}
@@ -234,6 +233,7 @@ void CSOPHIA::CalcPotentialCollisions(
 				}
 			else
 			{
+				if(dynamic_cast<CBrick*>(e->obj))
 				collisionEvents.push_back(e);
 			}
 		}

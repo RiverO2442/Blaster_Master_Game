@@ -82,11 +82,19 @@ void CLASERGUARD::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEventsResult[i];
+	
+			CGame* game = CGame::GetInstance();
 			if (dynamic_cast<CBrick*>(e->obj))
 			{
-				if(ny == 0 && nx != 0)
-				vx = -vx;
+				if (ny == 0 && nx != 0)
+					vx = -vx;
 			}
+			if (dynamic_cast<JASON*>(e->obj) && !playscene->GetPlayer2()->getUntouchable())
+			{
+				playscene->GetPlayer2()->StartUntouchable();
+				game->setheath(game->Getheath() - 100);
+			}
+			
 		}
 	}
 

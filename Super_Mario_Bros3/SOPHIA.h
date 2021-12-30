@@ -32,7 +32,9 @@ public:
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	void StartFiring() {if(firing_start == 0) firing_start = GetTickCount(); }
 	void SetisIsFiring(int time) { firing_start = time; }
-
+	bool getUntouchable() {
+		return untouchable;
+	}
 	void Reset();
 
 	int GetNx() {

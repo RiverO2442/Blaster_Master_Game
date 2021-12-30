@@ -76,6 +76,12 @@ public:
 	void setheath(int value)
 	{
 		heath = value;
+		if (heath < 0)
+		{
+			heath = 0;
+		}
+		if (heath >= 800)
+			heath = 800;
 	}
 	bool GetFilming()
 	{

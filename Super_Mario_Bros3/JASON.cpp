@@ -7,6 +7,7 @@
 
 #include "PlayScene.h"
 #include "Portal.h"
+#include "Brick.h"
 
 JASON::JASON(float x, float y) : CGameObject()
 {
@@ -38,7 +39,7 @@ void JASON::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		CalcPotentialCollisions(coObjects, coEvents);
 
 	// reset untouchable timer if untouchable time has passed
-	if (GetTickCount() - untouchable_start > JASON_UNTOUCHABLE_TIME)
+	if (GetTickCount() - untouchable_start > JASON_UNTOUCHABLE_TIME && untouchable_start != 0)
 	{
 		untouchable_start = 0;
 		untouchable = 0;
@@ -91,38 +92,41 @@ void JASON::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void JASON::Render()
 {
-
-	int ani = 0;
-	switch (state)
+	CGame* game = CGame::GetInstance();
+	if (!game->Getheath() == 0)
 	{
-	case JASON_STATE_WALKING_DOWN:
-		ani = JASON_ANI_WALK_DOWN;
-		pre_ani = ani;
-		break;
-	case JASON_STATE_WALKING_UP:
-		ani = JASON_ANI_WALK_UP;
-		pre_ani = ani;
-		break;
-	case JASON_STATE_WALKING_RIGHT:
-		ani = JASON_ANI_WALK_RIGHT;
-		pre_ani = ani;
-		break;
-	case JASON_STATE_WALKING_LEFT:
-		ani = JASON_ANI_WALK_LEFT;
-		pre_ani = ani;
-		break;
-	case JASON_STATE_IDLE:
-		ani = pre_ani + 4;
-		break;
+		int ani = 0;
+		switch (state)
+		{
+		case JASON_STATE_WALKING_DOWN:
+			ani = JASON_ANI_WALK_DOWN;
+			pre_ani = ani;
+			break;
+		case JASON_STATE_WALKING_UP:
+			ani = JASON_ANI_WALK_UP;
+			pre_ani = ani;
+			break;
+		case JASON_STATE_WALKING_RIGHT:
+			ani = JASON_ANI_WALK_RIGHT;
+			pre_ani = ani;
+			break;
+		case JASON_STATE_WALKING_LEFT:
+			ani = JASON_ANI_WALK_LEFT;
+			pre_ani = ani;
+			break;
+		case JASON_STATE_IDLE:
+			ani = pre_ani + 4;
+			break;
+		}
+
+		int alpha = 255;
+
+		if (untouchable) alpha = 128;
+
+		animation_set->at(ani)->Render(x, y, alpha);
+
+		////RenderBoundingBox();
 	}
-
-	int alpha = 255;
-
-	if (untouchable) alpha = 128;
-
-	animation_set->at(ani)->Render(x, y, alpha);
-
-	////RenderBoundingBox();
 }
 
 void JASON::SetState(int state)
@@ -230,7 +234,16 @@ void JASON::CalcPotentialCollisions(
 				}
 			else
 			{
-				collisionEvents.push_back(e);
+				if (dynamic_cast<CBrick*>(e->obj))
+					collisionEvents.push_back(e);
+				/*else
+				{
+					if (!untouchable)
+					{
+						game->setheath(game->Getheath() - 100);
+						StartUntouchable();
+					}
+				}*/
 			}
 		}
 		else
